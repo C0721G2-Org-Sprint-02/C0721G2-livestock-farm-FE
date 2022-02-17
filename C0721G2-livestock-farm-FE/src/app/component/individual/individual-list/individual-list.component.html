@@ -1,1 +1,210 @@
-<p>individual-list works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link text-dark hvr-sweep-to-right pleft0"
+               data-bs-parent="#sidebar" aria-current="page"
+               href="#">
+              <i class="fas fa-tasks fa-fw"></i>
+              Quản lý trang web
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark hvr-sweep-to-right pleft0"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <i class="fas fa-bell fa-fw"></i>
+              Thông báo
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-dark hvr-sweep-to-right pleft0"
+               [routerLink]="['/employee/list']">
+              <i class="fas fa-users fa-fw"></i>
+              Quản lý nhân viên
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark hvr-sweep-to-right pleft0"
+               [routerLink]="['/customer/list']">
+              <i class="fas fa-user-tie fa-fw"></i>
+              Quản lý khách hàng
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark hvr-sweep-to-right pleft0"
+               [routerLink]="['/real-estate-new/list-post-approval']">
+              <i class="fas fa-city fa-fw"></i>
+              Quản lý bài đăng
+            </a>
+          </li>
+          <li>
+            <ul class="collapse nav flex-column ms-1" id="news" data-bs-parent="#menu">
+              <li class="nav-item">
+                <a class="nav-link text-dark hvr-sweep-to-right"
+                   href="#">
+                  Đăng mới
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark hvr-sweep-to-right "
+                   href="#">
+                  Tin đã đăng
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark hvr-sweep-to-right "
+                   href="#">
+                  Tin nháp
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark hvr-sweep-to-right pleft0"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <i class="fas fa-hand-holding-usd fa-fw"></i>
+              Giao dịch
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark hvr-sweep-to-right pleft0"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <i class="far fa-calendar-alt fa-fw"></i>
+              Lịch làm việc
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark hvr-sweep-to-right pleft0"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                   viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" class="feather feather-layers" aria-hidden="true">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+              Hồ sơ biểu mẫu
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark hvr-sweep-to-right pleft0"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                   viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" class="feather feather-file-text"
+                   aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              Thống kê
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main class="col-md-9 col-lg-10 px-md-4">
+      <div class="row mt-5">
+        <div class="col-12">
+          <h2 class="fw-bold text-center">DANH SÁCH CÁ THỂ</h2>
+        </div>
+      </div>
+      <form class="row mt-5 mx-5 ">
+        <div class="col-xxl-2 col-xl-4 col-md-6 mb-3">
+          <div class="input-group m-0">
+            <input type="text" class="form-control " placeholder="Mã cá thể">
+          </div>
+        </div>
+        <div class="col-xxl-2 col-xl-4 col-md-6 mb-3">
+          <div class="input-group m-0">
+            <input type="text" class="form-control " placeholder="Mã chuồng">
+          </div>
+        </div>
+        <div class="col-xxl-2 col-xl-4 col-md-6 mb-3">
+          <div class="input-group m-0">
+            <input type="text" class="form-control " placeholder="Ngày nhập chuồng"
+                   onfocus="(this.type='date')"
+                   onblur="(this.type='text')">
+          </div>
+        </div>
+        <div class="col-xxl-2 col-xl-4 col-md-6 mb-3">
+          <div class="input-group m-0">
+            <input type="text" class="form-control " placeholder="Ngày xuất chuồng"
+                   onfocus="(this.type='date')"
+                   onblur="(this.type='text')">
+          </div>
+        </div>
+        <div class="col-xxl-2 col-xl-4 col-md-6 mb-3">
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Tình trạng</option>
+            <option value="1">Có bệnh</option>
+            <option value="2">Không có bệnh</option>
+          </select>
+        </div>
+        <div class="col-xxl-2 col-xl-4  col-md-6 mb-3 ">
+          <button type="submit" class="btn btn-secondary"><i class="fal fa-search me-2"></i>Tìm kiếm
+          </button>
+        </div>
+      </form>
+      <div class="row mb-3 mt-4">
+        <div class="col-12 text-end">
+          <span class="text-success fst-italic mx-2">Thêm mới thành công!</span>
+          <a class="btn btn-success font-weight-bold">
+            Thêm mới cá thể
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class=" table-responsive{-sm|-md|-lg|-xl|-xxl}">
+          <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+              <th class="text-center">Mã cá thể</th>
+              <th class="text-center">Mã chuồng</th>
+              <th class="text-center">Ngày nhập chuồng</th>
+              <th class="text-center">Ngày xuất chuồng</th>
+              <th class="text-center">Tình trạng</th>
+              <th class="text-center">Cân nặng (Kg)</th>
+              <th class="text-center">Tác vụ</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="align-middle text-center">L001</td>
+              <td class="text-center align-middle ">C01</td>
+              <td class="text-center align-middle">29/02/2016</td>
+              <td class="text-center align-middle">29/02/2017</td>
+              <td class="text-center align-middle">Có bệnh</td>
+              <td class="text-center align-middle">25.3</td>
+              <td class="align-middle text-center px-0">
+                <button class="btn btn-warning btn-responsive-margin-bottom btn-w100px  ">Chỉnh sửa</button>
+                <button class="btn btn-danger mx-1 btn-w100px" >Xóa</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <nav class="">
+            <ul class="pagination justify-content-end">
+              <li class="page-item "><a class="page-link" href="#"><i class="fal fa-backward"></i></a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#"><i class="fal fa-forward"></i></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+</div>
+

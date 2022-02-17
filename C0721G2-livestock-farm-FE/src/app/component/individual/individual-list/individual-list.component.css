@@ -1,0 +1,10 @@
+@media only screen and (max-width: 1250px) {
+  .btn-responsive-margin-bottom {
+    margin-bottom: 5px;
+  }
+
+}
+
+.btn-w100px{
+  width: 100px;
+}

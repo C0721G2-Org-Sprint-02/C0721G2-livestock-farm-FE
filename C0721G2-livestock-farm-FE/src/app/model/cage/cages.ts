@@ -6,6 +6,6 @@ export interface Cages {
   closeDate?: string;
   openDate?: string;
   quantily?: number;
-  emloyee: Employee;
+  employee: Employee;
   typeOfCage: TypeOfCage;
 }
