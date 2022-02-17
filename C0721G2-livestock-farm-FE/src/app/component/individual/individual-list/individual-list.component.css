@@ -4,7 +4,8 @@
   }
 
 }
-
-.btn-w100px{
-  width: 100px;
+.cursor-pointer:hover{
+  cursor: pointer;
+  color: red;
 }
+

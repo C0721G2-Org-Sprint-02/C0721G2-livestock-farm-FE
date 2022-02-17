@@ -11,9 +11,16 @@ import {Individual} from '../../../model/individual/individual';
 export class IndividualListComponent implements OnInit {
 
   individuals: Individual[];
+  individualId = '';
+  cageId = '';
+  dateIn = '';
+  dateOut = '';
+  status = '';
   page = 0;
-  totalPage: number;
+  totalPages: number;
   currentPage: number;
+  sortField = 'id';
+  sortDirection = 'asc';
   flagSearch = false;
   message: string;
 
@@ -23,6 +30,46 @@ export class IndividualListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.showIndividual();
   }
 
+  showIndividual() {
+    if (this.individualId === '' && this.cageId === '' && this.dateIn === '' && this.dateOut === '' && this.status === '') {
+      this.flagSearch = false;
+      this.getIndividuals();
+    } else {
+      if (this.flagSearch === false) {
+        this.page = 0;
+        this.getIndividuals();
+        this.flagSearch = true;
+      } else {
+        this.getIndividuals();
+      }
+    }
+  }
+
+  getIndividuals() {
+    this.individualService.searchIndividual(this.page, this.sortField, this.sortDirection, this.individualId,
+      this.cageId, this.dateIn, this.dateOut, this.status).subscribe(value => {
+      this.individuals = value.content;
+      this.totalPages = value.totalPages;
+      this.page = value.pageable.pageNumber;
+      this.message = '';
+    }, error => {
+      this.message = 'Không tìm thấy';
+      this.individuals = [];
+      this.totalPages = 0;
+    });
+  }
+
+  onSubmit() {
+    this.flagSearch = false;
+    this.showIndividual();
+  }
+
+  sort(sortField: string) {
+    this.sortField = sortField;
+    this.sortDirection = (this.sortDirection === 'asc') ? 'desc' : 'asc';
+    this.ngOnInit();
+  }
 }
