@@ -9,10 +9,14 @@ import { AboutUsComponent } from './about-us/about-us.component';
 
 
 @NgModule({
-  declarations: [FooterComponent, HeaderComponent, HomeComponent, AboutUsComponent],
-  imports: [
-    CommonModule,
-    ShareRoutingModule
-  ]
+    declarations: [FooterComponent, HeaderComponent, HomeComponent, AboutUsComponent],
+  exports: [
+    FooterComponent,
+    HeaderComponent
+  ],
+    imports: [
+        CommonModule,
+        ShareRoutingModule
+    ]
 })
 export class ShareModule { }
