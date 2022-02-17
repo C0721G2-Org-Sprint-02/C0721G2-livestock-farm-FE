@@ -1,1 +1,31 @@
-<p>news-detail works!</p>
+<main class="container-fluid bg-white" style="padding-top: 4rem">
+  <div class="row">
+    <div class="col-md-9 m-auto justify-content-center bg-white ">
+      <!--                Đề mục-->
+      <div class="">
+        <!--        <p>{{news.title}}</p>-->
+      </div>
+      <!--                Tiêu đề-->
+      <div>
+        <p class="fs-4 fw-bold">{{news.title}}</p>
+        <!--                Ngày đăng-->
+        <p class="fs-6 mb-2">{{news.postDate}}</p>
+        <!--                    Nội dung-->
+        <div class="text-center mb-2">
+          <img src="{{img}}" width="90%">
+        </div>
+        <p align="justify" class="fs-5">{{news.content}}</p>
+      </div>
+      <!--                Tác giả-->
+      <div class="float-end">
+        <p class="fs-5 fw-bold">{{news.employee.name}}</p>
+        <div class="float-end">
+        <a class="btn btn-sm btn-warning ms-4">Sửa</a>
+        <a class="btn btn-sm btn-danger ms-2">Xóa</a>
+      </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>

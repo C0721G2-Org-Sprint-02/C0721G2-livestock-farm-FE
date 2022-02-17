@@ -1,13 +1,138 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <title>Live-stock-farm</title>
   <meta charset="utf-8">
-  <title>C0721G2LivestockFarmFE</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
+  <!--  <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <style>
+    * {
+      font-family: Arial;
+    }
+
+    .trans-nav:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: green;
+      transition: all 0.3s ease 0s;
+      -webkit-transition: all 0.3s ease 0s;
+    }
+
+    .trans-nav:hover:after {
+      width: 100%;
+    }
+
+    .main-bg {
+      background-color: snow;
+    }
+
+
+    .dropdown-menu li {
+      display: inline-block;
+    }
+
+    .hvr-float:hover, .hvr-float:focus, .hvr-float:active {
+      -webkit-transform: translateY(-4px);
+      transform: translateY(-4px);
+      background-color: snow;
+      color: white;
+    }
+
+    /* Sweep To Right */
+    .hvr-sweep-to-right {
+      /*display: inline-block;*/
+      vertical-align: middle;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      position: relative;
+      -webkit-transition-property: color;
+      transition-property: color;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+    }
+
+    .hvr-sweep-to-right:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: mediumseagreen;
+      -webkit-transform: scaleX(0);
+      transform: scaleX(0);
+      -webkit-transform-origin: 0 50%;
+      transform-origin: 0 50%;
+      -webkit-transition-property: transform;
+      transition-property: transform;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+    }
+
+    .hvr-sweep-to-right:hover, .hvr-sweep-to-right:focus, .hvr-sweep-to-right:active {
+      color: white;
+    }
+    .my-hvr:hover,  .my-hvr:focus, .my-hvr:active {
+      color: mediumseagreen;
+    }
+
+    .hvr-sweep-to-right:hover:before, .hvr-sweep-to-right:focus:before, .hvr-sweep-to-right:active:before {
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+    }
+
+    .pleft0 {
+      padding-left: 0;
+    }
+
+
+    .pull-left {
+      float: left !important;
+    }
+
+    .pull-right {
+      float: right !important
+    }
+
+    .card-hover:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+    }
+
+    .slide {
+      display: block;
+      vertical-align: middle;
+      position: relative;
+
+    }
+
+  </style>
 </head>
 <body>
   <app-root></app-root>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+          integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+          integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+          crossorigin="anonymous"></script>
 </body>
 </html>
