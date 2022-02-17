@@ -6,13 +6,16 @@ import { IndividualListComponent } from './individual-list/individual-list.compo
 import { IndividualCreateComponent } from './individual-create/individual-create.component';
 import { IndividualDeleteComponent } from './individual-delete/individual-delete.component';
 import { IndividualEditComponent } from './individual-edit/individual-edit.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [IndividualListComponent, IndividualCreateComponent, IndividualDeleteComponent, IndividualEditComponent],
   imports: [
     CommonModule,
-    IndividualRoutingModule
+    IndividualRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class IndividualModule { }
