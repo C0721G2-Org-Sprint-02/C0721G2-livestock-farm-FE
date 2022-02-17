@@ -3,13 +3,24 @@ import { CommonModule } from '@angular/common';
 
 import { SecurityRoutingModule } from './security-routing.module';
 import { LoginComponent } from './login/login.component';
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
+import {VerifyResetPasswordComponent} from "./verify-reset-password/verify-reset-password.component";
+import {AccessDeniedComponent} from "./access-denied/access-denied.component";
+import {FocusInvalidInputDirective} from "./custom-directive/focus-invalid-input.directive";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [
+    LoginComponent,
+    ResetPasswordComponent,
+    VerifyResetPasswordComponent,
+    AccessDeniedComponent,
+    FocusInvalidInputDirective],
   imports: [
     CommonModule,
-    SecurityRoutingModule
+    SecurityRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class SecurityModule { }

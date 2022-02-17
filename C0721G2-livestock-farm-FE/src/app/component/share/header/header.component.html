@@ -1,1 +1,50 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-lg navbar-light fs-6 main-bg fixed-top " style="height: 5rem">
+  <div class="container-fluid">
+    <a class="navbar-brand col-md-3 col-lg-2 px-3 " href="">
+      <img class="" width="90%"
+           src="https://fv9-2.failiem.lv/thumb_show.php?i=jp53m5a92&view" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown ">
+          <a class="navbar-brand trans-nav text-success fw-bold" routerLink="/home" id="saleList" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            Trang chủ
+          </a>
+        </li>
+        <li class="nav-item dropdown ">
+          <a class="navbar-brand trans-nav text-success fw-bold" routerLink="/about-us" id="buyList" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            Giới thiệu
+          </a>
+        </li>
+        <li class="nav-item dropdown ">
+          <a class="navbar-brand trans-nav text-success fw-bold" routerLink="/news/list" id="new" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            Tin tức
+          </a>
+        </li>
+        <li class="nav-item dropdown  ">
+          <a class="navbar-brand trans-nav text-success fw-bold " href="#" id="contact" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            Liên hệ
+          </a>
+        </li>
+      </ul>
+
+
+      <ul class="d-flex navbar-nav mb-lg-0 fw-bold">
+        <li class="nav-item d-flex ">
+          <a class="navbar-brand hvr-float text-success"
+          (click)="openDialog()"
+          >Đăng nhập</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
