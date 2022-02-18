@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'individual',
     loadChildren: () => import('./component/individual/individual.module').then(module => module.IndividualModule)
   },
+  {
+    path: 'treatement',
+    loadChildren: () => import('./component/treatement/treatement.module').then(module => module.TreatementModule)
+  },
 ];
 
 @NgModule({

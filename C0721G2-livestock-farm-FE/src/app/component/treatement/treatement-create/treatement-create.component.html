@@ -1,1 +1,119 @@
-<p>treatement-create works!</p>
+<div class="container " >
+  <div class="row">
+    <div class="col-6">
+      <h4 style="padding-top: 0px" class="text-success" >Đăng ký mới thông tin khám chữa trị</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-success" >
+      <a href="#"  class="text-decoration-none text-success">Khám chữa trị</a> > <a href="#" class="text-decoration-none text-success">Đăng ký</a></div>
+    <hr>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header pb-0   bg-success ">
+          <h6  class="text-white ">Form đăng ký </h6>
+        </div>
+        <form class="row g-3 needs-validation m-3" method="post" [formGroup]="formCreate"
+              (ngSubmit)="onSubmit()">
+          <div class="col-md-6 position-relative">
+            <label  class="form-label">Ngày đăng ký<span style="color: red">(*)</span></label>
+            <input type="date" class="form-control" formControlName="treatementDate">
+            <small
+              *ngIf="formCreate.controls.treatementDate.errors?.required"
+              class="fst-italic" style="color: red">Không được để trống</small>
+          </div>
+          <div class="col-md-6 position-relative">
+            <label class="form-label">Người khám <span style="color: red">(*)</span></label>
+            <input type="text" class="form-control" required placeholder="Nhập tên người khám" formControlName="doctor">
+            <small
+              *ngIf="formCreate.controls.doctor.errors?.required && (formCreate.controls.doctor.touched || formCreate.controls.doctor.dirty) "
+              class="fst-italic" style="color: red">Không được để trống</small>
+            <small
+              *ngIf="formCreate.controls.doctor.errors?.maxlength && (formCreate.controls.doctor.touched || formCreate.controls.doctor.dirty) "
+              class="fst-italic" style="color: red">Độ dài tối đa: 40 ký tự</small>
+          </div>
+          <div class="col-md-6 position-relative">
+            <label class="form-label">Mã lợn <span style="color: red">(*)</span></label>
+            <input type="text" class="form-control" required placeholder="Nhập mã lợn" formControlName="individualId">
+            <small
+              *ngIf="formCreate.controls.individualId.errors?.required && (formCreate.controls.individualId.touched || formCreate.controls.individualId.dirty) "
+              class="fst-italic" style="color: red">Không được để trống</small>
+<!--            <small style="color: red">Không được để trống.</small>-->
+<!--            <small style="color: red">Độ dài tối đa: 10 ký tự</small>-->
+<!--            <small style="color: red">Phải đúng định dạng IN-XXXX. </small>-->
+<!--            <small style="color: red">Mã lợn không có trong hệ thống. </small>-->
+          </div>
+          <div class="col-md-6 position-relative">
+            <label class="form-label">Loại bệnh<span style="color: red">(*)</span></label>
+            <input type="text" class="form-control" required placeholder="Nhập loại bệnh" formControlName="kindOfDisease">
+            <small
+              *ngIf="formCreate.controls.kindOfDisease.errors?.required && (formCreate.controls.kindOfDisease.touched || formCreate.controls.kindOfDisease.dirty) "
+              class="fst-italic" style="color: red">Không được để trống</small>
+            <small
+              *ngIf="formCreate.controls.kindOfDisease.errors?.maxlength && (formCreate.controls.kindOfDisease.touched || formCreate.controls.kindOfDisease.dirty) "
+              class="fst-italic" style="color: red">Độ dài tối đa: 10 ký tự</small>
+<!--            <small style="color: red">Không được để trống.</small>-->
+<!--            <small style="color: red">Độ dài tối đa: 10 ký tự</small>-->
+          </div>
+          <div class="col-md-6 position-relative">
+            <label class="form-label">Loại Thuốc <span style="color: red">(*)</span></label>
+            <input type="text" class="form-control" required placeholder="Nhập loại thuốc" formControlName="medicine">
+            <small
+              *ngIf="formCreate.controls.medicine.errors?.required && (formCreate.controls.medicine.touched || formCreate.controls.medicine.dirty) "
+              class="fst-italic" style="color: red">Không được để trống</small>
+            <small
+              *ngIf="formCreate.controls.medicine.errors?.maxlength && (formCreate.controls.medicine.touched || formCreate.controls.medicine.dirty) "
+              class="fst-italic" style="color: red">Độ dài tối đa: 10 ký tự</small>
+<!--            <small style="color: red">Không được để trống.</small>-->
+<!--            <small style="color: red">Độ dài tối đa: 10 ký tự</small>-->
+          </div>
+          <div class="col-md-6 position-relative">
+            <label for="quantily" class="form-label">Nhập số lượng <span style="color: red">(*)</span></label>
+            <input type="number" class="form-control" id="quantily" name="quantily" min="1" placeholder="Nhập số lượng thuốc" formControlName="quantily">
+            <small
+              *ngIf="formCreate.controls.quantily.errors?.required"
+              class="fst-italic" style="color: red">Không được để trống</small>
+<!--            <small style="color: red">Không được để trống.</small>-->
+<!--            <small style="color: red">Chỉ được nhập số nguyên dương(0-100)</small>-->
+          </div>
+          <div class="col-md-12 position-relative">
+            <label for="note" class="form-label">Ghi chú</label>
+            <textarea type="text" class="form-control" id="note"  formControlName="note" ></textarea>
+          </div>
+          <div class="btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
+               aria-label="Toolbar with button groups">
+            <div class="btn-group me-2 float-right">
+              <button class="btn btn-success customBtn" type="submit" data-bs-toggle="modal"
+                      data-bs-target="#save">Đăng ký</button>
+            </div>
+            <div class="btn-group me-2 float-right">
+              <button class="btn btn-secondary customBtn" type="submit">Hủy</button>
+            </div>
+            <!--Modal sửa-->
+            <div class="modal fade" id="save" data-bs-backdrop="static" data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title fs-4 fw-bold" id="staticBackdropLabel1">Xác nhận bạn muốn đăng ký?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ
+                    </button>
+                    <button type="button" class="btn btn-success ">Đồng ý</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Modal-->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div></div>
+</div>
