@@ -14,6 +14,8 @@ import {SecurityModule} from './component/security/security.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatDialogModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
