@@ -10,7 +10,7 @@
 
 <body>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaledit">Chỉnh sửa</button>
+<button type="button" class="btn btn-warning btn-responsive-margin-bottom text-white" data-toggle="modal" data-target="#myModaledit">Chỉnh sửa</button>
 <!--thẻ modal-->
 <div class="modal" id="myModaledit">
   <div class="modal-dialog mw-100 w-75" style="width: 1280px">
@@ -24,7 +24,7 @@
           <p class="text-success"></p>
         </div>
         <div class="modal-body">
-          <form class="form-group row g-3 needs-validation m-3" method="post">
+          <form class="form-group row g-3 needs-validation m-3" [formGroup]="individualForm" (ngSubmit)="onSubmit()" method="post">
             <div class="col-md-6 position-relative">
               <label for="code" class="form-label">Mã cá thể <span
                 style="color: red">(*)</span></label>
@@ -57,14 +57,14 @@
               <!--              <small class="fst-italic" style="color: red">không được là ngày quá khứ</small>-->
             </div>
             <div class="col-md-6 position-relative">
-              <label for="dateout" class="form-label">Ngày xuất chuồng <span
-                style="color: red">(*)</span></label>
-              <input type="date" id="dateout" class="form-control" formControlName="dateOut">
-              <small class="fst-italic" style="color: red"
-                     *ngIf="individualForm.controls.dateOut.dirty &&individualForm.controls.dateOut.hasError('required')">
-                Ngày xuất chuồng không được để trống</small>
-              <!--              <small class="fst-italic" style="color: red">không được là ngày quá khứ</small>-->
-            </div>
+            <label for="dateout" class="form-label">Ngày xuất chuồng <span
+              style="color: red">(*)</span></label>
+            <input type="date" id="dateout" class="form-control" formControlName="dateOut">
+            <small class="fst-italic" style="color: red"
+                   *ngIf="individualForm.controls.dateOut.dirty &&individualForm.controls.dateOut.hasError('required')">
+              Ngày xuất chuồng không được để trống</small>
+            <!--              <small class="fst-italic" style="color: red">không được là ngày quá khứ</small>-->
+          </div>
 
             <div class="col-md-6 position-relative ">
               <label for="position-relative" class="form-label" formControlName="status">Tình trạng <span
@@ -78,8 +78,7 @@
               </select>
             </div>
             <div class="col-md-6 position-relative">
-              <label for="weight" class="form-label">Cân nặng/Kg<span
-                style="color: red">(*)</span></label>
+              <label for="weight" class="form-label">Cân nặng/Kg<span style="color: red">(*)</span></label>
               <input type="number" id="weight" class="form-control" value="100" placeholder="Kg"
                      formControlName="weight">
               <small class="fst-italic" style="color: red"
@@ -99,9 +98,7 @@
                 <div class="me-2 float-right">
                   <button class="btn btn-secondary customBtn" type="button" (click)="Reset()" data-dismiss="modal">Hủy
                   </button>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaledit2"
-                          (click)="onSubmit()">Chỉnh sửa
-                  </button>
+                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModaledit2">Chỉnh sửa</button>
                 </div>
               </div>
             </div>
@@ -132,14 +129,16 @@
         <!--                <font size="3"> <span style="color: red">warning</span></font>-->
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal2">Đóng</button>
-        <button type="button" class="btn btn-success" onclick="confirm('Thành công')" data-dismiss="modal">
-          Xác nhận
-        </button>
+        <button type="button" class="btn btn-warning" (click)="onSubmit()" data-dismiss="modal" data-bs-target="#modal3"
+          data-toggle="modal">Xác nhận</button>
       </div>
     </div>
   </div>
 </div>
 
+<div class="modal" id="modal3">
+
+</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

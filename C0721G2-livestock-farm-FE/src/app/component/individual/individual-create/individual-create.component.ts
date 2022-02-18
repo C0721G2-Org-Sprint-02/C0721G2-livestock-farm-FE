@@ -35,21 +35,20 @@ export class IndividualCreateComponent implements OnInit {
 
   ngOnInit(): void {
     // this.subcription = this.cageService.getAll().subcribe(data=>{this.cage = data})
-    if (this.individualForm.valid) {
-      this.subcription = this.individualService.addIndividual(this.individualForm.value).subscribe(data => {
-        this.individual = data
-      }, error => {
-        console.log('không chạy');
-      })
-    }
+    // if (this.individualForm.valid) {
+    //   this.subcription = this.individualService.addIndividual(this.individualForm.value).subscribe(data => {
+    //     this.individual = data
+    //   }, error => {
+    //     console.log('không chạy');
+    //   })
+    // }
   }
 
   onSubmit(): void {
     if (this.individualForm.valid) {
       this.subcription = this.individualService.addIndividual(this.individualForm.value).subscribe(data => {
-        this.router.navigate(['/individual/list']);
+       this.individual = data
       }, error => {
-        console.log('có bug')
       })
     }
   }

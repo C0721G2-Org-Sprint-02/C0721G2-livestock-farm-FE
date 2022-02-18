@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {Individual} from '../../../model/individual/individual';
@@ -31,20 +31,15 @@ export class IndividualEditComponent implements OnInit {
               private router: Router,
               private matDialog: MatDialog, private cageService: CageService,) {
   }
+@Input() currentId : any;
 
   ngOnInit(): void {
-    this.id= 'IN-0001';
-
-    this.subcription = this.individualService.findIndividualbyId(this.id).subscribe(data => {
+    console.log(this.currentId);
+    this.subcription = this.individualService.findIndividualbyId(this.currentId).subscribe(data => {
       this.individual = data;
+      this.individualForm.setValue(this.individual);
+      console.log(this.individual)
     });
-    if (this.individualForm.valid) {
-      this.subcription = this.individualService.editIndividual(this.individualForm.value).subscribe(data => {
-        this.individual = data
-      }, error => {
-        console.log('không chạy');
-      })
-    }
   }
 
   onSubmit(): void {
@@ -56,6 +51,7 @@ export class IndividualEditComponent implements OnInit {
       })
     }
   }
+
 
   Reset(): void {
     this.individualForm.reset();
