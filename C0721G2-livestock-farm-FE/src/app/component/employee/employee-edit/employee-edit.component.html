@@ -1,4 +1,4 @@
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+<main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
   <div class="container py-4">
     <div class="row">
       <div class="col-12">
@@ -20,7 +20,7 @@
                 style="color: red">*</span><span
                 style="color: black">)</span></label>
               <input type="text" class="form-control" id="name" name="name" formControlName="name"
-                     placeholder="Nhập tên nhân viên">
+                     placeholder="Nhập tên nhân viên" [ngModel]="employee.name">
               <small style="color: red"
                      *ngIf="name.hasError('required') && (name.dirty || name.touched)">Họ và tên không được để
                 trống.</small>
@@ -32,7 +32,7 @@
                 style="color: black">   (</span><span
                 style="color: red">*</span><span
                 style="color: black">)</span></label>
-              <input type="date" class="form-control" id="date" name="date" formControlName="dateOfBirth">
+              <input type="date" class="form-control" id="date" name="date" formControlName="dateOfBirth" [ngModel]="employee.dateOfBirth">
               <small style="color: red"
                      *ngIf="dateOfBirth.hasError('required') && (dateOfBirth.dirty || dateOfBirth.touched)">Ngày sinh
                 không được để
@@ -45,7 +45,7 @@
                 style="color: red">*</span><span
                 style="color: black">)</span></label>
               <input type="text" class="form-control" id="price" name="phoneNumber" formControlName="phoneNumber"
-                     placeholder="Nhập số điện thoại">
+                     placeholder="Nhập số điện thoại" [ngModel]="employee.phoneNumber">
               <small style="color: red"
                      *ngIf="phoneNumber.hasError('required') && (phoneNumber.dirty || phoneNumber.touched)">Số điện
                 thoại không được để trống.</small> <br>
@@ -61,7 +61,7 @@
                 style="color: red">*</span><span
                 style="color: black">)</span></label>
               <input type="text" class="form-control" id="idCard" name="idCard" formControlName="idCard"
-                     placeholder="Nhập số CMND/CCCD">
+                     placeholder="Nhập số CMND/CCCD" [ngModel]="employee.idCard">
               <small style="color: red"
                      *ngIf="idCard.hasError('required') && (idCard.dirty || idCard.touched)">Số CMND/CCCD không được để
                 trống.</small> <br>
@@ -71,11 +71,13 @@
 
             <div class="col-md-4 position-relative">
               <label for="1" class="form-label">Giới tính<span
-                style="color: red">(*)</span></label>
+                style="color: black">   (</span><span
+                style="color: red">*</span><span
+                style="color: black">)</span></label>
 
               <div class="btn-group col-md-12 col-sm-12 position-relative" id="1" role="group"
                    aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" id="gender"
+                <input type="radio" class="btn-check" id="gender" [ngModel]="employee.gender"
                        [value]="1" autocomplete="off" formControlName="gender" name="gender"
                        checked>
                 <label class="btn btn-outline-success" for="gender">Nam</label>
@@ -88,11 +90,13 @@
 
             <div class="col-md-4  col-sm-12 position-relative">
               <label for="2" class="form-label">Phân quyền<span
-                style="color: red">(*)</span></label>
+                style="color: black">   (</span><span
+                style="color: red">*</span><span
+                style="color: black">)</span></label>
               <div class="btn-group col-md-12 col-sm-12 position-relative" id="2" role="group"
                    aria-label="Basic radio toggle button group">
                 <input type="radio" class="btn-check" id="btnradio3"
-                       autocomplete="off" formControlName="roleDTO" name="roleDTO" [value]="1">
+                       autocomplete="off" formControlName="roleDTO" name="roleDTO" [value]="1" [ngModel]="employee.roleDTO">
                 <label class="btn btn-outline-success" for="btnradio3">Admin</label>
 
                 <input type="radio" class="btn-check" id="btnradio4"
@@ -107,7 +111,7 @@
                 style="color: red">*</span><span
                 style="color: black">)</span></label>
               <input type="text" class="form-control" id="area" name="email" formControlName="email"
-                     placeholder="Nhập email" >
+                     placeholder="Nhập email" [ngModel]="employee.email">
               <small style="color: red"
                      *ngIf="email.hasError('required') && (email.dirty || email.touched)">Email không được để
                 trống.</small><br>
@@ -122,7 +126,7 @@
                 style="color: red">*</span><span
                 style="color: black">)</span></label>
               <input type="text" class="form-control" id="address" formControlName="address" name="address"
-                     placeholder="Nhập địa chỉ">
+                     placeholder="Nhập địa chỉ" [ngModel]="employee.address">
               <small style="color: red"
                      *ngIf="address.hasError('required') && (address.dirty || address.touched)">
                 Địa chỉ không được để trống.</small>
