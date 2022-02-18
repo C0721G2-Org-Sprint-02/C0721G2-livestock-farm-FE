@@ -32,7 +32,8 @@ export class HeaderComponent implements OnInit {
 
   loadHeader(): void{
     if(this.tokenStorageService.getUser()){
-      this.role = this.tokenStorageService.getUser().role[0];
+      //dòng này dùng để làm gì???
+      // this.role = this.tokenStorageService.getUser().role[0];
       this.username = this.tokenStorageService.getUser().username;
       this.urlImg = this.tokenStorageService.getUser().urlImg;
       this.isLoggedIn = this.tokenStorageService.getUser().idCustomer;
@@ -49,9 +50,9 @@ export class HeaderComponent implements OnInit {
     const dialogRef = this.dialog.open(LoginComponent, {
       width: "800px",
       panelClass: 'custom-dialog',
-      // disableClose: true
+      disableClose: true
     });
-    // dialogRef.afterClosed().subscribe( result => {});
+    dialogRef.afterClosed().subscribe( result => {});
   }
 
   logout() {

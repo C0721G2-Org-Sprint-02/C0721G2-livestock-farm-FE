@@ -57,9 +57,6 @@ export class LoginComponent implements OnInit {
     // );
   }
 
-  closeDialog() {
-    this.dialogRef.close();
-  }
 
   onSubmit() {
     this.authService.login(this.userForm.value).subscribe(data => {
@@ -94,6 +91,7 @@ export class LoginComponent implements OnInit {
       this.errorMessage = 'Tài khoản hoặc mật khẩu không đúng';
     });
 
+
   }
 
 
@@ -110,6 +108,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
   signInWithFB() {
 
   }
@@ -119,7 +121,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  //
+
   // logOut(): void {
   //   this.socialAuthService.signOut().then(
   //     data => {
