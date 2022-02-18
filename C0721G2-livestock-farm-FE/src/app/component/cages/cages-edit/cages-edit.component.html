@@ -1,1 +1,77 @@
-<p>cages-edit works!</p>
+<head>
+  <title>Thêm mới chuồng nuôi</title>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="/dist/scripts.min.js"></script>
+  <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script src="//www.danstools.com/js/forum.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="container register">
+  <div class="row">
+    <div class="col-md-3 register-left">
+      <img src="https://nongnghiepweb.files.wordpress.com/2017/04/cropped-leave-icon-png-106801.png" alt="" />
+      <h3>Chào mừng đến với trang trại của chúng tôi</h3>
+      <p></p>
+    </div>
+    <div class="col-md-9 register-right">
+      <!--                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist" style="background: gray">-->
+      <!--                            <li class="nav-item">-->
+      <!--                                <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Quay lại</a>-->
+      <!--                            </li>-->
+      <!--                            <li class="nav-item">-->
+      <!--                                <a class="nav-link" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false">Hirer</a>-->
+      <!--                                <a class="nav-link active" href="#home" style="margin-left: 220px">Quay lại</a>-->
+      <!--                            </li>-->
+      <!--                        </ul>-->
+      <!--      <h1>{{cage.quantity}}</h1>-->
+      <!--      <h1>123123123</h1>-->
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <h3 class="register-heading">Chỉnh sửa chuồng nuôi</h3>
+          <form [formGroup]="updateCage" (ngSubmit)="submit()">
+            <div class="row register-form">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Mã chuồng nuôi.</label>
+                  <input type="text" class="form-control" formControlName="id"/>
+                </div>
+                <div class="form-group">
+                  <label>Loại chuồng nuôi.</label>
+                  <select class="custom-select mt-1" formControlName="typeOfCage" name="typeOfCage"
+                          aria-label="Default select example">
+                    <option *ngFor="let item of typeOfCage" [ngValue]="item">{{item.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Mã nhân viên.</label>
+                  <input type="text" class="form-control" formControlName="employee"/>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Ngày tạo chuồng.</label>
+                  <input type="date" class="form-control" formControlName="openDate"/>
+                </div>
+                <div class="form-group">
+                  <label>Ngày đóng chuồng.</label>
+                  <input type="date" class="form-control" formControlName="closeDate"/>
+                </div>
+                <div class="form-group">
+                  <label>Số lượng cá thể.</label>
+                  <input type="text" class="form-control" formControlName="quantity"/>
+                </div>
+                <button type="submit" class=" btn btnRegister">Đồng ý</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
