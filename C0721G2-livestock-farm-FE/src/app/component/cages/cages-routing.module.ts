@@ -5,7 +5,7 @@ import {CagesListComponent} from './cages-list/cages-list.component';
 
 const routes: Routes = [
   {
-    path: 'list', component: CagesListComponent
+    path: 'cage/list', component: CagesListComponent
   },
 ];
 
