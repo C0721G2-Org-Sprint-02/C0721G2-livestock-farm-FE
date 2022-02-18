@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TreatementService} from '../../../service/treatement/treatement.service';
 import {Individual} from '../../../model/individual/individual';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-treatement-create',
@@ -9,12 +10,13 @@ import {Individual} from '../../../model/individual/individual';
   styleUrls: ['./treatement-create.component.css']
 })
 export class TreatementCreateComponent implements OnInit {
-
+  individual: Individual;
+  errorMessage: string;
   formCreate: FormGroup = this.formBuilder.group(
     {
       id: [],
       treatementDate: ['', [Validators.required]],
-      individualId: [''],
+      individual: [''],
       doctor: ['', [Validators.required, Validators.maxLength(40)]],
       medicine: ['', [Validators.required, Validators.maxLength(10)]],
       note: [''],
@@ -23,7 +25,7 @@ export class TreatementCreateComponent implements OnInit {
     }
   );
 
-  constructor(private formBuilder: FormBuilder, private treatementService: TreatementService) {
+  constructor(private formBuilder: FormBuilder, private treatementService: TreatementService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,9 +34,17 @@ export class TreatementCreateComponent implements OnInit {
   onSubmit() {
     console.log(this.formCreate.value);
     if (this.formCreate.valid) {
-      this.treatementService.save(this.formCreate.value).subscribe(data => {
+      console.log('valid form');
+      this.treatementService.save(this.formCreate.value).subscribe(
+        data => {
         // console.log(this.customer);
         // this.router.navigate(['/employee/list']);
+          alert('OK');
+          console.log(data);
+          this.router.navigate(['/employee/list']);
+      }, error => {
+        this.errorMessage = error.error.IndividualNotExist;
+        console.log(this.errorMessage);
       })
     }
   }

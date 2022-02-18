@@ -17,6 +17,7 @@ export class TreatementService {
   }
 
   save(treatement: any): Observable<any> {
-    return this.http.post(this.API + '/create', treatement);
+    console.log('send to be');
+    return this.http.post(this.API + '/post', treatement);
   }
 }

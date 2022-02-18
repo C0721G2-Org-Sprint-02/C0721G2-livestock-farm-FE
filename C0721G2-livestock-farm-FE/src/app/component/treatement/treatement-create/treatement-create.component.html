@@ -36,10 +36,12 @@
           </div>
           <div class="col-md-6 position-relative">
             <label class="form-label">Mã lợn <span style="color: red">(*)</span></label>
-            <input type="text" class="form-control" required placeholder="Nhập mã lợn" formControlName="individualId">
+            <input type="text" class="form-control" required placeholder="Nhập mã lợn" formControlName="individual">
             <small
-              *ngIf="formCreate.controls.individualId.errors?.required && (formCreate.controls.individualId.touched || formCreate.controls.individualId.dirty) "
+              *ngIf="formCreate.controls.individual.errors?.required && (formCreate.controls.individual.touched || formCreate.controls.individual.dirty) "
               class="fst-italic" style="color: red">Không được để trống</small>
+            <small *ngIf="errorMessage!==''" class="fst-italic" style="color: red">
+              {{errorMessage}}</small>
 <!--            <small style="color: red">Không được để trống.</small>-->
 <!--            <small style="color: red">Độ dài tối đa: 10 ký tự</small>-->
 <!--            <small style="color: red">Phải đúng định dạng IN-XXXX. </small>-->
