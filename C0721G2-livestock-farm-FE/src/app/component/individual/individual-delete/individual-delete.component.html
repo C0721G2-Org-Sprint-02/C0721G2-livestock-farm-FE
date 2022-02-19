@@ -1,1 +1,43 @@
-<p>individual-delete works!</p>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <p class="modal-title fs-4 text-center text-success">Bạn có muốn xóa cá thể này ?</p>
+    </div>
+    <div class="modal-body fs-6 fw-bold text-danger">
+      <table class="table">
+        <tbody>
+        <tr>
+          <th>Mã cá thể:</th>
+          <td>{{this.individual.id}}</td>
+        </tr>
+        <tr>
+          <th>Mã chuồng:</th>
+          <td>{{this.individual.cage.id}}</td>
+        </tr>
+        <tr>
+          <th>Ngày nhập chuồng:</th>
+          <td>{{this.individual.dateIn}}</td>
+        </tr>
+        <tr>
+          <th>Ngày xuất chuồng:</th>
+          <td>{{this.individual.dateOut}}</td>
+        </tr>
+        <tr>
+          <th>Cân nặng:</th>
+          <td>{{this.individual.weight}}</td>
+        </tr>
+        <tr>
+          <th>Tình trạng:</th>
+          <td *ngIf="this.individual.status == '1' ">Có bệnh</td>
+          <td *ngIf="this.individual.status == '0' ">Không có bệnh</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button [mat-dialog-close] class="btn btn-secondary me-2">Hủy</button>
+      <button class="btn btn-danger" (click)="deleteIndividual()">Xóa</button>
+    </div>
+  </div>
+</div>
+

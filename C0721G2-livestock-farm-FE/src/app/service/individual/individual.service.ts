@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {Individual} from '../../model/individual/individual';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +15,13 @@ export class IndividualService {
                    dateIn: string, dateOut: string, status: string) : Observable<any> {
     return this.http.get(this.API + 'list?page=' + page + '&sortField=' + sortField + '&sortDirection=' + sortDirection
     + '&individualId=' + individualId + '&cageId=' + cageId + '&dateIn=' +dateIn +'&dateOut=' + dateOut +'&status=' + status);
+  }
+
+  getIndividualById(id: string): Observable<any> {
+    return this.http.get(this.API + 'detail/' + id);
+  }
+
+  deleteIndividual(individual: any): Observable<any> {
+    return this.http.delete(this.API + 'delete/' + individual.id);
   }
 }

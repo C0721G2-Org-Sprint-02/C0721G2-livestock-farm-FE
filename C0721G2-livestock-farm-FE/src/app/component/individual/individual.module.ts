@@ -7,6 +7,7 @@ import { IndividualCreateComponent } from './individual-create/individual-create
 import { IndividualDeleteComponent } from './individual-delete/individual-delete.component';
 import { IndividualEditComponent } from './individual-edit/individual-edit.component';
 import {FormsModule} from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {FormsModule} from '@angular/forms';
     imports: [
         CommonModule,
         IndividualRoutingModule,
-        FormsModule
+        FormsModule,
+        MatDialogModule
     ]
 })
 export class IndividualModule { }
