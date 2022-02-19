@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
 import {IndividualService} from '../../../service/individual/individual.service';
 import {MatDialog} from '@angular/material/dialog';
 import {Individual} from '../../../model/individual/individual';
 import {IndividualDeleteComponent} from '../individual-delete/individual-delete.component';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {IndividualEditComponent} from '../individual-edit/individual-edit.component';
 
 @Component({
   selector: 'app-individual-list',
   templateUrl: './individual-list.component.html',
-  styleUrls: ['./individual-list.component.css']
+  styleUrls: ['./individual-list.component.css'],
 })
 export class IndividualListComponent implements OnInit {
 
@@ -28,13 +29,11 @@ export class IndividualListComponent implements OnInit {
 
   constructor(private individualService: IndividualService,
               private dialogDeleteIndividual: MatDialog,
-              private activatedRoute: ActivatedRoute,
-  ) {
+              private activatedRoute: ActivatedRoute,) {
   }
 
   ngOnInit(): void {
     this.showIndividual();
-    console.log(this.message);
   }
 
   showIndividual() {
@@ -72,6 +71,20 @@ export class IndividualListComponent implements OnInit {
     this.showIndividual();
   }
 
+  opendialog(individualId) {
+    individualId = this.individualService.findIndividualbyId(individualId);
+    this.individualService.findIndividualbyId(individualId).subscribe(data => {
+      const dialogRef = this.dialogDeleteIndividual.open(IndividualEditComponent, {
+        width: '500px',
+        data: {data2: data},
+        disableClose: true
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('the dialog was closed');
+        this.ngOnInit();
+      });
+    });
+  }
 
 
   sort(sortField: string) {
@@ -100,20 +113,20 @@ export class IndividualListComponent implements OnInit {
   }
 
   openDialogDelete(id: string) {
-      this.individualService.getIndividualById(id).subscribe(value => {
-        const dialogRef =this.dialogDeleteIndividual.open(IndividualDeleteComponent, {
-          width: '550px',
-          data: {individual: value},
-          disableClose: true,
-          panelClass: 'custom-dialog',
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-          this.message = result;
-          this.ngOnInit();
-        });
-      }, error => {
-        this.message = 'Không tìm thấy';
+    this.individualService.getIndividualById(id).subscribe(value => {
+      const dialogRef = this.dialogDeleteIndividual.open(IndividualDeleteComponent, {
+        width: '550px',
+        data: {individual: value},
+        disableClose: true,
+        panelClass: 'custom-dialog',
       });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.message = result;
+        this.ngOnInit();
+      });
+    }, error => {
+      this.message = 'Không tìm thấy';
+    });
   }
 }

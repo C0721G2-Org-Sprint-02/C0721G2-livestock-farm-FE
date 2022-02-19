@@ -1,1 +1,147 @@
-<p>individual-edit works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chỉnh sửa</title>
+  <link rel="stylesheet">
+  <!--    boostrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<button type="button" class="btn btn-warning btn-responsive-margin-bottom text-white" data-toggle="modal" data-target="#myModaledit">Chỉnh sửa</button>
+<!--thẻ modal-->
+<div class="modal" id="myModaledit">
+  <div class="modal-dialog mw-100 w-75" style="width: 1280px">
+    <div class="modal-content col-12">
+      <!--            thẻ header modal-->
+      <!--            <button class="btn btn-outline-primary col-3">Trở về</button>-->
+      <!--            <div class="row">-->
+      <div class="card mb-8">
+        <div class="btn btn-success modal-header">
+          <h6>Chỉnh sửa thông tin</h6>
+          <p class="text-success"></p>
+        </div>
+        <div class="modal-body">
+          <form class="form-group row g-3 needs-validation m-3" [formGroup]="individualForm" (ngSubmit)="onSubmit()" method="post">
+            <div class="col-md-6 position-relative">
+              <label for="code" class="form-label">Mã cá thể <span
+                style="color: red">(*)</span></label>
+              <input type="text" id="code" class="form-control" formControlName="id">
+              <small class="fst-italic" style="color: red"
+                     *ngIf="individualForm.controls.id.dirty &&individualForm.controls.id.hasError('required')">
+                Mã cá thể không được để trống</small>
+              <small class="fst-italic" style="color: red"
+                     *ngIf="individualForm.controls.id.dirty &&individualForm.controls.id.hasError('required')">
+                Phải đúng định dạng IN-XXXX</small>
+            </div>
+
+            <div class="col-md-6 position-relative">
+              <label for="sheet" class="form-label">Mã chuồng nuôi <span
+                style="color: red">(*)</span></label>
+              <input type="text" id="sheet" class="form-control" value="CA-0001">
+              <!--                          <small class="fst-italic" style="color: red"-->
+              <!--                                 *ngIf="individualForm.controls.dirty && individualForm.controls.id.hasError('required')">Mã chuồng không được để trống</small>-->
+              <!--                          <small class="fst-italic" style="color: red">Phải đúng định dạng MC-XXXX</small>-->
+            </div>
+
+            <div class="col-md-6 position-relative">
+              <label for="datein" class="form-label">Ngày vào chuồng <span
+                style="color: red">(*)</span></label>
+              <input type="date" id="datein" class="form-control" formControlName="dateIn">
+              <small class="fst-italic" style="color: red"
+                     *ngIf="individualForm.controls.dateIn.dirty &&individualForm.controls.dateIn.hasError('required')">
+                Ngày vào chuồng không được để
+                trống</small>
+              <!--              <small class="fst-italic" style="color: red">không được là ngày quá khứ</small>-->
+            </div>
+            <div class="col-md-6 position-relative">
+            <label for="dateout" class="form-label">Ngày xuất chuồng <span
+              style="color: red">(*)</span></label>
+            <input type="date" id="dateout" class="form-control" formControlName="dateOut">
+            <small class="fst-italic" style="color: red"
+                   *ngIf="individualForm.controls.dateOut.dirty &&individualForm.controls.dateOut.hasError('required')">
+              Ngày xuất chuồng không được để trống</small>
+            <!--              <small class="fst-italic" style="color: red">không được là ngày quá khứ</small>-->
+          </div>
+
+            <div class="col-md-6 position-relative ">
+              <label for="position-relative" class="form-label" formControlName="status">Tình trạng <span
+                style="color: red">(*)</span></label>
+              <br>
+              <select id="position-relative" class="custom-select" aria-label="Default select example">
+                <option Value="null">Lựa chọn trạng thái</option>
+                <option [value]="0">Bệnh</option>
+                <option [value]="1">Khỏe mạnh</option>
+
+              </select>
+            </div>
+            <div class="col-md-6 position-relative">
+              <label for="weight" class="form-label">Cân nặng/Kg<span style="color: red">(*)</span></label>
+              <input type="number" id="weight" class="form-control" value="100" placeholder="Kg"
+                     formControlName="weight">
+              <small class="fst-italic" style="color: red"
+                     *ngIf="individualForm.controls.weight.dirty &&individualForm.controls.weight.hasError('required')">
+                Cân nặng không được để trống</small>
+              <small class="fst-italic" style="color: red"
+                     *ngIf="individualForm.controls.weight.dirty &&individualForm.controls.weight.hasError('required')">
+                không được là số âm, chỉ được nhập số</small>
+            </div>
+
+            <!--            <div class="col-md-12 position-relative">-->
+            <!--              <label fozr="note" class="form-label">Ghi chú</label>-->
+            <!--              <textarea type="text" class="form-control" id="note"></textarea>-->
+            <div class="modal-footer col-12">
+              <div class="btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
+                   aria-label="Toolbar with button groups">
+                <div class="me-2 float-right">
+                  <button class="btn btn-secondary customBtn" type="button" (click)="Reset()" data-dismiss="modal">Hủy
+                  </button>
+                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModaledit2">Chỉnh sửa</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModaledit2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header btn-danger">
+        <h5 class="modal-title" id="exampleModalLabel">thông báo</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p size="6"> Bạn có muốn cập nhật thông tin cá thể
+          <!--          <span style="color: red">IN-0001</span>-->
+        </p>
+        <br>
+        <font size="3"> <span style="color: red">Các thông tin cũ sẽ bị mất</span></font>
+      </div>
+      <div class="modal-footer">
+
+        <!--                <font size="3"> <span style="color: red">warning</span></font>-->
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal2">Đóng</button>
+        <button type="button" class="btn btn-warning" (click)="onSubmit()" data-dismiss="modal" data-bs-target="#modal3"
+          data-toggle="modal">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal3">
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
