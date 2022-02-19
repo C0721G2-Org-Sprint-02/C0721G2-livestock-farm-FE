@@ -12,8 +12,11 @@ export class TreatementService {
   }
 
   search(page: number, searchDoctor: string, searchKindOfDisease: string, searchCage: string): Observable<any> {
-    return this.http.get(this.API + '/list?'+'cage=' + searchCage + '&page=' + page);
-    // return this.http.get(this.API + '/list?doctor=' + searchDoctor + '&kindOfDisease=' + searchKindOfDisease + '&cage=' + searchCage + '&page=' + page);
+    if(searchDoctor===undefined) searchDoctor = '';
+    if(searchKindOfDisease===undefined) searchKindOfDisease = '';
+    if(searchCage===undefined) searchCage = '';
+    // return this.http.get(this.API + '/list?'+'cage=' + searchCage + '&page=' + page);
+    return this.http.get(this.API + '/list?doctor=' + searchDoctor + '&kindOfDisease=' + searchKindOfDisease + '&cage=' + searchCage + '&page=' + page);
   }
 
   save(treatement: any): Observable<any> {

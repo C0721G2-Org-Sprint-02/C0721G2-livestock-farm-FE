@@ -31,61 +31,39 @@ export class TreatementListComponent implements OnInit {
       if (this.flag === false) {
         console.log('if 1');
         this.page = 0;
-        this.treatmentService.search(this.page, this.searchDoctor, this.searchKindOfDisease,  this.searchCage).subscribe(data => {
-          if (data !== null) {
-            this.treatements = data.content;
-            this.totalPages = data.totalPages;
-            this.pageNumber = data.pageable.pageNumber;
-            this.size = data.size;
-            this.page = data.pageable.pageNumber;
-            this.message = '';
-          } else {
-            this.message = 'Không tìm thấy';
-            this.treatements = [];
-            this.totalPages = 0;
-          }
+        this.searchService();
           this.flag = true;
-        });
       } else {
-        console.log('if 3');
-        this.treatmentService.search(this.page, this.searchDoctor, this.searchKindOfDisease, this.searchCage).subscribe(data => {
-          if (data !== null) {
-            this.treatements = data.content;
-            this.totalPages = data.totalPages;
-            this.pageNumber = data.pageable.pageNumber;
-            this.size = data.size;
-            this.page = data.pageable.pageNumber;
-            this.message = '';
-            console.log(this.message);
-          } else {
-            this.message = 'Không tìm thấy';
-            this.treatements = [];
-            this.totalPages = 0;
-          }
+        console.log('if 2');
+        this.searchService();
           this.flag = true;
-        });
       }
     } else {
       console.log('if 3');
       this.flag = false;
-      this.treatmentService.search(this.page, this.searchCage, this.searchKindOfDisease, this.searchCage).subscribe(data => {
-        console.log(data);
-        if (data !== null) {
-          this.treatements = data.content;
-          this.totalPages = data.totalPages;
-          this.pageNumber = data.pageable.pageNumber;
-          this.size = data.size;
-          this.page = data.pageable.pageNumber;
-          this.message = '';
-        } else {
-          this.message = 'Không tìm thấy';
-          this.treatements = [];
-          this.totalPages = 0;
-        }
-      });
+      this.searchService();
     }
   }
-
+  searchService(){
+    console.log('searchDoctor: '+this.searchDoctor);
+    console.log('searchKindOfDisease: '+this.searchKindOfDisease);
+    console.log('searchCage: '+this.searchCage);
+    this.treatmentService.search(this.page, this.searchDoctor, this.searchKindOfDisease, this.searchCage).subscribe(data => {
+      console.log(data);
+      if (data !== null) {
+        this.treatements = data.content;
+        this.totalPages = data.totalPages;
+        this.pageNumber = data.pageable.pageNumber;
+        this.size = data.size;
+        this.page = data.pageable.pageNumber;
+        this.message = '';
+      } else {
+        this.message = 'Không tìm thấy';
+        this.treatements = [];
+        this.totalPages = 0;
+      }
+    });
+  }
   previousClick(index) {
     this.page = this.page - index;
     this.ngOnInit();

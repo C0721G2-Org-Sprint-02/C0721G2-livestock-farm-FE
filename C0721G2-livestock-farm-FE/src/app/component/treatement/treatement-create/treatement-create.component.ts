@@ -16,12 +16,12 @@ export class TreatementCreateComponent implements OnInit {
     {
       id: [],
       treatementDate: ['', [Validators.required]],
-      individual: [''],
-      doctor: ['', [Validators.required, Validators.maxLength(40)]],
-      medicine: ['', [Validators.required, Validators.maxLength(10)]],
+      individual: ['', [Validators.required, Validators.pattern('^IN-[0-9]{4}$')]],
+      doctor: ['', [Validators.required, Validators.maxLength(40), Validators.pattern('^([^0-9]{2,})$')]],
+      medicine: ['', [Validators.required, Validators.maxLength(40)]],
       note: [''],
-      kindOfDisease: ['', [Validators.required, Validators.maxLength(10)]],
-      quantily: [null, [Validators.required]],
+      kindOfDisease: ['', [Validators.required, Validators.maxLength(255)]],
+      quantily: [null, [Validators.required, Validators.max(100), Validators.min(1), Validators.pattern('^[0-9]*$')]],
     }
   );
 
@@ -41,10 +41,11 @@ export class TreatementCreateComponent implements OnInit {
         // this.router.navigate(['/employee/list']);
           alert('OK');
           console.log(data);
-          this.router.navigate(['/employee/list']);
+          this.router.navigate(['/treatement/list']);
       }, error => {
         this.errorMessage = error.error.IndividualNotExist;
         console.log(this.errorMessage);
+        console.log(error.error);
       })
     }
   }

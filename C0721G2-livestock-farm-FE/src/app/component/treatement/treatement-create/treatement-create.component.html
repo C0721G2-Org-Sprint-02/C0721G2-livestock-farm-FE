@@ -33,6 +33,9 @@
             <small
               *ngIf="formCreate.controls.doctor.errors?.maxlength && (formCreate.controls.doctor.touched || formCreate.controls.doctor.dirty) "
               class="fst-italic" style="color: red">Độ dài tối đa: 40 ký tự</small>
+            <small
+              *ngIf="formCreate.controls.doctor.errors?.pattern && (formCreate.controls.doctor.touched || formCreate.controls.doctor.dirty) "
+              class="fst-italic" style="color: red">Tên không được có số và từ 2 kí tự trở lên</small>
           </div>
           <div class="col-md-6 position-relative">
             <label class="form-label">Mã lợn <span style="color: red">(*)</span></label>
@@ -42,10 +45,11 @@
               class="fst-italic" style="color: red">Không được để trống</small>
             <small *ngIf="errorMessage!==''" class="fst-italic" style="color: red">
               {{errorMessage}}</small>
-<!--            <small style="color: red">Không được để trống.</small>-->
-<!--            <small style="color: red">Độ dài tối đa: 10 ký tự</small>-->
-<!--            <small style="color: red">Phải đúng định dạng IN-XXXX. </small>-->
-<!--            <small style="color: red">Mã lợn không có trong hệ thống. </small>-->
+            <small
+              *ngIf="formCreate.controls.individual.errors?.pattern"
+              class="fst-italic" style="color: red">Phải đúng định dạng IN-XXXX.</small>
+
+
           </div>
           <div class="col-md-6 position-relative">
             <label class="form-label">Loại bệnh<span style="color: red">(*)</span></label>
@@ -55,7 +59,7 @@
               class="fst-italic" style="color: red">Không được để trống</small>
             <small
               *ngIf="formCreate.controls.kindOfDisease.errors?.maxlength && (formCreate.controls.kindOfDisease.touched || formCreate.controls.kindOfDisease.dirty) "
-              class="fst-italic" style="color: red">Độ dài tối đa: 10 ký tự</small>
+              class="fst-italic" style="color: red">Độ dài tối đa: 255 ký tự</small>
 <!--            <small style="color: red">Không được để trống.</small>-->
 <!--            <small style="color: red">Độ dài tối đa: 10 ký tự</small>-->
           </div>
@@ -67,7 +71,7 @@
               class="fst-italic" style="color: red">Không được để trống</small>
             <small
               *ngIf="formCreate.controls.medicine.errors?.maxlength && (formCreate.controls.medicine.touched || formCreate.controls.medicine.dirty) "
-              class="fst-italic" style="color: red">Độ dài tối đa: 10 ký tự</small>
+              class="fst-italic" style="color: red">Độ dài tối đa: 40 ký tự</small>
 <!--            <small style="color: red">Không được để trống.</small>-->
 <!--            <small style="color: red">Độ dài tối đa: 10 ký tự</small>-->
           </div>
@@ -77,8 +81,10 @@
             <small
               *ngIf="formCreate.controls.quantily.errors?.required"
               class="fst-italic" style="color: red">Không được để trống</small>
-<!--            <small style="color: red">Không được để trống.</small>-->
-<!--            <small style="color: red">Chỉ được nhập số nguyên dương(0-100)</small>-->
+            <small
+              *ngIf="formCreate.controls.quantily.errors?.min ||formCreate.controls.quantily.errors?.max || formCreate.controls.quantily.errors?.pattern "
+              class="fst-italic" style="color: red">Chỉ được nhập số nguyên dương (0-100)</small>
+
           </div>
           <div class="col-md-12 position-relative">
             <label for="note" class="form-label">Ghi chú</label>
@@ -88,7 +94,7 @@
                aria-label="Toolbar with button groups">
             <div class="btn-group me-2 float-right">
               <button class="btn btn-success customBtn" type="submit" data-bs-toggle="modal"
-                      data-bs-target="#save">Đăng ký</button>
+                      data-bs-target="#save" [disabled]="formCreate.invalid">Đăng ký</button>
             </div>
             <div class="btn-group me-2 float-right">
               <button class="btn btn-secondary customBtn" type="submit">Hủy</button>
