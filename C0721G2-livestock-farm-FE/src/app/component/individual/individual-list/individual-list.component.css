@@ -1,0 +1,11 @@
+@media only screen and (max-width: 1250px) {
+  .btn-responsive-margin-bottom {
+    margin-bottom: 5px;
+  }
+
+}
+.cursor-pointer:hover{
+  cursor: pointer;
+  color: red;
+}
+

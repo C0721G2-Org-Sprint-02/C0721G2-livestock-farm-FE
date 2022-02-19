@@ -35,7 +35,8 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
 import {IndividualService} from '../../../service/individual/individual.service';
 import {MatDialog} from '@angular/material/dialog';
 import {Individual} from '../../../model/individual/individual';
+import {IndividualDeleteComponent} from '../individual-delete/individual-delete.component';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
 import {IndividualEditComponent} from '../individual-edit/individual-edit.component';
 
 @Component({
@@ -19,7 +21,6 @@ export class IndividualListComponent implements OnInit {
   status = '';
   page = 0;
   totalPages: number;
-  currentPage: number;
   sortField = 'id';
   sortDirection = 'asc';
   flagSearch = false;
@@ -27,7 +28,8 @@ export class IndividualListComponent implements OnInit {
 
 
   constructor(private individualService: IndividualService,
-              private dialogDeleteIndividual: MatDialog) {
+              private dialogDeleteIndividual: MatDialog,
+              private activatedRoute: ActivatedRoute,) {
   }
 
   ngOnInit(): void {
@@ -55,7 +57,7 @@ export class IndividualListComponent implements OnInit {
       this.individuals = value.content;
       this.totalPages = value.totalPages;
       this.page = value.pageable.pageNumber;
-      this.message = '';
+      // this.message = '';
     }, error => {
       this.message = 'Không tìm thấy';
       this.individuals = [];
@@ -65,6 +67,7 @@ export class IndividualListComponent implements OnInit {
 
   onSubmit() {
     this.flagSearch = false;
+    this.message = '';
     this.showIndividual();
   }
 
@@ -87,6 +90,43 @@ export class IndividualListComponent implements OnInit {
   sort(sortField: string) {
     this.sortField = sortField;
     this.sortDirection = (this.sortDirection === 'asc') ? 'desc' : 'asc';
+    this.message = '';
     this.ngOnInit();
+  }
+
+  previousClick() {
+    this.page = this.page - 1;
+    this.message = '';
+    this.ngOnInit();
+  }
+
+  nextClick() {
+    this.page = this.page + 1;
+    this.message = '';
+    this.ngOnInit();
+  }
+
+  findPagination(value: any) {
+    this.page = value - 1;
+    this.message = '';
+    this.ngOnInit();
+  }
+
+  openDialogDelete(id: string) {
+    this.individualService.getIndividualById(id).subscribe(value => {
+      const dialogRef = this.dialogDeleteIndividual.open(IndividualDeleteComponent, {
+        width: '550px',
+        data: {individual: value},
+        disableClose: true,
+        panelClass: 'custom-dialog',
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.message = result;
+        this.ngOnInit();
+      });
+    }, error => {
+      this.message = 'Không tìm thấy';
+    });
   }
 }
