@@ -38,6 +38,7 @@ export class VerifyResetPasswordComponent implements OnInit {
     });
     this.activatedRoute.queryParams.subscribe(params => {
       this.verificationCode = params['code'];
+
       this.authService.checkVerificationCode(this.verificationCode).subscribe(data => {
         this.isExpiredCode = data.message === 'valid';
       });

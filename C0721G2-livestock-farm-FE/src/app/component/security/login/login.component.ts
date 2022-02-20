@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {SocialUser} from "angularx-social-login";
+import {SocialAuthService, SocialUser} from "angularx-social-login";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AuthService} from "../../../service/security/auth.service";
 import {TokenStorageService} from "../../../service/security/token-storage.service";
@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
       remember_me: false
     });
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     if (this.tokenStorageService.getUser()) {
       this.authService.isLoggedIn = true;
       this.roles = this.tokenStorageService.getUser().roles;
@@ -78,6 +77,7 @@ export class LoginComponent implements OnInit {
 
       this.userForm.reset();
       this.dialogRef.close();
+
       if (this.roles.indexOf('ROLE_EMPLOYEE') !== -1) {
         this.router.navigate(['cages/list']);
         this.shareService.sendClickEvent();
@@ -85,6 +85,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['employee/list']);
         this.shareService.sendClickEvent();
       }
+
     }, error => {
       console.log(error);
       this.authService.isLoggedIn = false;
