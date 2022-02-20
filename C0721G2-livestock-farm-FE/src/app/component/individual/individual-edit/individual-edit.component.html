@@ -1,7 +1,7 @@
 
-<button type="button" class="btn btn-warning btn-responsive-margin-bottom text-white" data-toggle="modal" data-target="#myModaledit"><i class="fas fa-edit"></i> Sửa</button>
-<!--thẻ modal-->
-<div class="modal" id="myModaledit">
+<button type="button" class="btn btn-warning btn-responsive-margin-bottom text-white" data-bs-toggle="modal" data-bs-target="#myModaledit"><i class="fas fa-edit"></i> Sửa</button>
+<span [class.alert-danger]="message" (message)="message" [textContent]="message">{{'message'}}</span><!--thẻ modal-->
+<div class="modal" id="myModaledit" style="text-align: left">
   <div class="modal-dialog mw-100 w-75" style="width: 1280px">
     <div class="modal-content col-12">
       <!--            thẻ header modal-->
@@ -59,7 +59,7 @@
               <label for="position-relative" class="form-label" formControlName="status">Tình trạng <span
                 style="color: red">(*)</span></label>
               <br>
-              <select id="position-relative" class="custom-select" aria-label="Default select example">
+              <select id="position-relative" class="form-control" aria-label="Default select example">
                 <option Value="null">Lựa chọn trạng thái</option>
                 <option [value]="0">Bệnh</option>
                 <option [value]="1">Khỏe mạnh</option>
@@ -85,9 +85,9 @@
               <div class="btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
                    aria-label="Toolbar with button groups">
                 <div class="me-2 float-right">
-                  <button class="btn btn-secondary customBtn" type="button" (click)="Reset()" data-dismiss="modal">Hủy
+                  <button class="btn btn-secondary customBtn" type="button" (click)="Reset()" data-bs-dismiss="modal">Hủy
                   </button>
-                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModaledit2">Chỉnh sửa</button>
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModaledit2">Chỉnh sửa</button>
                 </div>
               </div>
             </div>
@@ -99,12 +99,12 @@
 </div>
 
 
-<div class="modal fade" id="myModaledit2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModaledit2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align: left">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header btn-danger">
         <h5 class="modal-title" id="exampleModalLabel">thông báo</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p size="6"> Bạn có muốn cập nhật thông tin cá thể
@@ -117,8 +117,8 @@
 
         <!--                <font size="3"> <span style="color: red">warning</span></font>-->
 
-        <button type="button" class="btn btn-secondary" data-dismiss="modal2">Đóng</button>
-        <button type="button" class="btn btn-warning" (click)="onSubmit()" data-dismiss="modal" data-bs-target="#modal3"
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal2">Đóng</button>
+        <button type="button" class="btn btn-warning" (click)="onSubmit()" data-bs-dismiss="modal" data-bs-target="#modal3"
           data-toggle="modal">Xác nhận</button>
       </div>
     </div>

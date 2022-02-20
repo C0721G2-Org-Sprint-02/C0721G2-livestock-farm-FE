@@ -32,6 +32,7 @@ export class IndividualEditComponent implements OnInit {
               private matDialog: MatDialog, private cageService: CageService,) {
   }
 @Input() currentId : any;
+  message: string;
 
   ngOnInit(): void {
     console.log(this.currentId);
@@ -46,8 +47,9 @@ export class IndividualEditComponent implements OnInit {
     if (this.individualForm.valid) {
       this.subcription = this.individualService.editIndividual(this.individualForm.value).subscribe(data => {
         this.router.navigate(['/individual/list']);
+        this.message='Đã cập nhật thành công';
       }, error => {
-        console.log('có bug')
+        this.message='Đã cập nhật thất bại';
       })
     }
   }

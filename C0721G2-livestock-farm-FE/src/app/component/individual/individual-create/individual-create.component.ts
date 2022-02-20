@@ -27,6 +27,7 @@ export class IndividualCreateComponent implements OnInit {
   subcription: Subscription;
   individual: Individual;
   cage: Cages[];
+  message: string;
 
   constructor(private individualService: IndividualService,
               private router: Router,
@@ -47,8 +48,10 @@ export class IndividualCreateComponent implements OnInit {
   onSubmit(): void {
     if (this.individualForm.valid) {
       this.subcription = this.individualService.addIndividual(this.individualForm.value).subscribe(data => {
-       this.individual = data
+       this.individual = data;
+        this.message='Thêm mới thành công';
       }, error => {
+        this.message='Thêm mới thất bại';
       })
     }
   }
