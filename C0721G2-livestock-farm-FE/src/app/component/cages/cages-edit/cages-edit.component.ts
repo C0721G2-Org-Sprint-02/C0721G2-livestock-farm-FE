@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TypeOfCage} from "../../../model/cage/type-of-cage";
 import {Cage} from "../../../model/cage/cage";
 import {CageService} from "../../../service/cage/cage.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TypeOfCageService} from "../../../service/cage/type-of-cage.service";
 import {Employee} from "../../../model/employee/employee";
 
@@ -26,7 +26,8 @@ export class CagesEditComponent implements OnInit {
   constructor(private cageService: CageService,
               private activatedRoute: ActivatedRoute,
               private typeOfCageService: TypeOfCageService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -67,7 +68,7 @@ export class CagesEditComponent implements OnInit {
       data => {
         this.showAlert = true;
         console.log(this.updateCage);
-        alert('update thành công');
+        this.router.navigateByUrl('cage/list')
       }, error => {
         console.log(error);
         console.log('erorr');

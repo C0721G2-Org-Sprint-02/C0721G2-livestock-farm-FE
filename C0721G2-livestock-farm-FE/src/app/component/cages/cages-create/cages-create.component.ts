@@ -62,7 +62,8 @@ export class CagesCreateComponent implements OnInit {
           this.showAlert = true;
           console.log(data);
           this.createCage.reset();
-        }, error => {
+          this.router.navigateByUrl('cage/list')
+          }, error => {
           this.showErrorCage = error.error.cageError;
           this.employeeExist = error.error.employeeError;
           console.log(error.error.cageError);

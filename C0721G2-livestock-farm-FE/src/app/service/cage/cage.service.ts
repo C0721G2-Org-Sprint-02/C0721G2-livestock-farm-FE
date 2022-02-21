@@ -25,4 +25,11 @@ export class CageService {
   public findCageById(id: string): Observable<any> {
     return this.httpClient.get(this.API + '/' + id);
   }
+  getListCage(): Observable<any> {
+    return this.httpClient.get(this.API + '/list');
+  }
+
+  search(page: number, search: string): Observable<any> {
+    return this.httpClient.get(this.API + '/search?search=' + search + '&page=' + page);
+  }
 }

@@ -6,9 +6,9 @@ import {CagesEditComponent} from "./cages-edit/cages-edit.component";
 
 
 const routes: Routes = [
-  {path: 'list', component: CagesListComponent},
-  {path: 'create', component: CagesCreateComponent},
-  {path: 'edit/:id', component: CagesEditComponent},
+  {path: 'cage/list', component: CagesListComponent},
+  {path: 'cage/create', component: CagesCreateComponent},
+  {path: 'cage/edit/:id', component: CagesEditComponent},
 ];
 
 @NgModule({
