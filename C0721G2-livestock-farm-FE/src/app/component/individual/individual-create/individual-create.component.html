@@ -1,6 +1,7 @@
-
 <!--form nhập-->
-<button type="button" class="btn btn-success font-weight-bold" data-bs-toggle="modal" data-bs-target="#myModalCreate">Thêm mới</button>
+<button type="button" class="btn btn-success font-weight-bold" data-bs-toggle="modal" data-bs-target="#myModalCreate">
+  Thêm một
+</button>
 <span [class.alert-danger]="message" (message)="message" [textContent]="message">{{'message'}}</span><!--thẻ modal-->
 
 <div class="modal" id="myModalCreate" style="text-align: left">
@@ -25,19 +26,19 @@
               individualForm.controls.id.hasError('required')">Phải đúng định dạng IN-XXXX</small>
             </div>
 
-<!--            <div class="col-md-6 position-relative">-->
-<!--              <label class="form-label">Mã chuồng nuôi <span-->
-<!--                style="color: red">(*)</span></label>-->
-<!--              <input type="text" id="cage" class="form-control" formControlName="cage">-->
-<!--              <small class="fst-italic" style="color: red" *ngIf="individualForm.controls.cage.dirty &&-->
-<!--              individualForm.controls.cage.hasError('required')">Phải đúng định dạng MC-XXXX</small>-->
-<!--                           <select id="status" class="form-select" aria-label="Default select example"-->
-<!--                                    formControlName="cage" name="positionDTO">-->
-<!--                              <option [ngValue]="null">&#45;&#45;Chọn&#45;&#45;</option>-->
-<!--                              <option *ngFor="let item of cage"-->
-<!--                                      [ngValue]="item">{{item.id}}</option>-->
-<!--                            </select>-->
-<!--            </div>-->
+            <!--            <div class="col-md-6 position-relative">-->
+            <!--              <label class="form-label">Mã chuồng nuôi <span-->
+            <!--                style="color: red">(*)</span></label>-->
+            <!--              <input type="text" id="cage" class="form-control" formControlName="cage">-->
+            <!--              <small class="fst-italic" style="color: red" *ngIf="individualForm.controls.cage.dirty &&-->
+            <!--              individualForm.controls.cage.hasError('required')">Phải đúng định dạng MC-XXXX</small>-->
+            <!--                           <select id="status" class="form-select" aria-label="Default select example"-->
+            <!--                                    formControlName="cage" name="positionDTO">-->
+            <!--                              <option [ngValue]="null">&#45;&#45;Chọn&#45;&#45;</option>-->
+            <!--                              <option *ngFor="let item of cage"-->
+            <!--                                      [ngValue]="item">{{item.id}}</option>-->
+            <!--                            </select>-->
+            <!--            </div>-->
 
             <div class="col-md-6 position-relative">
               <label for="datein" class="form-label">Ngày vào chuồng <span
@@ -63,13 +64,14 @@
               <label for="position-relative" class="form-label">Tình trạng <span
                 style="color: red">(*)</span></label>
               <br>
-              <select id="position-relative" class="form-control" aria-label="Default select example" formControlName="status">
+              <select id="position-relative" class="form-control" aria-label="Default select example"
+                      formControlName="status">
                 <option Value="null">Lựa chọn trạng thái</option>
                 <option value="0">Bệnh</option>
-<!--                <option value="2">Đang Nuôi</option>-->
+                <!--                <option value="2">Đang Nuôi</option>-->
                 <option value="1">Khỏe mạnh</option>
-<!--                <option value="4">Chuẩn bị xuất</option>-->
-<!--                <option value="5">Đã xuất</option>-->
+                <!--                <option value="4">Chuẩn bị xuất</option>-->
+                <!--                <option value="5">Đã xuất</option>-->
               </select>
             </div>
 
@@ -86,17 +88,18 @@
             <!--              <label for="note" class="form-label">Ghi chú</label>-->
             <!--              <textarea type="text" class="form-control" id="note"></textarea>-->
             <!--            </div>-->
-            <button type="button" class="btn btn-success">Thêm hàng loạt</button>
-
             <br>
             <div class="modal-footer col-12">
               <div class="btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
                    aria-label="Toolbar with button groups">
                 <div class="me-2 float-right">
-                  <button class="btn btn-secondary customBtn" type="button" (click)="Reset()" data-bs-dismiss="modal">Hủy</button>
+                  <button class="btn btn-secondary customBtn me-2" type="button" (click)="Reset()"
+                          data-bs-dismiss="modal">Hủy
+                  </button>
                   <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal2"
-                     [disabled]="individualForm.invalid">Thêm mới</button>
-<!--                  <p type="button" class="btn btn-success" data-toggle="modalCreate" data-target="#modal">Lưu</p>-->
+                          [disabled]="individualForm.invalid">Thêm mới
+                  </button>
+                  <!--                  <p type="button" class="btn btn-success" data-toggle="modalCreate" data-target="#modal">Lưu</p>-->
                 </div>
               </div>
             </div>
@@ -121,12 +124,14 @@
       </div>
       <div class="modal-body">
         <p>Bạn có muốn thêm cá thể mới cá thể</p>
-        <p>{{individual.id}}</p>
+        <!--        <p>{{individual.id}}</p>-->
         <span style="color:red"></span>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success " (click)="onSubmit()" [routerLink]="['/individual/list']">Xác nhận</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <button type="submit" class="btn btn-success " (click)="onSubmit()" [routerLink]="['/individual/list']">Xác
+          nhận
+        </button>
       </div>
     </div>
   </div>

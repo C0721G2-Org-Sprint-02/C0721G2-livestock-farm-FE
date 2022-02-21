@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {IndividualService} from '../../../service/individual/individual.service';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
@@ -7,6 +7,8 @@ import {CageService} from '../../../service/cage/cage.service';
 import {Subscription} from 'rxjs';
 import {Individual} from '../../../model/individual/individual';
 import {Cages} from '../../../model/cage/cages';
+import {IndividualEditComponent} from '../individual-edit/individual-edit.component';
+import {IndividualCreateALotComponent} from '../individual-create-a-lot/individual-create-a-lot.component';
 
 @Component({
   selector: 'app-individual-create',
@@ -29,9 +31,11 @@ export class IndividualCreateComponent implements OnInit {
   cage: Cages[];
   message: string;
 
+
   constructor(private individualService: IndividualService,
               private router: Router,
-              private matDialog: MatDialog, private cageService: CageService,) {
+              private matDialog: MatDialog, private cageService: CageService,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -43,20 +47,21 @@ export class IndividualCreateComponent implements OnInit {
     //     console.log('không chạy');
     //   })
     // }
+
   }
 
   onSubmit(): void {
     if (this.individualForm.valid) {
       this.subcription = this.individualService.addIndividual(this.individualForm.value).subscribe(data => {
-       this.individual = data;
-        this.message='Thêm mới thành công';
+        this.individual = data;
+        this.message = 'Thêm mới thành công';
       }, error => {
-        this.message='Thêm mới thất bại';
+        this.message = 'Thêm mới thất bại';
       })
     }
   }
-  Reset(): void{
+
+  Reset(): void {
     this.individualForm.reset();
   }
-
 }

@@ -37,4 +37,11 @@ export class IndividualService {
   editIndividual(individual: any): Observable<any> {
     return this.http.patch(this.API + 'edit/', individual);
   }
+
+  uploadFileIndividual(formData: FormData): Observable<any> {
+    return this.http.post(this.API + 'upload/', formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+  }
 }

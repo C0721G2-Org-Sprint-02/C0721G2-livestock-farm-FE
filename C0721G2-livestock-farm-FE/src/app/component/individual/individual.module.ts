@@ -8,10 +8,11 @@ import {IndividualDeleteComponent} from './individual-delete/individual-delete.c
 import {IndividualEditComponent} from './individual-edit/individual-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
+import { IndividualCreateALotComponent } from './individual-create-a-lot/individual-create-a-lot.component';
 
 
 @NgModule({
-  declarations: [IndividualListComponent, IndividualCreateComponent, IndividualDeleteComponent, IndividualEditComponent],
+  declarations: [IndividualListComponent, IndividualCreateComponent, IndividualDeleteComponent, IndividualEditComponent, IndividualCreateALotComponent],
   imports: [
     CommonModule,
     IndividualRoutingModule,

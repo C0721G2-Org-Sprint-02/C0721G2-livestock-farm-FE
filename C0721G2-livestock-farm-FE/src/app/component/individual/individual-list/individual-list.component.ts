@@ -5,6 +5,7 @@ import {IndividualDeleteComponent} from '../individual-delete/individual-delete.
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Component, Input, OnInit} from '@angular/core';
 import {IndividualEditComponent} from '../individual-edit/individual-edit.component';
+import {IndividualCreateALotComponent} from '../individual-create-a-lot/individual-create-a-lot.component';
 
 @Component({
   selector: 'app-individual-list',
@@ -127,6 +128,17 @@ export class IndividualListComponent implements OnInit {
       });
     }, error => {
       this.message = 'Không tìm thấy';
+    });
+  }
+
+  openDialogFile() {
+    const dialogRef = this.dialogDeleteIndividual.open(IndividualCreateALotComponent, {
+      width: '600px',
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.message = result;
+      this.ngOnInit();
     });
   }
 }
