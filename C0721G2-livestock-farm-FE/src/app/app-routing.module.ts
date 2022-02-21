@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomeComponent} from "./component/share/home/home.component";
-import {AboutUsComponent} from "./component/share/about-us/about-us.component";
+import {HomeComponent} from './component/share/home/home.component';
+import {AboutUsComponent} from './component/share/about-us/about-us.component';
 
 
 const routes: Routes = [
@@ -30,6 +30,10 @@ const routes: Routes = [
   },
   {
     path: 'about-us', component: AboutUsComponent
+  },
+  {
+    path: 'treatement',
+    loadChildren: () => import('./component/treatement/treatement.module').then(module => module.TreatementModule)
   },
 ];
 
