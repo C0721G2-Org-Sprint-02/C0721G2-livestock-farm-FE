@@ -1,0 +1,13 @@
+<div class="mat-card-header">
+  <h6>Thêm bằng file excel</h6>
+</div>
+<div class="row">
+  <div class="input-group col-12">
+    <input type="file" accept=".xlsx" (change)="onFileSelect($event)" class="form-control" id="inputGroupFile04"
+           formControlName="profile" name="profile"
+           aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+    <button [mat-dialog-close] class="btn btn-secondary me-2">Hủy</button>
+    <button class="btn btn-success" type="button" (click)="submitFile()" id="inputGroupFileAddon04">Thêm </button>
+
+  </div>
+</div>

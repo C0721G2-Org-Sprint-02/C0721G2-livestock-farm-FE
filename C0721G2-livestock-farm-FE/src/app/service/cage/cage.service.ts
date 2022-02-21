@@ -6,11 +6,8 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class CageService {
-
   public API = 'http://localhost:8080/api/cage';
-
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   getCage(id: string): Observable<any> {
     return this.http.get(this.API + '/detail/' + id);
@@ -23,4 +20,5 @@ export class CageService {
   search(page: number, search: string): Observable<any> {
     return this.http.get(this.API + '/search?search=' + search + '&page=' + page);
   }
+
 }

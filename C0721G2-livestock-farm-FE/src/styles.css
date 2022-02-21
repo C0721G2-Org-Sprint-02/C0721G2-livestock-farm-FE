@@ -6,3 +6,10 @@
   background: #198754;
   /*box-shadow: none;*/
 }/* You can add global styles to this file, and also import other style files */
+
+/* You can add global styles to this file, and also import other style files */
+/*style nay cua Hien*/
+.custom-dialog .mat-dialog-container {
+  padding: 0;
+  border-radius: 15px;
+}

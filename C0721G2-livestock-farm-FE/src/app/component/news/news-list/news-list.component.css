@@ -1,0 +1,8 @@
+.btn-search{
+  border-color: #20b2aa !important;
+  color: white !important;
+}
+.btn:hover{
+  /*border-color: white !important;*/
+  color: white !important;
+}

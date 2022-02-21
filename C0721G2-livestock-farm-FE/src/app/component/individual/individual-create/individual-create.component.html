@@ -1,1 +1,143 @@
-<p>individual-create works!</p>
+<span [class.alert-danger]="message" (message)="message" [textContent]="message">{{'message'}}</span><!--thẻ modal-->
+<br>
+<!--form nhập-->
+<button type="button" class="btn btn-success font-weight-bold me-2" data-bs-toggle="modal" data-bs-target="#myModalCreate">
+  Thêm một
+</button>
+
+<div class="modal" id="myModalCreate" style="text-align: left">
+  <div class="modal-dialog mw-100 w-75" style="width: 1280px">
+    <div class="modal-content col-12">
+      <div class="card mb-8">
+        <div class="btn btn-success modal-header">
+          <h6>Thêm mới cá thể</h6>
+          <p class="text-success"></p>
+        </div>
+
+        <div class="modal-body">
+          <form class="form-group row g-3 needs-validation m-3" method="post" [formGroup]="individualForm"
+                (ngSubmit)="onSubmit()">
+<!--            <div class="col-md-6 position-relative">-->
+<!--              <label for="code" class="form-label">Mã cá thể <span-->
+<!--                style="color: red">(*)</span></label>-->
+<!--              <input type="text" id="code" class="form-control" formControlName="id">-->
+<!--              <small class="fst-italic" style="color: red" *ngIf="individualForm.controls.id.dirty &&-->
+<!--              individualForm.controls.id.hasError('required')">Mã cá thể không được để trống</small>-->
+<!--              <small class="fst-italic" style="color: red" *ngIf="individualForm.controls.id.dirty &&-->
+<!--              individualForm.controls.id.hasError('required')">Phải đúng định dạng IN-XXXX</small>-->
+<!--            </div>-->
+            <div class="col-md-6 position-relative">
+              <label class="form-label">Mã chuồng nuôi <span
+                style="color: red">(*)</span></label>
+              <select id="status" class="form-select" aria-label="Default select example"
+                      formControlName="cage" name="positionDTO">
+                <option [ngValue]="null">--Chọn--</option>
+                <option *ngFor="let item of cage"
+                        [ngValue]="item">{{item.id}}</option>
+              </select>
+            </div>
+            <div class="col-md-6 position-relative">
+              <label for="datein" class="form-label">Ngày vào chuồng <span
+                style="color: red">(*)</span></label>
+              <input type="date" id="datein" class="form-control" formControlName="dateIn">
+              <small class="fst-italic" style="color: red" *ngIf="individualForm.controls.dateIn.dirty &&
+              individualForm.controls.dateIn.hasError('required')">Ngày vào chuồng không được để
+                trống</small>
+              <!--              <small class="fst-italic" style="color: red">không được là ngày quá khứ</small>-->
+            </div>
+
+            <div class="col-md-6 position-relative ">
+              <label for="dateout" class="form-label">Ngày xuất chuồng <span
+                style="color: red">(*)</span></label>
+              <input type="date" id="dateout" class="form-control" formControlName="dateOut">
+              <small class="fst-italic" style="color: red" *ngIf="individualForm.controls.dateOut.dirty &&
+              individualForm.controls.dateOut.hasError('required')">Ngày xuất chuồng không được để
+                trống</small>
+              <!--              <small class="fst-italic" style="color: red">không được là ngày quá khứ</small>-->
+            </div>
+
+            <div class="col-md-6 position-relative ">
+              <label for="position-relative" class="form-label">Tình trạng <span
+                style="color: red">(*)</span></label>
+              <br>
+              <select id="position-relative" class="form-control" aria-label="Default select example"
+                      formControlName="status">
+                <option Value="null">Lựa chọn trạng thái</option>
+                <option value="0">Bệnh</option>
+                <!--                <option value="2">Đang Nuôi</option>-->
+                <option value="1">Khỏe mạnh</option>
+                <!--                <option value="4">Chuẩn bị xuất</option>-->
+                <!--                <option value="5">Đã xuất</option>-->
+              </select>
+            </div>
+
+            <div class="col-md-6 position-relative">
+              <label for="weight" class="form-label">Cân nặng/Kg <span
+                style="color: red">(*)</span></label>
+              <input type="number" id="weight" class="form-control" formControlName="weight">
+              <small class="fst-italic" style="color: red" *ngIf="individualForm.controls.dateOut.dirty &&
+              individualForm.controls.weight.hasError('required')">Cân nặng không được để trống</small>
+              <!--              <small class="fst-italic" style="color: red">không được là số âm, chỉ được nhập-->
+              <!--                số</small>-->
+            </div>
+            <!--            <div class="col-md-12 position-relative">-->
+            <!--              <label for="note" class="form-label">Ghi chú</label>-->
+            <!--              <textarea type="text" class="form-control" id="note"></textarea>-->
+            <!--            </div>-->
+            <br>
+            <div class="modal-footer col-12">
+              <div class="btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
+                   aria-label="Toolbar with button groups">
+                <div class="me-2 float-right">
+                  <div class="btn-group me-2">
+                    <button class="btn btn-secondary customBtn" type="button" (click)="Reset()" data-bs-dismiss="modal">
+                      Hủy
+                    </button>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal2"
+                            [disabled]="individualForm.invalid">Thêm mới
+                    </button>
+                  </div>
+                  <!--                  <p type="button" class="btn btn-success" data-toggle="modalCreate" data-target="#modal">Lưu</p>-->
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--modal hiện xác nhận-->
+
+<div class="modal fade" id="modal2" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true" style="text-align: left">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header btn-danger">
+        <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+        <button type="button" class="" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có muốn thêm cá thể mới cá thể</p>
+        <!--        <p>{{individual.id}}</p>-->
+        <span style="color:red"></span>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn btn-success " (click)="onSubmit()" [routerLink]="['/individual/list']">Xác
+            nhận
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

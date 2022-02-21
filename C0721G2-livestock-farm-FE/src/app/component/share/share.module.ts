@@ -11,8 +11,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
 @NgModule({
     declarations: [FooterComponent, HeaderComponent, HomeComponent, AboutUsComponent],
   exports: [
-    HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent
   ],
     imports: [
         CommonModule,

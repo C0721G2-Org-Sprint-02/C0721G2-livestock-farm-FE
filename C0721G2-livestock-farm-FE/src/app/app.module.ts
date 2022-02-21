@@ -17,6 +17,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSliderModule} from '@angular/material/slider';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -38,6 +39,7 @@ import {MatSliderModule} from '@angular/material/slider';
     BrowserAnimationsModule,
     MatDialogModule,
     MatSliderModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
