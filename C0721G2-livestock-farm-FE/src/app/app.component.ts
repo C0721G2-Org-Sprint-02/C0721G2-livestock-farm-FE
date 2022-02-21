@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {BuyCreateComponent} from './component/buy/buy-create/buy-create.component';
 
 @Component({
   selector: 'app-root',
