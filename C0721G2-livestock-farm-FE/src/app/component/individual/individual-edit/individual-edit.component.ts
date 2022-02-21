@@ -27,15 +27,20 @@ export class IndividualEditComponent implements OnInit {
   individual: Individual;
   cage: Cages[];
   id: string;
+
   constructor(private individualService: IndividualService,
               private router: Router,
-              private matDialog: MatDialog, private cageService: CageService,) {
+              private matDialog: MatDialog, private cageService: CageService) {
   }
-@Input() currentId : any;
+
+  @Input() currentId: any;
   message: string;
 
   ngOnInit(): void {
     console.log(this.currentId);
+    this.subcription = this.cageService.getListCage().subscribe(data => {
+      this.cage = data;
+    });
     this.subcription = this.individualService.findIndividualbyId(this.currentId).subscribe(data => {
       this.individual = data;
       this.individualForm.setValue(this.individual);
@@ -47,9 +52,9 @@ export class IndividualEditComponent implements OnInit {
     if (this.individualForm.valid) {
       this.subcription = this.individualService.editIndividual(this.individualForm.value).subscribe(data => {
         this.router.navigate(['/individual/list']);
-        this.message='Đã cập nhật thành công';
+        this.message = 'Đã cập nhật thành công';
       }, error => {
-        this.message='Đã cập nhật thất bại';
+        this.message = 'Đã cập nhật thất bại';
       })
     }
   }
