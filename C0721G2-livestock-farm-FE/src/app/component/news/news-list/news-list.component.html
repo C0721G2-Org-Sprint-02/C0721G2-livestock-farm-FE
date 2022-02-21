@@ -33,7 +33,7 @@
           </form>
         </div>
       </div>
-      <div *ngIf="this.page < 1 && flag == true then show"></div>
+      <div *ngIf="this.page < 1 then show else onlyShow"></div>
       <ng-template #show>
         <div class="row">
           <div class="col-md-7 col-lg-7 col-xl-7 col-sm-12">
@@ -89,7 +89,7 @@
           </div>
         </div>
       </ng-template>
-      <div *ngIf="this.page > 0 then onlyShow"></div>
+<!--      <div *ngIf="this.page > 0 then onlyShow"></div>-->
       <ng-template #onlyShow>
         <div class="row">
           <!--                    Tin tuc muc thu 2-->
