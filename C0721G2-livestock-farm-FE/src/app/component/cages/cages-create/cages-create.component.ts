@@ -18,6 +18,7 @@ export class CagesCreateComponent implements OnInit {
   employeeExist: any;
   typeOfCage: TypeOfCage[];
   employee: Employee[];
+  showAlert: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
               private cageService: CageService,
@@ -30,7 +31,7 @@ export class CagesCreateComponent implements OnInit {
       openDate: ['', [Validators.required]],
       quantity: ['', [Validators.required, Validators.pattern('^([0-9]+)$')]],
       typeOfCage: [null, [Validators.required]],
-      employee: [''],
+      employee: ['', [Validators.required, Validators.pattern('^([N][V]-[0-9]{4})$')]],
     });
   }
 
@@ -48,6 +49,7 @@ export class CagesCreateComponent implements OnInit {
 
   submit() {
     if (this.createCage.valid) {
+      console.log('OK');
       console.log(this.createCage.value);
       this.cageService.saveCage(this.createCage.value).subscribe(
         data => {
@@ -55,6 +57,9 @@ export class CagesCreateComponent implements OnInit {
           //   this.createCage.value.typeOfCage = value.id;
           // });
           alert('OK');
+          this.showErrorCage = '';
+          this.employeeExist = '';
+          this.showAlert = true;
           console.log(data);
           this.createCage.reset();
         }, error => {
@@ -66,4 +71,7 @@ export class CagesCreateComponent implements OnInit {
     }
   }
 
+  closeAlert() {
+    this.showAlert = false;
+  }
 }

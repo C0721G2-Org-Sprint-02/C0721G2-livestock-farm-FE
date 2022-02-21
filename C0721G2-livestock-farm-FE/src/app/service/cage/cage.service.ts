@@ -19,7 +19,7 @@ export class CageService {
   }
 
   public updateCage(id: string, cage: Cage): Observable<any> {
-    return this.httpClient.patch(this.API + '/edit/' + id, cage);
+    return this.httpClient.patch(this.API + '/edit/' + id , cage);
   }
 
   public findCageById(id: string): Observable<any> {

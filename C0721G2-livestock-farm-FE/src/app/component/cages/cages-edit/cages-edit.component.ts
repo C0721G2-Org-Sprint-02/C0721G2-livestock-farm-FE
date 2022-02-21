@@ -5,6 +5,7 @@ import {Cage} from "../../../model/cage/cage";
 import {CageService} from "../../../service/cage/cage.service";
 import {ActivatedRoute} from "@angular/router";
 import {TypeOfCageService} from "../../../service/cage/type-of-cage.service";
+import {Employee} from "../../../model/employee/employee";
 
 @Component({
   selector: 'app-cages-edit',
@@ -16,6 +17,11 @@ export class CagesEditComponent implements OnInit {
   id: string;
   public cage: Cage;
   typeOfCage: TypeOfCage[];
+  showAlert:boolean = false;
+
+  employeeId: string;
+  showErrorCage: any;
+  employeeExist: any;
 
   constructor(private cageService: CageService,
               private activatedRoute: ActivatedRoute,
@@ -40,7 +46,9 @@ export class CagesEditComponent implements OnInit {
           data => {
             this.cage = data;
             this.updateCage.patchValue(this.cage);
+            this.employeeId = this.cage.employee.id;
             console.log(data);
+            console.log(this.updateCage.value);
           }, error => {
             console.log('error');
             console.log(error);
@@ -57,13 +65,23 @@ export class CagesEditComponent implements OnInit {
   submit() {
     this.cageService.updateCage(this.id, this.updateCage.value).subscribe(
       data => {
+        this.showAlert = true;
         console.log(this.updateCage);
         alert('update thành công');
       }, error => {
         console.log(error);
         console.log('erorr');
+        this.showErrorCage = error.error.cageError;
+        this.employeeExist = error.error.employeeError;
       }
     );
   }
 
+  compareFn(c1: any, c2: any): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
+  closeAlert() {
+   this.showAlert = false;
+  }
 }
