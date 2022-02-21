@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {BuyIndividual} from '../../../model/buy/buy-individual';
+import {Subscription} from 'rxjs';
+import {BuyService} from '../../../service/buy/buy.service';
+import {Router} from '@angular/router';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-buy-create',
@@ -6,10 +12,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./buy-create.component.css']
 })
 export class BuyCreateComponent implements OnInit {
+  buyIndividualForm = new FormGroup({
+    name: new FormControl('', [Validators.required,
+      Validators.maxLength(40), Validators.minLength(6),
+      Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
+    email: new FormControl('',
+      [Validators.required, Validators.pattern('^[a-zA-Z0-9_!#$%&\'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+.[a-z]{2,6}$')]),
+    phoneNumber: new FormControl('',
+      [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
+    address: new FormControl('',
+      [Validators.required, Validators.pattern('')]),
+    content: new FormControl('', [Validators.required]),
+  });
 
-  constructor() { }
+  subscription: Subscription;
+  buyIndividual: BuyIndividual;
+
+  constructor(private buyIndividualSerive: BuyService, private router: Router,
+              public dialogRef: MatDialogRef<BuyCreateComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,) { }
 
   ngOnInit(): void {
   }
 
+  onSubmit(buyIndividualForm: FormGroup) {
+    if (this.buyIndividualForm.valid) {
+      console.log(this.buyIndividualForm.value);
+      this.subscription = this.buyIndividualSerive.save(this.buyIndividualForm.value).subscribe(data => {
+          this.dialogRef.close();
+          alert("Đã gửi thành công");
+        }
+        , error => {
+          console.log('Not found');
+        });
+    }
+  }
+
+  onNoClick() {
+    this.dialogRef.close();
+  }
 }

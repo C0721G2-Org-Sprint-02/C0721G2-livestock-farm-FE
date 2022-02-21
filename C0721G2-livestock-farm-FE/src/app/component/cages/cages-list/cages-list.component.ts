@@ -85,7 +85,6 @@ export class CagesListComponent implements OnInit {
           this.flag = true;
         });
       }
-
     }
   }
 
@@ -105,8 +104,8 @@ export class CagesListComponent implements OnInit {
     this.ngOnInit();
   }
 
-  onSubmit() {
+  onsubmit() {
     this.flag = false;
     this.search();
-  }
+}
 }

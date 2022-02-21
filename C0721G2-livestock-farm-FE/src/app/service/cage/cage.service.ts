@@ -16,7 +16,11 @@ export class CageService {
     return this.http.get(this.API + '/detail/' + id);
   }
 
+  getListCage(): Observable<any> {
+    return this.http.get(this.API + '/list');
+  }
+
   search(page: number, search: string): Observable<any> {
-    return this.http.get(this.API + '/search?search' + search + '&page=' + page);
+    return this.http.get(this.API + '/search?search=' + search + '&page=' + page);
   }
 }
