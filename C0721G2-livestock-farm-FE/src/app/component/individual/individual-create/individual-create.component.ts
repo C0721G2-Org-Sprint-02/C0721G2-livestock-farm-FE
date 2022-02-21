@@ -16,7 +16,7 @@ import {Cages} from '../../../model/cage/cages';
 export class IndividualCreateComponent implements OnInit {
 
   individualForm = new FormGroup({
-    id: new FormControl('', [Validators.required]),
+    // id: new FormControl('', [Validators.required]),
     dateIn: new FormControl('', [Validators.required]),
     dateOut: new FormControl('', [Validators.required]),
     weight: new FormControl('', [Validators.required]),
@@ -35,7 +35,7 @@ export class IndividualCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.subcription = this.cageService.getAll().subcribe(data=>{this.cage = data})
+    this.subcription = this.cageService.getListCage().subscribe(data=>{this.cage = data})
     // if (this.individualForm.valid) {
     //   this.subcription = this.individualService.addIndividual(this.individualForm.value).subscribe(data => {
     //     this.individual = data
