@@ -55,7 +55,7 @@
               <ng-template #is>
                 <img class="rounded-circle" width="40px" height="40px" [src]="this.urlImg">
               </ng-template>
-              <span class="mx-2" style="font-size: 80%">{{this.username}}</span>
+              <span class="mx-2" style="font-size: 80%">{{this.username | titlecase}}</span>
             </a>
             <ul class="dropdown-menu border-0 pb-0 fw-bold" aria-labelledby="navbarDropdown">
               <div *ngIf="this.role === 'ROLE_ADMIN' then admin else customer"></div>
@@ -99,7 +99,7 @@
         </ng-template>
         <ng-template #wrong>
           <li class="nav-item d-flex ">
-            <a class="navbar-brand  " style="cursor: pointer" (click)="openDialog()">Đăng nhập</a>
+            <a class="navbar-brand text-success fw-bold " style="cursor: pointer" (click)="openDialog()">Đăng nhập</a>
           </li>
           <span class="reline me-3"></span>
           <li class="nav-item d-flex">
