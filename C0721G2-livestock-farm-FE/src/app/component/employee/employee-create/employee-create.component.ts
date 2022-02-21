@@ -115,7 +115,7 @@ export class EmployeeCreateComponent implements OnInit {
     //     }
     //   });
 
-
+    console.log(this.employeeForm.value.image);
     this.subscription = this.employeeService.save(this.employeeForm.value).subscribe(data => {
         alert('tao thanh cong');
         console.log(this.employee);

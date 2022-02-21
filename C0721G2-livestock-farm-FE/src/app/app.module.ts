@@ -14,7 +14,15 @@ import {SecurityModule} from './component/security/security.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialogModule} from '@angular/material/dialog';
+import {environment} from '../environments/environment';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
+import {AngularFireFunctionsModule} from '@angular/fire/functions';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireModule} from '@angular/fire';
 
 @NgModule({
   declarations: [
@@ -35,7 +43,14 @@ import {MatDialogModule} from "@angular/material/dialog";
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFireMessagingModule,
+    AngularFireDatabaseModule,
+    AngularFireFunctionsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
