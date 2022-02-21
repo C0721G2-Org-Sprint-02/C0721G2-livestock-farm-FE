@@ -1,10 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {BuyIndividual} from '../../../model/buy/buy-individual';
 import {Subscription} from 'rxjs';
-import {BuyService} from '../../../service/buy/buy.service';
+import { BuyIndividual } from 'src/app/model/buy/buy-individual';
+import {BuyService} from '../../../service/buy_individual/buy.service';
 import {Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-buy-create',
@@ -40,7 +41,7 @@ export class BuyCreateComponent implements OnInit {
       console.log(this.buyIndividualForm.value);
       this.subscription = this.buyIndividualSerive.save(this.buyIndividualForm.value).subscribe(data => {
           this.dialogRef.close();
-          alert("Đã gửi thành công");
+          alert('Đã gửi thành công');
         }
         , error => {
           console.log('Not found');
@@ -51,4 +52,5 @@ export class BuyCreateComponent implements OnInit {
   onNoClick() {
     this.dialogRef.close();
   }
+
 }

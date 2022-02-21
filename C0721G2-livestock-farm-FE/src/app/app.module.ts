@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {CagesModule} from './component/cages/cages.module';
 import {EmployeeModule} from './component/employee/employee.module';
 import {NewsModule} from './component/news/news.module';
 import {IndividualModule} from './component/individual/individual.module';
@@ -16,6 +15,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSliderModule} from '@angular/material/slider';
+import {CagesModule} from './component/cages/cages.module';
 
 
 @NgModule({
@@ -39,7 +39,6 @@ import {MatSliderModule} from '@angular/material/slider';
     BrowserAnimationsModule,
     MatDialogModule,
     MatSliderModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]

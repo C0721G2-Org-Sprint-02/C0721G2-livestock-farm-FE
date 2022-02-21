@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { BuyRoutingModule } from './buy-routing.module';
 import { BuyListComponent } from './buy-list/buy-list.component';
 import { BuyCreateComponent } from './buy-create/buy-create.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     imports: [
         CommonModule,
         BuyRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+      MatDialogModule
     ]
 })
 export class BuyModule { }

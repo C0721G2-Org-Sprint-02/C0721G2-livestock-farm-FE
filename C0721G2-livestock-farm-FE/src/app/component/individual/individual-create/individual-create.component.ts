@@ -6,9 +6,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {CageService} from '../../../service/cage/cage.service';
 import {Subscription} from 'rxjs';
 import {Individual} from '../../../model/individual/individual';
-import {Cages} from '../../../model/cage/cages';
-import {IndividualEditComponent} from '../individual-edit/individual-edit.component';
-import {IndividualCreateALotComponent} from '../individual-create-a-lot/individual-create-a-lot.component';
+import {Cage} from '../../../model/cage/cage';
+
+
 
 @Component({
   selector: 'app-individual-create',
@@ -28,7 +28,7 @@ export class IndividualCreateComponent implements OnInit {
   });
   subcription: Subscription;
   individual: Individual;
-  cage: Cages[];
+  cage: Cage[];
   message: string;
 
 

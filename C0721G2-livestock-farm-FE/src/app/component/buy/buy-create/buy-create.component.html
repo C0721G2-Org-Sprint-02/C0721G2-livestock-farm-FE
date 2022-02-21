@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!--<div class="modal fade " id="exampleModal8" tabindex="-1"-->
 <!--     aria-labelledby="exampleModalLabel" aria-hidden="true">-->
 <!--  <div class="modal-dialog modal-lg">-->
@@ -155,5 +156,90 @@
           </button>
           <button type="submit" class="btn text-light bg-warning">Gửi</button>
         </div>
+=======
+<form class="btn-success" [formGroup]="buyIndividualForm" (ngSubmit)="onSubmit(buyIndividualForm)">
+  <h4 class="btn-success ">Liên Hệ</h4>
+  <p>Chúng tôi có thể giúp được gì cho bạn ?</p>
+  <table class="table" style="border: seagreen">
+    <tbody>
+    <tr>
+      <td >
+        <input type="text" class="form-control" id="name" formControlName="name"
+               placeholder="Tên Bạn">
+      </td>
+      <td >
+        <input type="text" class="form-control" placeholder="Email" formControlName="email">
+      </td>
+
+
+    </tr>
+    <tr>
+      <td style="color: yellow">
+        <small
+          *ngIf="buyIndividualForm.controls.name.errors?.pattern">Họ và tên sai định dạng</small>
+        <small
+          *ngIf="buyIndividualForm.controls.name.touched && buyIndividualForm.controls.name.errors?.required ">Họ và tên không để trống</small>
+        <small
+          *ngIf="buyIndividualForm.controls.name.errors?.maxLength">Họ và tên tối đa 40 ký tự </small>
+        <small
+          *ngIf="buyIndividualForm.controls.name.errors?.minLength">Họ và tên tối đa 6 ký tự </small>
+      </td>
+      <td style="color: yellow">
+        <small
+          *ngIf="buyIndividualForm.controls.email.errors?.pattern">Email sai định dạng</small>
+        <small
+          *ngIf="buyIndividualForm.controls.email.touched && buyIndividualForm.controls.email.errors?.required ">
+          Email không để trống</small>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <input type="text" id="phone" class="form-control" formControlName="phoneNumber"
+               placeholder="Số Điện Thoại"
+               aria-describedby="passwordHelpInline">
+      </td>
+      <td>
+        <input type="text" id="address" class="form-control" placeholder="Địa chỉ" formControlName="address"
+               aria-describedby="passwordHelpInline">
+      </td>
+    </tr>
+    <tr>
+      <td style="color: yellow">
+        <small
+          *ngIf="buyIndividualForm.controls.phoneNumber.errors?.pattern">Số điện thoại sai định dạng</small>
+        <small
+          *ngIf="buyIndividualForm.controls.phoneNumber.touched && buyIndividualForm.controls.phoneNumber.errors?.required ">
+          Số điện thoại không để trống</small>
+      </td>
+      <td style="color: yellow">
+        <small
+          *ngIf="buyIndividualForm.controls.address.touched && buyIndividualForm.controls.address.errors?.required ">
+          Địa chỉ không để trống</small>
+      </td>
+    </tr>
+    <tr >
+
+      <td colspan="2">
+        <textarea class="form-control" placeholder="Nội dung của bạn" formControlName="content"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td style="color: yellow">
+        <small
+          *ngIf="buyIndividualForm.controls.content.touched && buyIndividualForm.controls.content.errors?.required ">
+          Nội dung không để trống</small>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+  <div class="modal-footer btn-success">
+    <button type="button" class="btn btn-secondary"
+            data-bs-dismiss="modal" (click)=" onNoClick()">Đóng
+    </button>
+    <button type="submit" class="btn text-light bg-warning">Gửi</button>
+  </div>
+>>>>>>> ac87e7c1e2b43bb1cee5532a8df434c829475fba
 
 </form>
