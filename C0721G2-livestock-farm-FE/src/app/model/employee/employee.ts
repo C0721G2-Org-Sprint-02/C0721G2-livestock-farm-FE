@@ -1,4 +1,5 @@
-import {AppUser} from '../security/app-user';
+import {AppUser} from '../user/app-user';
+
 
 export interface Employee {
   id?: string;
@@ -11,4 +12,6 @@ export interface Employee {
   gender: number;
   image: string;
   appUser: AppUser;
+  username: string;
+  rolesId: number;
 }

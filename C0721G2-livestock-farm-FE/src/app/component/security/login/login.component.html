@@ -1,1 +1,152 @@
-<p>login works!</p>
+<div class="login-dialog">
+  <button class="btn-close-c" (click)="closeDialog()">
+    <img class="close-img" src="https://salt.tikicdn.com/ts/upload/fe/20/d7/6d7764292a847adcffa7251141eb4730.png"
+         alt="icon">
+  </button>
+  <div class="login-content container h-100 ">
+
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-sm-2 gradient-custom-2" style="background-image: url('https://cdn.dribbble.com/users/1803663/screenshots/14875915/media/2dbc4413c047b5b048a02a1554b0758e.jpg?compress=1&resize=1200x900&vertical=top')
+      ; height: 600px">
+
+      </div>
+
+      <div class="col-md-6 col-lg-6 col-sm-8">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj2xVSzBJlVa574WaU9Gqk1Er_U0pIZ3S6TNJMk_hKFjBvBYsXEgG90NVZow5U3FNJi70&usqp=CAU"
+                height="120" width="120 " alt="logo"/>
+              <h4 class="mt-3 mb-3 pb-1 text-success">Tập đoàn C0721G2</h4>
+              <form [formGroup]="userForm" (ngSubmit)="onSubmit()" appFocusInvalidInput class="row ms-3 mt-1">
+                <div class="col-12">
+<!--                  <i class="far fa-user user-icon "></i>-->
+                  <input type="email" class="form-control input-height" id="username" formControlName="username"
+                         placeholder="Tên đăng nhập/Email">
+                  <small *ngIf="userForm.get('username').touched && userForm.get('username').errors?.required"
+                         class="text-danger">Tên đăng nhập không được để trống!</small>
+                </div>
+                <div class="mb-3 col-12">
+                  <i class="far fa-lock password-icon"></i>
+                  <input type="password" class="form-control input-height" formControlName="password"
+                         placeholder="Mật khẩu">
+                  <small *ngIf="userForm.get('password').touched && userForm.get('password').errors?.required"
+                         class="text-danger">Mật khẩu không được để trống!</small>
+                </div>
+                <div class="col-12">
+<!--                  <button type="submit" [disabled]="this.userForm.invalid"-->
+<!--                          class="btn bg-gradient-info text-white shadow border-0 mb-3 w-100 p-2 border-btn-login fw-bold ">-->
+<!--                    Đăng nhập-->
+<!--                  </button>-->
+                  <button  type="submit" [disabled]="this.userForm.invalid"
+                    class="btn btn-success btn-block fa-lg  mb-3 mt-3 ">Đăng nhập
+                  </button>
+                </div>
+                <div class="text-center mb-2 col-12">
+                  <small class="text-danger">{{this.errorMessage}}</small>
+                </div>
+                <div class="mb-3 row ">
+                  <div class=" col-sm-6 col-xs-12 form-check form-switch d-inline">
+                    <input type="checkbox" formControlName="remember_me" class="form-check-input fs-6  "
+                           id="remember_me">
+                    <label class="form-check-label mx-1" for="remember_me">Nhớ tài khoản</label>
+
+                  </div>
+                  <div class=" col-sm-6 col-xs-12 forget-password text-end-forgot-password ">
+                    <a class="text-muted text-danger" (click)="openDialogResetPassword()"  type="button">Quên mật khẩu?</a>
+                  </div>
+
+<!--                  <div class=" col-sm-6 col-xs-12 form-check form-switch ">-->
+<!--                      <input type="checkbox" formControlName="remember_me" class="form-check-input fs-6"-->
+<!--                             style=" margin-left:-22px; margin-top: 2px" id="remember_me">-->
+<!--                      <label class="form-check-label mx-1" for="remember_me">Nhớ tài khoản</label>-->
+<!--                  </div>-->
+<!--                  <div class=" col-sm-6 col-xs-12 forget-password text-end-forgot-password">-->
+<!--                    <a class="text-danger text-decoration-none" (click)="openDialogResetPassword()">Quên mật khẩu?</a>-->
+<!--                  </div>-->
+                </div>
+
+                <hr class="mt-5">
+                <div class="d-flex justify-content-center text-center pt-1">
+
+                  <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"><img
+                    src="https://img.icons8.com/fluency/48/000000/facebook-new.png"/></i></a>
+                  <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg  px-2"><img
+                    src="https://img.icons8.com/fluency/48/000000/twitter.png"/></i></a>
+                  <a href="#!" class="text-white"><i class="fab fa-google fa-lg"><img
+                    src="https://img.icons8.com/fluency/48/000000/google-logo.png"/></i></a>
+                </div>
+
+              </form>
+
+
+            </div>
+            <p class="text-muted text-center mt-5 mb-0">@Bản quyền thuộc về C0721G2</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--        <div class="row">-->
+<!--          <div class="col-12">-->
+<!--            <h3 class="fw-bold text-gradient text-head-login ">Đăng nhập!</h3>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" appFocusInvalidInput class="row" >-->
+<!--          <div class="col-12">-->
+<!--            <i class="far fa-user user-icon"></i>-->
+<!--            <input type="email" class="form-control input-height" id="username" formControlName="username" placeholder="Tên đăng nhập/Email">-->
+<!--            <small *ngIf="userForm.get('username').touched && userForm.get('username').errors?.required"-->
+<!--                   class="text-danger">Tên đăng nhập không được để trống!</small>-->
+<!--          </div>-->
+<!--          <div class="mb-3 col-12">-->
+<!--            <i class="far fa-lock password-icon"></i>-->
+<!--            <input type="password" class="form-control input-height" formControlName="password" placeholder="Mật khẩu">-->
+<!--            <small *ngIf="userForm.get('password').touched && userForm.get('password').errors?.required"-->
+<!--                   class="text-danger">Mật khẩu không được để trống!</small>-->
+<!--          </div>-->
+<!--          <div class="col-12">-->
+<!--            <button type="submit" [disabled]="this.userForm.invalid" class="btn bg-gradient-info text-white shadow border-0 mb-3 w-100 p-2 border-btn-login fw-bold ">-->
+<!--              Đăng nhập</button>-->
+<!--          </div>-->
+<!--          <div class="text-center mb-2 col-12">-->
+<!--            <small class="text-danger">{{this.errorMessage}}</small>-->
+<!--          </div>-->
+<!--          <div class="mb-3 row">-->
+<!--            <div class=" col-sm-6 col-xs-12 form-check form-switch">-->
+<!--              <input type="checkbox" formControlName="remember_me" class="form-check-input fs-6" style=" margin-left:-22px; margin-top: 2px" id="remember_me">-->
+<!--              <label class="form-check-label mx-1" for="remember_me">Nhớ tài khoản</label>-->
+<!--            </div>-->
+<!--            <div class=" col-sm-6 col-xs-12 forget-password text-end-forgot-password">-->
+<!--              <a class="text-danger text-decoration-none" (click)="openDialogResetPassword()">Quên mật khẩu?</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </form>-->
+
+
+<!--        <div class="row">-->
+<!--          <div class="col"><hr></div>-->
+<!--          <div class="col-auto mt-1"><small>Hoặc</small> </div>-->
+<!--          <div class="col"><hr></div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--          <div class="col-12">-->
+<!--            <button class=" btn bg-login-facebook border-btn-login shadow w-100 mb-3 text-white fw-bold" (click)="signInWithFB()"><i class="fab fa-facebook-f me-2"></i>Đăng nhập với Facebook</button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--          <div class="col-12">-->
+<!--            <button class=" btn bg-login-google border-btn-login shadow w-100 mb-3 text-white fw-bold" (click)="signInWithGoogle()"><i class="fab fa-google me-2"></i>Đăng nhập với Google</button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="text-center row ">-->
+<!--          <div class="col-12">-->
+<!--            <span>Bạn chưa là thành viên?<a class="text-gradient text-head-login text-decoration-none" (click)="openDialogRegister()"> Đăng ký </a>tại đây</span>-->
+<!--          </div>-->
+<!--        </div>-->

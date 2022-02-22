@@ -1,1 +1,154 @@
-<p>news-list works!</p>
+<main class="container-fluid " style="padding-top: 4rem">
+  <div class="row justify-content-center ">
+    <div class="col-md-9 col-lg-9 col-xl-9 col-sm-12 bg-light">
+      <div class="row justify-content-end">
+        <div style="background-color: lightseagreen; font-size: 100%" class="text-light">
+          <div class="mt-1 mb-1">
+             <span class="mt-2 mb-2">
+            <button class="text-decoration-none text-light  btn btn-link"
+                    (click)="showAllNews()">Tin tức</button></span>
+            <span class="mt-2 mb-2"> |
+            <button class="text-decoration-none text-light  btn btn-link " (click)="focus()">Tiêu điểm</button></span>
+            <span class="mt-2 mb-2"> |
+            <button class="text-decoration-none text-light  btn btn-link"
+                    (click)="breeding()">Tin chăn nuôi</button></span>
+            <span class="mt-1 mb-1 "> |
+              <button class="text-decoration-none text-light  btn btn-link"
+                      (click)="technology()">Tin công nghệ</button></span>
+            <span class="float-end mt-2 mb-2 me-1   text-light "
+                  style="text-align: center">{{time | date:'hh:mm:ss a dd/MM/yyyy '}}</span>
+          </div>
+        </div>
+        <div *ngIf="message != '' then showMsg else showList"></div>
+        <ng-template #showMsg>
+          <div class="text-center mt-4 mb-4" *ngIf="message != ''">Không có tin để hiển thị</div>
+        </ng-template>
+        <ng-template #showList>
+          <div class="col-md-5 col-lg-5 col-xl-5 col-sm-12 mt-2">
+            <form class="mb-2" #myNgForm="ngForm" (ngSubmit)="onSubmit()">
+              <div class="row ">
+                <div class="col-md-8">
+                  <input class="btn-sm border-success form-control" type="search" name="title"
+                         [(ngModel)]="title" [ngModelOptions]="{standalone: true}" placeholder="Tìm theo tiêu đề">
+                </div>
+                <div class="col-md-4">
+                  <button class="btn btn-sm  btn-success text-light float-end" type="submit"
+                          style="font-size: 80%"
+                  >Tìm kiếm
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div *ngIf="this.page < 1 then show else onlyShow"></div>
+          <ng-template #show>
+            <div class="row">
+              <div class="col-md-7 col-lg-7 col-xl-7 col-sm-12">
+                <a class="text-decoration-none text-success " [routerLink]="['/news/detail',news[0].id]">
+                  <div class="card">
+                    <img src="{{news[0].image}}">
+                  </div>
+                  <p class="fw-bolder fs-5 mt-2">
+                    {{news[0].title}}
+                  </p>
+                </a>
+                <!--          <p class="fs-6">-->
+                <!--            {{news[0].content}}-->
+                <!--          </p>-->
+              </div>
+              <div class="col-md-5 col-lg-5 col-xl-5 col-sm-12">
+                <div *ngFor="let fItem of news let i = index">
+                  <div class="card mb-3" style="max-width: 100%" *ngIf="i<5">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{{fItem.image}}" class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <a class="text-decoration-none text-success " [routerLink]="['/news/detail',fItem.id]">
+                          <p class="card-text fw-bolder ms-2" style="font-size: 85%">
+                            {{fItem.title}}</p></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--                    Tin tuc muc thu 2-->
+              <div>
+                <div class="card mb-3" *ngFor="let item of news let i = index">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <div class="mt-2 mb-2 me-2 ms-2">
+                        <img
+                          src="{{item.image}}"
+                          class="img-fluid rounded-start" alt="...">
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <a class="text-decoration-none text-success " [routerLink]="['/news/detail',item.id]">
+                        <p class="card-text fs-5 fw-bolder mt-3">
+                          {{item.title}}</p>
+                        <small class="fs-6 text-dark" style="font-size: 60%">{{item.content | slice: 0:150}}...</small>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <!--      <div *ngIf="this.page > 0 then onlyShow"></div>-->
+          <ng-template #onlyShow>
+            <div class="row">
+              <!--                    Tin tuc muc thu 2-->
+              <div>
+                <div class="card mb-3" *ngFor="let item of news let i = index">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <div class="mt-3 mb-3 me-3 ms-3">
+                        <img
+                          src="{{item.image}}"
+                          class="img-fluid rounded-start" alt="...">
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <a class="text-decoration-none text-success " [routerLink]="['/news/detail',item.id]">
+                        <p class="card-text fs-5 fw-bolder mt-3">
+                          {{item.title}}</p>
+                        <small class="fs-6 text-dark" style="font-size: 60%">{{item.content | slice: 0:150}}...</small>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <!--                        Phân trang-->
+          <div class="float-end">
+            <div class="float-end">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <div *ngIf="this.page >0 then previous"></div>
+                  <ng-template #previous>
+                    <li class="page-item ">
+                      <button
+                        (click)="previousClick(1)" class="page-link text-success" type="button">Trang trước
+                      </button>
+                    </li>
+                  </ng-template>
+                  <li class="page-item ">
+                    <span class="input-group-text page-link text-success">{{page + 1}}/{{totalPages}}</span>
+                  </li>
+                  <div *ngIf="this.page  < this.totalPages-1 then nexts"></div>
+                  <ng-template #nexts>
+                    <li class="page-item ">
+                      <button (click)="nextClick(1)" class="page-link text-success" type="button">Trang sau</button>
+                    </li>
+                  </ng-template>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</main>

@@ -6,13 +6,19 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
   declarations: [FooterComponent, HeaderComponent, HomeComponent, AboutUsComponent],
+  exports: [
+    HeaderComponent,
+    FooterComponent
+  ],
   imports: [
     CommonModule,
-    ShareRoutingModule
+    ShareRoutingModule,
+    MatDialogModule
   ]
 })
 export class ShareModule { }
