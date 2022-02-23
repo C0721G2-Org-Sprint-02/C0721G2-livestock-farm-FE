@@ -1,1 +1,180 @@
-<p>employee-list works!</p>
+<main class="container-fluid" style="padding-top: 4rem">
+  <div class="row">
+    <div class="col-md-2 col-sm-12" style="background-color: #009966;">
+      <div class="position-sticky ">
+        <ul class="text-decoration-none list-group mt-4 mb-4 ">
+          <li class="list-unstyled mb-2">
+            <a class="text-decoration-none   hvr-sweep-to-right"
+               >
+              <img src="https://cdn-icons-png.flaticon.com/512/1177/1177568.png"
+                   height="20px">
+              <span class="text-light">Quản lý nhân viên</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1178/1178215.png"
+                   height="20px">
+              <span class="text-light">Quản lý đàn</span>
+            </a>
+          </li>
+
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               [routerLink]="['/employee/list']">
+              <img src="https://cdn-icons-png.flaticon.com/512/1177/1177455.png"
+                   height="20px">
+              <span class="text-light">Quản lý chuồng nuôi</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               [routerLink]="['/customer/list']">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060673.png"
+                   height="20px">
+              <span class="text-light">Khám chữa trị</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               [routerLink]="['/real-estate-new/list-post-approval']">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060702.png" height="20px">
+              <span class="text-light">Quản lý bài đăng</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060668.png" height="20px">
+
+              <span class="text-light">Giao dịch</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class="text-decoration-none hvr-sweep-to-right pleft0"
+               href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060694.png" height="20px">
+              <span class="text-light">Lịch làm việc</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class="text-decoration-none hvr-sweep-to-right pleft0"
+               href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060699.png" height="20px">
+              <span class="text-light">Hồ sơ biểu mẫu</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060674.png" height="20px">
+              <span class="text-light">Thống kê</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <section class="col-md-10">
+          <div class="row justify-content-center">
+            <div class="row mt-3">
+              <div class="col-12">
+                <h2 class="fw-bold text-center">DANH SÁCH NHÂN VIÊN</h2>
+              </div>
+              <div class="row mt-5 mx-5">
+                <div class="col-xxl-3 col-xl-4 col-md-6 mb-3">
+                  <select class="form-select" aria-label="Default select example"  [(ngModel)]="sortType" (change)="sort()">
+                    <option value="0" [selected]="0">Xắp sếp</option>
+                    <option value="1">Tên A-Z</option>
+                    <option value="2">Tên Z-A</option>
+                    <option value="3">Địa chỉ A-Z</option>
+                    <option value="4">Địa chỉ Z-A</option>
+                    <option value="5">Ngày sinh giảm dần</option>
+                    <option value="6">Ngày sinh tăng dần</option>
+                  </select>
+                </div>
+                <div class="col-xxl-3 col-xl-4 col-md-6 mb-3">
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="roleType" (change)="role()">
+                    <option value="0" [selected]="0">Tất cả</option>
+                    <option value="1">Quản trị viên</option>
+                    <option value="2">Nhân viên</option>
+                  </select>
+                </div>
+                <div class="col-xxl-4 col-xl-4 col-md-6 mb-3">
+                  <div class="input-group m-0">
+                    <input type="text" class="form-control" style="text-align: center"
+                           placeholder="Từ khoá" [(ngModel)]="keyword">
+                  </div>
+                </div>
+                <div class="col-xxl-2 col-xl-4  col-md-6 mb-3 ">
+                  <button type="submit" class="btn btn-success" (click)="searchKey()"><i class="fal fa-search me-2"></i>Tìm kiếm
+                  </button>
+                </div>
+              </div>
+              <div class="row mb-3 mt-4">
+                <div class="col-12 text-end">
+                  <ng-container *ngIf="deleteMessenger"><span class="text-success fst-italic mx-2">{{deleteMessenger}}</span></ng-container>
+                  <ng-container *ngIf="emptyMessenger"><span class="text-danger fst-italic mx-2">{{emptyMessenger}}</span></ng-container>
+                  <a class="btn btn-success font-weight-bold">
+                    Thêm mới nhân viên
+                  </a>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="container">
+                  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+                    <ng-container *ngFor="let employee of employeeList">
+                      <div class="col">
+                        <div class="card">
+                          <ng-container *ngIf="employee.image; else imageDefault">
+                            <img [src]="employee.image"
+                                 class="card-img-top" alt="..." height="350">
+                          </ng-container>
+                          <ng-template #imageDefault> <img src="https://www.seekpng.com/png/detail/966-9665317_placeholder-image-person-jpg.png"
+                                                           class="card-img-top" alt="..." height="350"></ng-template>
+                          <div class="card-body">
+                            <h3 class="card-title text-center">{{employee.id}}--{{employee.name}}
+                              <span *ngIf="employee.gender == 0; else male">
+                        <i class="bi bi-gender-female"></i>
+                      </span>
+                              <ng-template #male> <i class="bi bi-gender-male"></i></ng-template>
+                            </h3>
+                            <p class="card-text">
+                              <i class="bi bi-file-earmark-person-fill">{{employee.username}}</i>
+                              <i class="bi bi-people float-end"><ng-container *ngIf="employee.rolesId==1; else other">quản trị viên</ng-container>
+                                <ng-template #other>nhân viên</ng-template></i>
+                            </p>
+                            <p class="card-text">
+                              <i class="bi bi-calendar-check">{{employee.dateOfBirth}}</i>
+                              <i class="bi bi-house-door float-end">{{employee.address}}</i>
+                            </p>
+                            <p class="card-text">
+                              <i class="bi bi-credit-card-2-front">{{employee.idCard}}</i>
+                              <i class="bi bi-telephone float-end">{{employee.phoneNumber}}</i>
+                            </p>
+                            <p class="card-text">
+                              <i class="bi bi-envelope-fill">{{employee.email}}</i>
+                            </p>
+                            <div class="d-grid gap-2 d-md-block text-center">
+                              <button class="btn btn-success custom me-2" type="button">Sửa</button>
+                              <button class="btn btn-danger custom" (click)="openDialog(employee.id)">Xóa</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="page<totalPage-1">
+                      <button class="btn btn-success" (click)="loadMore()">Xem thêm nhân viên</button>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </section>
+  </div>
+</main>
+
+
+
+

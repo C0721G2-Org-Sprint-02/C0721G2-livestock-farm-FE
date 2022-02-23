@@ -1,4 +1,4 @@
-import {Cages} from '../cage/cages';
+import {Cage} from '../cage/cage';
 
 export interface Individual {
   id?: string;
@@ -6,5 +6,5 @@ export interface Individual {
   dateOut?: string;
   weight?: number;
   status?: string;
-  cage: Cages;
+  cage: Cage;
 }

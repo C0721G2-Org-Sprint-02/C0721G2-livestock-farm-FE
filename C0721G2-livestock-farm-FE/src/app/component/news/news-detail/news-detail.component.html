@@ -9,7 +9,7 @@
       <div>
         <p class="fs-4 fw-bold">{{news.title}}</p>
         <!--                Ngày đăng-->
-        <p class="fs-6 mb-2">{{news.postDate}}</p>
+        <p class="fs-6 mb-2">{{news.postDate | date : "dd-MM-yyyy"}}</p>
         <!--                    Nội dung-->
         <div class="text-center mb-2">
           <img src="{{img}}" width="90%">

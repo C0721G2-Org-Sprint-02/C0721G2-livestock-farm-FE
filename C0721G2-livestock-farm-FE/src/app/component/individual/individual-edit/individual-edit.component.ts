@@ -2,11 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {Individual} from '../../../model/individual/individual';
-import {Cages} from '../../../model/cage/cages';
 import {IndividualService} from '../../../service/individual/individual.service';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {CageService} from '../../../service/cage/cage.service';
+import {Cage} from '../../../model/cage/cage';
 
 @Component({
   selector: 'app-individual-edit',
@@ -25,7 +25,7 @@ export class IndividualEditComponent implements OnInit {
   });
   subcription: Subscription;
   individual: Individual;
-  cage: Cages[];
+  cage: Cage[];
   id: string;
 
   constructor(private individualService: IndividualService,
