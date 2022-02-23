@@ -40,8 +40,8 @@ export class BuyCreateComponent implements OnInit {
     if (this.buyIndividualForm.valid) {
       console.log(this.buyIndividualForm.value);
       this.subscription = this.buyIndividualSerive.save(this.buyIndividualForm.value).subscribe(data => {
+          alert('Đã gửi thành công');
           this.dialogRef.close();
-          alert("Đã gửi thành công");
         }
         , error => {
           console.log('Not found');

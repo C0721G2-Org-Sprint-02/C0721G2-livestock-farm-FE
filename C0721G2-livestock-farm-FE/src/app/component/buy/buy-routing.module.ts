@@ -6,7 +6,7 @@ import {BuyListComponent} from './buy-list/buy-list.component';
 const routes: Routes = [
   {
     path: 'list', component: BuyListComponent
-  },
+  }
 ];
 
 @NgModule({

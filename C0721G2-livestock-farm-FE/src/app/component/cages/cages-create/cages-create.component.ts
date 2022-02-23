@@ -20,6 +20,7 @@ export class CagesCreateComponent implements OnInit {
   employee: Employee[];
   showAlert: boolean = false;
 
+
   constructor(private formBuilder: FormBuilder,
               private cageService: CageService,
               private typeOfCageService: TypeOfCageService,
@@ -29,7 +30,7 @@ export class CagesCreateComponent implements OnInit {
       id: ['', [Validators.required, Validators.pattern('^([C][A]-[0-9]{4})$')]],
       closeDate: ['', [Validators.required]],
       openDate: ['', [Validators.required]],
-      quantity: ['', [Validators.required, Validators.pattern('^([0-9]+)$')]],
+      quantity: ['', [Validators.required, Validators.pattern('^([0-9]+)$') , Validators.max(100)]],
       typeOfCage: [null, [Validators.required]],
       employee: ['', [Validators.required, Validators.pattern('^([N][V]-[0-9]{4})$')]],
     });
@@ -49,20 +50,21 @@ export class CagesCreateComponent implements OnInit {
 
   submit() {
     if (this.createCage.valid) {
-      console.log('OK');
+      // console.log('OK');
+      this.showAlert = true;
       console.log(this.createCage.value);
       this.cageService.saveCage(this.createCage.value).subscribe(
         data => {
           // this.typeOfCage.forEach(value => {
           //   this.createCage.value.typeOfCage = value.id;
           // });
-          alert('OK');
+          // alert('OK');
           this.showErrorCage = '';
           this.employeeExist = '';
           this.showAlert = true;
           console.log(data);
           this.createCage.reset();
-          this.router.navigateByUrl('cage/list')
+          // this.router.navigateByUrl('cage/list')
           }, error => {
           this.showErrorCage = error.error.cageError;
           this.employeeExist = error.error.employeeError;
@@ -75,4 +77,5 @@ export class CagesCreateComponent implements OnInit {
   closeAlert() {
     this.showAlert = false;
   }
+
 }

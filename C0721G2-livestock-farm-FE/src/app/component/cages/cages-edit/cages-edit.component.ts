@@ -17,11 +17,13 @@ export class CagesEditComponent implements OnInit {
   id: string;
   public cage: Cage;
   typeOfCage: TypeOfCage[];
-  showAlert:boolean = false;
+  // cages: Cage[];
+  showAlert: boolean = false;
+  messageNotFound='';
 
   employeeId: string;
-  showErrorCage: any;
-  employeeExist: any;
+  showErrorCage: string;
+  employeeExist: string;
 
   constructor(private cageService: CageService,
               private activatedRoute: ActivatedRoute,
@@ -35,9 +37,9 @@ export class CagesEditComponent implements OnInit {
       id: ['', [Validators.required, Validators.pattern('^([C][A]-[0-9]{4})$')]],
       closeDate: ['', [Validators.required]],
       openDate: ['', [Validators.required]],
-      quantity: ['', [Validators.required, Validators.pattern('^([0-9]+)$')]],
+      quantity: ['', [Validators.required, Validators.pattern('^([0-9]+)$') , Validators.max(100)]],
       typeOfCage: ['', [Validators.required]],
-      employee: ['', [Validators.required]],
+      employee: ['', [Validators.required, Validators.pattern('^([N][V]-[0-9]{4})$')]],
     });
     this.activatedRoute.paramMap.subscribe(
       params => {
@@ -51,6 +53,7 @@ export class CagesEditComponent implements OnInit {
             console.log(data);
             console.log(this.updateCage.value);
           }, error => {
+            this.messageNotFound = 'Không tìm thấy chuồng nuôi này.';
             console.log('error');
             console.log(error);
           }
@@ -66,9 +69,12 @@ export class CagesEditComponent implements OnInit {
   submit() {
     this.cageService.updateCage(this.id, this.updateCage.value).subscribe(
       data => {
+        // alert('Chỉnh sửa thành công');
         this.showAlert = true;
         console.log(this.updateCage);
-        this.router.navigateByUrl('cage/list')
+        this.employeeExist = '';
+        this.showErrorCage= '';
+        // this.router.navigateByUrl('cage/list')
       }, error => {
         console.log(error);
         console.log('erorr');
@@ -83,6 +89,6 @@ export class CagesEditComponent implements OnInit {
   }
 
   closeAlert() {
-   this.showAlert = false;
+    this.showAlert = false;
   }
 }

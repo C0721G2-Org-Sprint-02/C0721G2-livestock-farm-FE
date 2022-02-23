@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-
     });
   }
 }
