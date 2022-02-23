@@ -130,30 +130,30 @@
                     <table class="table table-striped table-hover container-fluid">
                       <thead class="text-white bg-success">
                       <tr class=" text-start">
-                        <th class="text-center " ><a (click)="sort('id')" class="cursor-pointer text-decoration-none text-white">Mã cá thể</a></th>
-                        <th class="text-center">Mã chuồng</th>
-                        <th class="text-center">Loại chuồng</th>
-                        <th class="text-center">Ngày nhập chuồng</th>
-                        <th class="text-center">Ngày xuất chuồng</th>
-                        <th class="text-center">Tình trạng</th>
-                        <th class="text-center">Cân nặng (Kg)</th>
-                        <th class="text-center">Tác vụ</th>
+                        <th class=" text-center align-middle " ><a (click)="sort('id')" class="cursor-pointer text-decoration-none text-white">Mã cá thể</a></th>
+                        <th class="text-center align-middle">Mã chuồng</th>
+                        <th class="text-center align-middle">Loại chuồng</th>
+                        <th class="text-center align-middle">Ngày nhập chuồng</th>
+                        <th class="text-center align-middle">Ngày xuất chuồng</th>
+                        <th class="text-center align-middle">Tình trạng</th>
+                        <th class="text-center align-middle">Cân nặng (Kg)</th>
+                        <th class="text-center align-middle">Tác vụ</th>
                       </tr>
                       </thead>
                       <tbody>
                       <tr *ngFor="let individual of individuals">
-                        <td class="align-middle text-center">{{individual.id}}</td>
-                        <td class="text-center align-middle ">{{individual.cage.id}}</td>
-                        <td class="text-center align-middle ">{{individual.cage.typeOfCage.name}}</td>
-                        <td class="text-center align-middle">{{individual.dateIn}}</td>
-                        <td class="text-center align-middle">{{individual.dateOut}}</td>
-                        <td class="text-center align-middle" *ngIf="individual.status == '1' ">Có bệnh</td>
-                        <td class="text-center align-middle" *ngIf="individual.status == '0' ">Không có bệnh</td>
-                        <td class="text-center align-middle">{{individual.weight}}</td>
-                        <td class="align-middle text-center px-0">
+                        <td class="align-middle text-center text-break">{{individual.id}}</td>
+                        <td class="text-center align-middle text-break ">{{individual.cage.id}}</td>
+                        <td class="text-center align-middle text-break ">{{individual.cage.typeOfCage.name}}</td>
+                        <td class="text-center align-middle text-break ">{{individual.dateIn}}</td>
+                        <td class="text-center align-middle text-break">{{individual.dateOut}}</td>
+                        <td class=" align-middle text-break" *ngIf="individual.status == '1' ">Có bệnh</td>
+                        <td class=" align-middle text-break" *ngIf="individual.status == '0' ">Không có bệnh</td>
+                        <td class="text-center align-middle text-break">{{individual.weight}}</td>
+                        <td class="align-middle text-center">
                           <app-individual-edit [currentId]="individual.id"></app-individual-edit>
-                          <!--                          <button class="btn btn-warning btn-responsive-margin-bottom text-white"><i class="fas fa-edit"></i> Sửa</button>-->
-                          <button class="btn btn-danger text-white mx-1" (click)="openDialogDelete(individual.id)" ><i class="fas fa-trash-alt"></i> Xóa</button>
+<!--                          <button class="btn btn-warning btn-responsive-margin-bottom text-white"><i class="fas fa-edit"></i> Sửa</button>-->
+                          <button class="btn btn-danger text-white" (click)="openDialogDelete(individual.id)" ><i class="fas fa-trash-alt"></i> Xóa</button>
                         </td>
                       </tr>
                       </tbody>
