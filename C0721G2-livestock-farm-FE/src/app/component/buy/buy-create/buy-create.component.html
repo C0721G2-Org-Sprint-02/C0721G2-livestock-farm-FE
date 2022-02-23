@@ -153,7 +153,7 @@
           <button type="button" class="btn btn-secondary"
                   data-bs-dismiss="modal" (click)=" onNoClick()">Đóng
           </button>
-          <button type="submit" class="btn text-light bg-warning">Gửi</button>
+          <button type="submit" class="btn text-light bg-warning"  [disabled]="buyIndividualForm.invalid">Gửi</button>
         </div>
 
 </form>
