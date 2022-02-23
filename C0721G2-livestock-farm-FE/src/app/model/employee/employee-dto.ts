@@ -10,6 +10,6 @@ export interface EmployeeDTO {
   idCard: string;
   gender: number;
   roleDTO: number;
-  appUser: AppUser;
+  appUser: string;
   image: string;
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Employee} from '../../model/employee/employee';
+import {EmployeeDTO} from '../../model/employee/employee-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,10 @@ export class EmployeeService {
 
   updateEmployee(id: string, employee: Employee): Observable<any> {
     return this.http.patch(this.API + '/edit/' + id, employee);
+  }
+
+  createEmployeeDTO(employee: EmployeeDTO): Observable<EmployeeDTO> {
+    // @ts-ignore
+    return this.http.post<EmployeeDTO>(this.API + '/create/', JSON.stringify(employee), this.httpOptions)
   }
 }

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {EmployeeDTO} from '../../../model/employee/employee-dto';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {EmployeeService} from '../../../service/employee/employee.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-employee-edit',
@@ -20,11 +22,13 @@ export class EmployeeEditComponent implements OnInit {
   imgMess: string;
   urls = new Array<string>();
   selectFiles: FileList;
+  selectedImage: any = null;
 
   constructor(private employeeService: EmployeeService,
               private router: Router,
               private fb: FormBuilder,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              @Inject(AngularFireStorage) private storage: AngularFireStorage) {
   }
 
 
@@ -43,9 +47,8 @@ export class EmployeeEditComponent implements OnInit {
       idCard: this.fb.control('',
         [Validators.required, Validators.pattern('^\\d{9}$|\\d{12}$')]),
       gender: this.fb.control('', [Validators.required]),
-      degreeDTO: this.fb.control('', [Validators.required]),
-      positionDTO: this.fb.control('', [Validators.required]),
-      roleDTO: this.fb.control('', [Validators.required])
+      roleDTO: this.fb.control('', [Validators.required]),
+      image: new FormControl(),
     });
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
 
@@ -61,10 +64,6 @@ export class EmployeeEditComponent implements OnInit {
       console.log('cuộc sống khó khắn');
     });
 
-  }
-
-  compareFn(c1: any, c2: any): boolean {
-    return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
   get name() {
@@ -95,65 +94,46 @@ export class EmployeeEditComponent implements OnInit {
     return this.employeeForm.get('gender');
   }
 
-  get position_form() {
-    return this.employeeForm.get('positionDTO');
-  }
-
-  get degree_form() {
-    return this.employeeForm.get('degreeDTO');
-  }
-
   get role() {
     return this.employeeForm.get('roleDTO');
   }
 
 
   onSubmit() {
-    // if (this.employeeForm.valid) {
-    this.subscription = this.employeeService.updateEmployee(this.id, this.employeeForm.value).subscribe(data => {
-      // alert('Chỉnh sửa thông tin thành công');
-      // this.router.navigate(['/employee/list']);
-      console.log(this.employeeForm);
-    }, error => {
-      console.log('có lỗi đại ca ơi');
-    });
-    // }
+    const nameImg = this.selectedImage.name;
+    const fileRef = this.storage.ref(nameImg);
+    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          console.log(url);
+          this.employeeForm.patchValue({image: url});
+
+          // Call API to create vaccine
+          this.employeeService.save(this.employeeForm.value).subscribe(() => {
+            this.router.navigateByUrl('/employee/list').then(r => console.log('Chỉnh sửa thông tin thành công!'));
+          })
+        });
+      })
+    ).subscribe();
+    // console.log(this.employeeForm.value.image);
+    // this.subscription = this.employeeService.save(this.employeeForm.value).subscribe(data => {
+    //     alert('tao thanh cong');
+    //     console.log(this.employee);
+    //     this.router.navigate(['/employee/list']);
+    //
+    //   }
+    //   , error => {
+    //     this.validateErrorEmail = error.error.errorEmail;
+    //     console.log('Not found');
+    //     this.validateErrorEmail = 'Email bạn nhập đã được sử dụng';
+    //   });
   }
 
   onClick() {
     this.employeeForm.reset();
   }
-
-  submitModal() {
-    this.router.navigate(['/employee/list']);
-  }
-
-  detectFiles(event) {
-    this.imgdetect = true;
-    this.imgMess = null;
-    if (this.urls.length !== 0) {
-      this.urls = new Array<string>();
-    }
-    if (event.target.files.length > 5) {
-      this.imgMess = 'Chỉ được chọn tối đa 5 ảnh';
-      this.imgdetect = false;
-      return;
-    } else if (event.target.files.length === 0) {
-      this.imgMess = 'Chọn tối thiểu 1 ảnh';
-      this.imgdetect = false;
-      return;
-    } else {
-      const files = event.target.files;
-      this.selectFiles = files;
-      if (files) {
-        for (const file of files) {
-          const reader = new FileReader();
-          reader.onload = (e: any) => {
-            this.urls.push(e.target.result);
-          };
-          reader.readAsDataURL(file);
-        }
-      }
-    }
+  showPreview(event: any) {
+    this.selectedImage = event.target.files[0];
+    console.log(this.selectedImage);
   }
 }

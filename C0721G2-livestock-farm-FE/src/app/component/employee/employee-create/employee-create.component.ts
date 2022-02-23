@@ -1,10 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {EmployeeService} from '../../../service/employee/employee.service';
 import {Subscription} from 'rxjs';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {EmployeeDTO} from '../../../model/employee/employee-dto';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {finalize} from 'rxjs/operators';
+import {checkDateOfBirth} from '../../../validator/checkDateOfBirth';
+
 
 @Component({
   selector: 'app-employee-create',
@@ -13,25 +17,28 @@ import {EmployeeDTO} from '../../../model/employee/employee-dto';
 })
 export class EmployeeCreateComponent implements OnInit {
 
+  // @ts-ignore
   employeeForm = new FormGroup({
-    name: new FormControl('', [Validators.required,
-      Validators.maxLength(40), Validators.minLength(6),
-      Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
-    email: new FormControl('',
-      [Validators.required, Validators.pattern('^[a-zA-Z0-9_!#$%&\'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+.[a-z]{2,6}$')]),
-    phoneNumber: new FormControl('',
-      [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
-    address: new FormControl('',
-      [Validators.required, Validators.pattern('')]),
-    dateOfBirth: new FormControl('', [Validators.required]),
-    idCard: new FormControl('', [Validators.required,
-      Validators.pattern('^\\d{9}$|\\d{12}$')]),
-    gender: new FormControl(0),
-    // degreeDTO: new FormControl(null, [Validators.required]),
-    // positionDTO: new FormControl(null, [Validators.required]),
-    roleDTO: new FormControl(2),
-    image: new FormControl(),
-  });
+      name: new FormControl('', [Validators.required,
+        Validators.maxLength(40), Validators.minLength(6),
+        Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
+      email: new FormControl('',
+        [Validators.required, Validators.pattern('^[a-zA-Z0-9_!#$%&\'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+.[a-z]{2,6}$')]),
+      phoneNumber: new FormControl('',
+        [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
+      address: new FormControl('',
+        [Validators.required, Validators.pattern('')]),
+      dateOfBirth: new FormControl('', [Validators.required, checkDateOfBirth]),
+      idCard: new FormControl('', [Validators.required,
+        Validators.pattern('^\\d{9}$|\\d{12}$')]),
+      gender: new FormControl(0),
+      // degreeDTO: new FormControl(null, [Validators.required]),
+      // positionDTO: new FormControl(null, [Validators.required]),
+      roleDTO: new FormControl(2),
+      image: new FormControl(),
+    }
+  );
+
   subscription: Subscription;
   employee: EmployeeDTO;
   validateErrorEmail: string;
@@ -39,10 +46,12 @@ export class EmployeeCreateComponent implements OnInit {
   imgMess: string;
   urls = new Array<string>();
   selectFiles: FileList;
+  selectedImage: any = null;
 
   constructor(private employeeService: EmployeeService,
               private router: Router,
-              private dialog: MatDialog
+              private dialog: MatDialog,
+              @Inject(AngularFireStorage) private storage: AngularFireStorage
   ) {
   }
 
@@ -101,20 +110,21 @@ export class EmployeeCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.employeeForm.value);
-    // if (this.employeeForm.valid) {
-    //   this.positions.forEach(value => {
-    //     console.log(value);
-    //     if (this.employeeForm.value.position_form === value.id) {
-    //       this.employeeForm.value.position_form = value;
-    //     }
-    //   });
-    //   this.degrees.forEach(value => {
-    //     if (this.employeeForm.value.degree_form === value.id) {
-    //       this.employeeForm.value.degree_form = value;
-    //     }
-    //   });
+    const nameImg = this.selectedImage.name;
+    const fileRef = this.storage.ref(nameImg);
+    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          console.log(url);
+          this.employeeForm.patchValue({image: url});
 
+          // Call API to create vaccine
+          this.employeeService.save(this.employeeForm.value).subscribe(() => {
+            this.router.navigateByUrl('/employee/list').then(r => console.log('Thêm mới thành công!'));
+          })
+        });
+      })
+    ).subscribe();
     console.log(this.employeeForm.value.image);
     this.subscription = this.employeeService.save(this.employeeForm.value).subscribe(data => {
         alert('tao thanh cong');
@@ -125,7 +135,7 @@ export class EmployeeCreateComponent implements OnInit {
       , error => {
         this.validateErrorEmail = error.error.errorEmail;
         console.log('Not found');
-        this.validateErrorEmail = 'Email bạn nhập đã được sử dụng';
+        this.validateErrorEmail = 'Email bạn nhập đã được sử dụng.';
       });
   }
 
@@ -133,46 +143,9 @@ export class EmployeeCreateComponent implements OnInit {
     this.employeeForm.reset();
   };
 
-  detectFiles(event) {
-    this.imgdetect = true;
-    this.imgMess = null;
-    if (this.urls.length !== 0) {
-      this.urls = new Array<string>();
-    }
-    if (event.target.files.length > 5) {
-      this.imgMess = 'Chỉ được chọn tối đa 5 ảnh';
-      this.imgdetect = false;
-      return;
-    } else if (event.target.files.length === 0) {
-      this.imgMess = 'Chọn tối thiểu 1 ảnh';
-      this.imgdetect = false;
-      return;
-    } else {
-      const files = event.target.files;
-      this.selectFiles = files;
-      if (files) {
-        for (const file of files) {
-          const reader = new FileReader();
-          reader.onload = (e: any) => {
-            this.urls.push(e.target.result);
-          };
-          reader.readAsDataURL(file);
-        }
-      }
-    }
+  showPreview(event: any) {
+    this.selectedImage = event.target.files[0];
+    console.log(this.selectedImage);
   }
 }
-
-//
-// openAlertDialog() {
-//   const dialogRef = this.dialog.open(SuccessComponent, {
-//     data: {
-//       message: 'Thêm mới nhân viên thành công',
-//       buttonText: {
-//         cancel: 'Xác nhận'
-//       }
-//     },
-//   });
-//   this.router.navigate(['/employee/list']);
-// }
 

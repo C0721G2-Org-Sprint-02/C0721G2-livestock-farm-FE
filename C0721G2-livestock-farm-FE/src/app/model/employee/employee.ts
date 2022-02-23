@@ -10,5 +10,5 @@ export interface Employee {
   idCard: string;
   gender: number;
   image: string;
-  appUser: AppUser;
+  appUser: string;
 }
