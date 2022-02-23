@@ -1,6 +1,6 @@
-<main class="container-fluid " style="padding-top: 4rem">
+<main class="container-fluid " style="padding-top: 5rem">
   <div class="row justify-content-center ">
-    <div class="col-md-9 col-lg-9 col-xl-9 col-sm-12 bg-light">
+    <div class="col-md-9 col-lg-9 col-xl-9 col-sm-12 bg-light mt-1">
       <div class="row justify-content-end">
         <div style="background-color: lightseagreen; font-size: 100%" class="text-light">
           <div class="mt-1 mb-1">
@@ -15,13 +15,14 @@
             <span class="mt-1 mb-1 "> |
               <button class="text-decoration-none text-light  btn btn-link"
                       (click)="technology()">Tin công nghệ</button></span>
-            <span class="float-end mt-2 mb-2 me-1   text-light "
-                  style="text-align: center">{{time | date:'hh:mm:ss a dd/MM/yyyy '}}</span>
+            <span class="float-end mt-2 mb-2 me-2   text-light "
+                  style="text-align: center">{{time | date:'dd/MM/yyyy'}}</span>
           </div>
         </div>
         <div *ngIf="message != '' then showMsg else showList"></div>
         <ng-template #showMsg>
-          <div class="text-center mt-4 mb-4" *ngIf="message != ''">Không có tin để hiển thị</div>
+          <div class="text-center mt-2 mb-2" *ngIf="message != ''">Không có tin để hiển thị</div>
+          <img src="https://cdn.dribbble.com/users/683081/screenshots/2728654/exfuse_app_main_nocontent.png">
         </ng-template>
         <ng-template #showList>
           <div class="col-md-5 col-lg-5 col-xl-5 col-sm-12 mt-2">
@@ -52,13 +53,10 @@
                     {{news[0].title}}
                   </p>
                 </a>
-                <!--          <p class="fs-6">-->
-                <!--            {{news[0].content}}-->
-                <!--          </p>-->
               </div>
               <div class="col-md-5 col-lg-5 col-xl-5 col-sm-12">
-                <div *ngFor="let fItem of news let i = index">
-                  <div class="card mb-3" style="max-width: 100%" *ngIf="i<5">
+                <div style="max-width: 100%; margin: 0px; padding: 0px" *ngFor="let fItem of news let i = index">
+                  <div class="card mb-3" style="max-width: 100%" *ngIf="i<6 && i>0">
                     <div class="row g-0">
                       <div class="col-md-4">
                         <img src="{{fItem.image}}" class="img-fluid rounded-start" alt="...">
@@ -74,23 +72,29 @@
               </div>
               <!--                    Tin tuc muc thu 2-->
               <div>
-                <div class="card mb-3" *ngFor="let item of news let i = index">
-                  <div class="row g-0">
-                    <div class="col-md-4">
-                      <div class="mt-2 mb-2 me-2 ms-2">
-                        <img
-                          src="{{item.image}}"
-                          class="img-fluid rounded-start" alt="...">
+                <div *ngFor="let listItem of news let i = index">
+                  <div *ngIf="i>5 then showEnd "></div>
+                  <ng-template #showEnd>
+                    <div class="card mb-3">
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                          <div class="mt-2 mb-2 me-2 ms-2">
+                            <img
+                              src="{{listItem.image}}"
+                              class="img-fluid rounded-start" alt="...">
+                          </div>
+                        </div>
+                        <div class="col-md-8">
+                          <a class="text-decoration-none text-success " [routerLink]="['/news/detail',listItem.id]">
+                            <p class="card-text fs-5 fw-bolder mt-3">
+                              {{listItem.title}}</p>
+                            <small class="fs-6 text-dark" style="font-size: 60%">{{listItem.content | slice: 0:150}}
+                              ...</small>
+                          </a>
+                        </div>
                       </div>
                     </div>
-                    <div class="col-md-8">
-                      <a class="text-decoration-none text-success " [routerLink]="['/news/detail',item.id]">
-                        <p class="card-text fs-5 fw-bolder mt-3">
-                          {{item.title}}</p>
-                        <small class="fs-6 text-dark" style="font-size: 60%">{{item.content | slice: 0:150}}...</small>
-                      </a>
-                    </div>
-                  </div>
+                  </ng-template>
                 </div>
               </div>
             </div>
