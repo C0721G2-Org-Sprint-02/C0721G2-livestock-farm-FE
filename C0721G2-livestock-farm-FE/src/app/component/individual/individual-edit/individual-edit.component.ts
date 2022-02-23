@@ -18,16 +18,14 @@ export class IndividualEditComponent implements OnInit {
     id: new FormControl('', [Validators.required]),
     dateIn: new FormControl('', [Validators.required]),
     dateOut: new FormControl('', [Validators.required]),
-    weight: new FormControl('', [Validators.required]),
-    status: new FormControl('', [Validators.required])
-    // ,
-    // cage: new FormControl('', [Validators.required])
+    weight: new FormControl('', [Validators.required, Validators.min(1)]),
+    status: new FormControl('', [Validators.required]),
+    cage: new FormControl('', [Validators.required])
   });
   subcription: Subscription;
   individual: Individual;
   cage: Cage[];
   id: string;
-
   constructor(private individualService: IndividualService,
               private router: Router,
               private matDialog: MatDialog, private cageService: CageService) {
@@ -37,29 +35,25 @@ export class IndividualEditComponent implements OnInit {
   message: string;
 
   ngOnInit(): void {
-    console.log(this.currentId);
     this.subcription = this.cageService.getListCage().subscribe(data => {
-      this.cage = data;
+      this.cage = data.content;
     });
     this.subcription = this.individualService.findIndividualbyId(this.currentId).subscribe(data => {
       this.individual = data;
       this.individualForm.setValue(this.individual);
-      console.log(this.individual)
     });
   }
 
   onSubmit(): void {
     if (this.individualForm.valid) {
       this.subcription = this.individualService.editIndividual(this.individualForm.value).subscribe(data => {
-        this.router.navigate(['/individual/list']);
+        // this.router.navigate(['/individual/list']);
         this.message = 'Đã cập nhật thành công';
       }, error => {
         this.message = 'Đã cập nhật thất bại';
       })
     }
   }
-
-
   Reset(): void {
     this.individualForm.reset();
   }
