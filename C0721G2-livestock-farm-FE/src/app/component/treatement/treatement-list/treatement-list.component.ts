@@ -13,13 +13,14 @@ export class TreatementListComponent implements OnInit {
   private subscription: Subscription | undefined;
   page = 0;
   searchCage = '';
-  searchDoctor: '';
-  searchKindOfDisease: '';
+  searchDoctor= '';
+  searchKindOfDisease= '';
   totalPages: number;
   pageNumber: number;
   size = 0;
   flag = false;
   message: string;
+  onSearching: string;
   constructor(private treatmentService: TreatementService) { }
 
   ngOnInit(): void {
@@ -28,15 +29,16 @@ export class TreatementListComponent implements OnInit {
 
   private search() {
     if (!(this.searchCage === '' && this.searchDoctor === '' && this.searchKindOfDisease === '')) {
+      this.onSearching = 'a';
       if (this.flag === false) {
         console.log('if 1');
         this.page = 0;
         this.searchService();
-          this.flag = true;
+        this.flag = true;
       } else {
         console.log('if 2');
         this.searchService();
-          this.flag = true;
+        this.flag = true;
       }
     } else {
       console.log('if 3');
@@ -83,5 +85,12 @@ export class TreatementListComponent implements OnInit {
   onSubmit() {
     this.flag = false;
     this.search();
+  }
+
+  clearSearch() {
+    this.onSearching = '';
+    this.searchCage = '';
+    this.searchDoctor= '';
+    this.searchKindOfDisease= '';
   }
 }
