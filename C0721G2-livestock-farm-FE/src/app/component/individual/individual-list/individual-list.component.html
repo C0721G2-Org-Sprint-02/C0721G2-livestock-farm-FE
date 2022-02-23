@@ -148,11 +148,10 @@
                         <td class="text-center align-middle">{{individual.dateIn}}</td>
                         <td class="text-center align-middle">{{individual.dateOut}}</td>
                         <td class="text-center align-middle" *ngIf="individual.status == '1' ">Có bệnh</td>
-                        <td class="text-center align-middle" *ngIf="individual.status == '0' ">Không có bệnh</td>
+                        <td class="text-center align-middle" *ngIf="individual.status == '0' ">Không bệnh</td>
                         <td class="text-center align-middle">{{individual.weight}}</td>
                         <td class="align-middle text-center px-0">
                           <app-individual-edit [currentId]="individual.id"></app-individual-edit>
-                          <!--                          <button class="btn btn-warning btn-responsive-margin-bottom text-white"><i class="fas fa-edit"></i> Sửa</button>-->
                           <button class="btn btn-danger text-white mx-1" (click)="openDialogDelete(individual.id)" ><i class="fas fa-trash-alt"></i> Xóa</button>
                         </td>
                       </tr>

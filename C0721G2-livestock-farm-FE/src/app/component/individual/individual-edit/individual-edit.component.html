@@ -20,7 +20,7 @@
             <div class="col-md-6 position-relative">
               <label for="code" class="form-label">Mã cá thể <span
                 style="color: red">(*)</span></label>
-              <input type="text" id="code" class="form-control" formControlName="id">
+              <input type="text" id="code" class="form-control" formControlName="id" disabled>
               <small class="fst-italic" style="color: red"
                      *ngIf="individualForm.controls.id.dirty &&individualForm.controls.id.hasError('required')">
                 Mã cá thể không được để trống</small>
@@ -32,10 +32,10 @@
             <div class="col-md-6 position-relative">
               <label for="machuong" class="form-label">Mã chuồng nuôi <span
                 style="color: red">(*)</span></label>
-              <select id="machuong" class="form-select" aria-label="Default select example"
-                      formControlName="cage" name="positionDTO">
+              <select id="machuong" class="form-select" aria-label="Default select example" formControlName="cage"
+                      name="positionDTO">
                 <option [ngValue]="null">--Chọn--</option>
-                <option *ngFor="let item of cage"
+                <option *ngFor ="let item of cage"
                         [ngValue]="item">{{item.id}}</option>
               </select>
             </div>
@@ -64,7 +64,8 @@
               <label for="position-relative" class="form-label" formControlName="status">Tình trạng <span
                 style="color: red">(*)</span></label>
               <br>
-              <select id="position-relative" class="form-control" aria-label="Default select example">
+              <select id="position-relative" class="form-control" aria-label="Default select example"
+                      formControlName="status">
                 <option Value="null">Lựa chọn trạng thái</option>
                 <option [value]="0">Bệnh</option>
                 <option [value]="1">Khỏe mạnh</option>
@@ -73,8 +74,8 @@
             </div>
             <div class="col-md-6 position-relative">
               <label for="weight" class="form-label">Cân nặng/Kg<span style="color: red">(*)</span></label>
-              <input type="number" id="weight" class="form-control" value="100" placeholder="Kg"
-                     formControlName="weight">
+              <input type="number" id="weight" class="form-control" placeholder="Kg"
+                     formControlName="weight" min="0">
               <small class="fst-italic" style="color: red"
                      *ngIf="individualForm.controls.weight.dirty &&individualForm.controls.weight.hasError('required')">
                 Cân nặng không được để trống</small>

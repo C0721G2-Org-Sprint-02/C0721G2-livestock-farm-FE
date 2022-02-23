@@ -20,13 +20,13 @@ export class IndividualCreateComponent implements OnInit {
     dateIn: new FormControl('', [Validators.required]),
     dateOut: new FormControl('', [Validators.required]),
     weight: new FormControl('', [Validators.required]),
-    status: new FormControl('', [Validators.required])
-    // ,
-    // cage: new FormControl('', [Validators.required])
+    status: new FormControl('', [Validators.required]),
+    cage: new FormControl('', [Validators.required]),
+    deleted: new FormControl(0)
   });
   subcription: Subscription;
   individual: Individual;
-  cage: Cages[];
+  cagelist: Cages[];
   message: string;
 
   constructor(private individualService: IndividualService,
@@ -35,22 +35,21 @@ export class IndividualCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subcription = this.cageService.getListCage().subscribe(data=>{this.cage = data})
-    // if (this.individualForm.valid) {
-    //   this.subcription = this.individualService.addIndividual(this.individualForm.value).subscribe(data => {
-    //     this.individual = data
-    //   }, error => {
-    //     console.log('không chạy');
-    //   })
-    // }
+    this.subcription = this.cageService.getListCage().subscribe(data=>{this.cagelist = data.content});
+    console.log(this.cagelist);
   }
 
   onSubmit(): void {
     if (this.individualForm.valid) {
+      console.log(this.individualForm);
       this.subcription = this.individualService.addIndividual(this.individualForm.value).subscribe(data => {
-       this.individual = data;
+       // this.individual = data;
+        console.log(data);
         this.message='Thêm mới thành công';
+        console.log('1');
       }, error => {
+        console.log('2');
+        console.log(error);
         this.message='Thêm mới thất bại';
       })
     }

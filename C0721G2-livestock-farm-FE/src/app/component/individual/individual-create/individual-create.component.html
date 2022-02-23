@@ -35,7 +35,7 @@
                            <select id="status" class="form-select" aria-label="Default select example"
                                     formControlName="cage" name="positionDTO">
                               <option [ngValue]="null">--Chọn--</option>
-                              <option *ngFor="let item of cage"
+                              <option *ngFor="let item of cagelist"
                                       [ngValue]="item">{{item.id}}</option>
                             </select>
             </div>
@@ -66,18 +66,15 @@
               <br>
               <select id="position-relative" class="form-control" aria-label="Default select example" formControlName="status">
                 <option Value="null">Lựa chọn trạng thái</option>
-                <option value="0">Bệnh</option>
-<!--                <option value="2">Đang Nuôi</option>-->
-                <option value="1">Khỏe mạnh</option>
-<!--                <option value="4">Chuẩn bị xuất</option>-->
-<!--                <option value="5">Đã xuất</option>-->
+                <option [value]="0">Bệnh</option>
+                <option [value]="1">Khỏe mạnh</option>
               </select>
             </div>
 
             <div class="col-md-6 position-relative">
               <label for="weight" class="form-label">Cân nặng/Kg <span
                 style="color: red">(*)</span></label>
-              <input type="number" id="weight" class="form-control" formControlName="weight">
+              <input type="number" id="weight" class="form-control" formControlName="weight" min="0" placeholder="tối đa 200Kg">
               <small class="fst-italic" style="color: red" *ngIf="individualForm.controls.dateOut.dirty &&
               individualForm.controls.weight.hasError('required')">Cân nặng không được để trống</small>
               <!--              <small class="fst-italic" style="color: red">không được là số âm, chỉ được nhập-->
@@ -87,7 +84,7 @@
             <!--              <label for="note" class="form-label">Ghi chú</label>-->
             <!--              <textarea type="text" class="form-control" id="note"></textarea>-->
             <!--            </div>-->
-<!--            <button type="button" class="btn btn-success">Thêm hàng loạt</button>-->
+            <input hidden type="button" class="btn btn-success" formControlName="deleted" [value]="0">
 
             <br>
             <div class="modal-footer col-12">
@@ -135,7 +132,7 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
         <div class="btn-group">
-          <button type="submit" class="btn btn-success " (click)="onSubmit()" [routerLink]="['/individual/list']">Xác nhận</button>
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="onSubmit()" [routerLink]="['/individual/list']">Xác nhận</button>
         </div>
       </div>
     </div>
