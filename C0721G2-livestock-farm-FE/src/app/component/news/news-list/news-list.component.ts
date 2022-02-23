@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {News} from '../../../model/news/news';
 import {NewsService} from '../../../service/news/news.service';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-news-list',
@@ -40,11 +39,9 @@ export class NewsListComponent implements OnInit {
       this.searchNewsByTitle();
     } else if (this.title === '' && this.typeNews === '1') {
       this.focus();
-    }
-    else if (this.title === '' && this.typeNews === '2') {
+    } else if (this.title === '' && this.typeNews === '2') {
       this.breeding();
-    }
-    else if (this.title === '' && this.typeNews === '3') {
+    } else if (this.title === '' && this.typeNews === '3') {
       this.technology();
     }
   }
@@ -61,6 +58,7 @@ export class NewsListComponent implements OnInit {
   }
 
   onSubmit() {
+    this.page = 0;
     console.log('aaa')
     this.flagSearch = false;
     this.showListNews();
