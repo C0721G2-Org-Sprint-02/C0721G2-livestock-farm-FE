@@ -17,7 +17,7 @@ export class TreatementCreateComponent implements OnInit {
       id: [],
       treatementDate: ['', [Validators.required]],
       individual: ['', [Validators.required, Validators.pattern('^IN-[0-9]{4}$')]],
-      doctor: ['', [Validators.required, Validators.maxLength(40), Validators.pattern('^([^0-9]{2,})$')]],
+      doctor: ['', [Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+\\s*)*$')]],
       medicine: ['', [Validators.required, Validators.maxLength(40)]],
       note: [''],
       kindOfDisease: ['', [Validators.required, Validators.maxLength(255)]],
@@ -37,16 +37,15 @@ export class TreatementCreateComponent implements OnInit {
       console.log('valid form');
       this.treatementService.save(this.formCreate.value).subscribe(
         data => {
-        // console.log(this.customer);
-        // this.router.navigate(['/employee/list']);
-          alert('OK');
+          // console.log(this.customer);
+          // this.router.navigate(['/employee/list']);
           console.log(data);
           this.router.navigate(['/treatement/list']);
-      }, error => {
-        this.errorMessage = error.error.IndividualNotExist;
-        console.log(this.errorMessage);
-        console.log(error.error);
-      })
+        }, error => {
+          this.errorMessage = error.error.IndividualNotExist;
+          console.log(this.errorMessage);
+          console.log(error.error);
+        })
     }
   }
 }
