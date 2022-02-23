@@ -114,6 +114,7 @@
               <div class="row mb-3 mt-4">
                 <div class="col-12 text-end">
                   <ng-container *ngIf="deleteMessenger"><span class="text-success fst-italic mx-2">{{deleteMessenger}}</span></ng-container>
+                  <ng-container *ngIf="emptyMessenger"><span class="text-danger fst-italic mx-2">{{emptyMessenger}}</span></ng-container>
                   <a class="btn btn-success font-weight-bold">
                     Thêm mới nhân viên
                   </a>
