@@ -14,6 +14,12 @@ export class EmployeeDeleteComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<EmployeeDeleteComponent>,
               public  employeeService: EmployeeService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
+    employeeService.findEmployeeById(data).subscribe(
+      value => {
+        console.log(value)
+        this.employee = value;
+      }
+    )
   }
 
   ngOnInit(): void {

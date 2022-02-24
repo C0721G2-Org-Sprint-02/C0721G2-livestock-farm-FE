@@ -79,10 +79,15 @@
           <div class="row justify-content-center">
             <div class="row mt-3">
               <div class="col-12">
-                <h2 class="fw-bold text-center">DANH SÁCH NHÂN VIÊN</h2>
+                <h1 class="text-success fw-bold text-center">DANH SÁCH NHÂN VIÊN</h1>
               </div>
               <div class="row mt-5 mx-5">
                 <div class="col-xxl-3 col-xl-4 col-md-6 mb-3">
+                  <a class="btn btn-success font-weight-bold" [routerLink]="['/employee/create']">
+                    Thêm mới nhân viên
+                  </a>
+                </div>
+                <div class="col-xxl-2 col-xl-4 col-md-6 mb-3">
                   <select class="form-select" aria-label="Default select example"  [(ngModel)]="sortType" (change)="sort()">
                     <option value="0" [selected]="0">Xắp sếp</option>
                     <option value="1">Tên A-Z</option>
@@ -93,14 +98,14 @@
                     <option value="6">Ngày sinh tăng dần</option>
                   </select>
                 </div>
-                <div class="col-xxl-3 col-xl-4 col-md-6 mb-3">
+                <div class="col-xxl-2 col-xl-4 col-md-6 mb-3">
                   <select class="form-select" aria-label="Default select example" [(ngModel)]="roleType" (change)="role()">
                     <option value="0" [selected]="0">Tất cả</option>
                     <option value="1">Quản trị viên</option>
                     <option value="2">Nhân viên</option>
                   </select>
                 </div>
-                <div class="col-xxl-4 col-xl-4 col-md-6 mb-3">
+                <div class="col-xxl-3 col-xl-4 col-md-6 mb-3">
                   <div class="input-group m-0">
                     <input type="text" class="form-control" style="text-align: center"
                            placeholder="Từ khoá" [(ngModel)]="keyword">
@@ -111,15 +116,8 @@
                   </button>
                 </div>
               </div>
-              <div class="row mb-3 mt-4">
-                <div class="col-12 text-end">
-                  <ng-container *ngIf="deleteMessenger"><span class="text-success fst-italic mx-2">{{deleteMessenger}}</span></ng-container>
-                  <ng-container *ngIf="emptyMessenger"><span class="text-danger fst-italic mx-2">{{emptyMessenger}}</span></ng-container>
-                  <a class="btn btn-success font-weight-bold" [routerLink]="['/employee/create']">
-                    Thêm mới nhân viên
-                  </a>
-                </div>
-              </div>
+                <ng-container *ngIf="deleteMessenger"><span class="d-flex justify-content-center pt-3 text-success">{{deleteMessenger}}</span></ng-container>
+                <ng-container *ngIf="emptyMessenger"><span class="d-flex justify-content-center pt-3 text-danger">{{emptyMessenger}}</span></ng-container>
               <div class="row mt-3">
                 <div class="container">
                   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
@@ -156,17 +154,19 @@
                               <i class="bi bi-envelope-fill">{{employee.email}}</i>
                             </p>
                             <div class="d-grid gap-2 d-md-block text-center">
-                              <button class="btn btn-success custom me-2" type="button">Sửa</button>
+                              <button class="btn btn-success custom me-2" type="button" [routerLink]="['/employee/edit',employee.id]">Sửa</button>
                               <button class="btn btn-danger custom" (click)="openDialog(employee.id)">Xóa</button>
                             </div>
                           </div>
                         </div>
                       </div>
                     </ng-container>
-                    <ng-container *ngIf="page<totalPage-1">
-                      <button class="btn btn-success" (click)="loadMore()">Xem thêm nhân viên</button>
-                    </ng-container>
                   </div>
+                  <ng-container *ngIf="page<totalPage-1" >
+                    <div class="text-center mt-2">
+                      <button class="btn btn-success" (click)="loadMore()">Xem thêm nhân viên</button>
+                    </div>
+                  </ng-container>
                 </div>
               </div>
             </div>
