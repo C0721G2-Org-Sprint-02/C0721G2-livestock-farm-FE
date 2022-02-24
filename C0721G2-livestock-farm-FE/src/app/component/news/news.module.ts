@@ -7,7 +7,9 @@ import { NewsEditComponent } from './news-edit/news-edit.component';
 import { NewsCreateComponent } from './news-create/news-create.component';
 import { NewsDeleteComponent } from './news-delete/news-delete.component';
 import { NewsDetailComponent } from './news-detail/news-detail.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
+import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 
 
 @NgModule({
@@ -15,7 +17,10 @@ import {FormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     NewsRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    CKEditorModule
   ]
 })
 export class NewsModule { }
