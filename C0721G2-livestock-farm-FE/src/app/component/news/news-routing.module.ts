@@ -5,6 +5,8 @@ import {NewsDetailComponent} from './news-detail/news-detail.component';
 import {NewsCreateComponent} from "./news-create/news-create.component";
 import {NewsEditComponent} from "./news-edit/news-edit.component";
 import {NewsDeleteComponent} from "./news-delete/news-delete.component";
+import {AuthGuard} from '../../helpers/auth.guard';
+
 
 const routes: Routes = [
   {
@@ -14,14 +16,17 @@ const routes: Routes = [
     path: 'detail/:id', component: NewsDetailComponent
   },
   {
-    path: 'create', component: NewsCreateComponent
+    path: 'create', component: NewsCreateComponent, canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']}
   },
 
   {
-    path: 'edit/:id', component: NewsEditComponent
+    path: 'edit/:id', component: NewsEditComponent, canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']}
   },
   {
-    path: 'delete/:id', component: NewsDeleteComponent
+    path: 'delete/:id', component: NewsDeleteComponent, canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']}
   }
 ];
 

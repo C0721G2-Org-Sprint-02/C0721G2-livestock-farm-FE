@@ -1,96 +1,254 @@
-<main class="container-fluid " style="padding-top: 4rem">
-  <!--  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">-->
-  <div class="container py-4">
-    <div class="row">
-      <div class="col-12">
-        <div class="card mb-4">
-          <div class="card-header pb-0">
-            <h6>Đăng tin tức chăn nuôi</h6>
-            <p class="text-success"></p>
-          </div>
-          <form class="row g-3 needs-validation m-3" method="post" [formGroup]="formCreateNews" (ngSubmit)="onSubmit()">
-            <div class="col-md-8 position-relative">
-              <label for="title" class="form-label">Tiêu đề <span
-                style="color: red">(*)</span></label>
-              <input type="text" class="form-control" id="title" required formControlName="title">
-              <small style="color: red" *ngIf="title.hasError('required') && (title.dirty || title.touched)">Tiêu đề
-                không được để trống.</small>
-              <small style="color: red"
-                     *ngIf="title.hasError('minlength')&& (title.dirty || title.touched)">Tiêu đề phải từ 20 đến 300 ký
-                tự.</small>
-              <small style="color: red"
-                     *ngIf="title.hasError('maxlength')&& (title.dirty || title.touched)">Tiêu đề phải từ 40 đến 255 ký
-                tự.</small>
-            </div>
-            <div class="col-md-4 position-relative">
-              <label for="position" class="form-label">Loại tin tức<span style="color: red">(*)</span></label>
-              <select id="position" class="form-select" aria-label="Default select example" formControlName="typeOfNewsDTO">
-                <option [ngValue]="null">Lựa chọn tin tức</option>
-                <option *ngFor="let item of typeOfNewss"
-                        [ngValue]="item">{{item.name}}</option>
-              </select>
-              <small style="color: red" *ngIf="typeOfNews.hasError('required') && (typeOfNews.dirty || typeOfNews.touched)">Yêu cầu lựa chọn loại tin tức.</small>
-            </div>
-
-            <div class="col-md-12 position-relative">
-              <label for="editor" class="form-label">Nội dung <span
-                style="color: red">(*)</span></label>
-              <ckeditor [editor]="Editor" type="text" class="form-control" id="editor" required
-                        formControlName="content" style="width: 100%"> </ckeditor>
-              <small style="color: red" *ngIf="content.hasError('required') && (content.dirty || content.touched)">Nội dung không được để trống.</small>
-            </div>
+<!--<main class="container-fluid " style="padding-top: 4rem">-->
+<!--  &lt;!&ndash;  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">&ndash;&gt;-->
+<!--  <div class="container py-4">-->
+<!--    <div class="row">-->
+<!--      <div class="col-12">-->
+<!--        <div class="card mb-4">-->
+<!--          <div class="card-header pb-0">-->
+<!--            <h6>Đăng tin tức chăn nuôi</h6>-->
+<!--            <p class="text-success"></p>-->
+<!--          </div>-->
 
 
-            <div class="col-md-12 position-relative field">
-              <label for="files" class="form-label">Thêm ảnh</label>
-              <input type="file" class="form-control" id="files"  (change)="showPreview($event)">
-              <small style="color: red" *ngIf="image.hasError('required') && (image.dirty || image.touched)">Phải chọn ảnh.</small>
-            </div>
-            <!--            <div class="mt-5 row form-group">-->
-            <!--              <div class="col-2" >-->
-            <!--                <label for="img-avatar" class="mr-3">Ảnh ca nhan<span style="color: red">*</span></label>-->
-            <!--              </div>-->
-            <!--              <div class="col-10">-->
-            <!--                <input id="img-avatar" type="file" class="form-control-file" (change)="showPreview($event)">-->
-            <!--              </div>-->
-            <!--            </div>-->
+<!--          <form class="row g-3 needs-validation m-3" method="post" [formGroup]="formCreateNews" (ngSubmit)="onSubmit()">-->
 
-            <div class="btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
-                 aria-label="Toolbar with button groups">
-              <div class="btn-group me-2 float-right">
-                <button class="btn btn-success customBtn" type="submit" >Đăng tin</button>
-              </div>
-              <div class="btn-group me-2 float-right">
-                <button class="btn btn-secondary customBtn" type="submit" (click)="onClear()">Hủy</button>
-              </div>
-            </div>
+<!--            <div class="col-md-8 position-relative">-->
+<!--              <label for="title" class="form-label">Tiêu đề <span-->
+<!--                style="color: red">(*)</span></label>-->
+<!--              <input type="text" class="form-control" id="title" required formControlName="title">-->
+<!--              <small style="color: red" *ngIf="title.hasError('required') && (title.dirty || title.touched)">Tiêu đề-->
+<!--                không được để trống.</small>-->
+<!--              <small style="color: red"-->
+<!--                     *ngIf="title.hasError('minlength')&& (title.dirty || title.touched)">Tiêu đề phải từ 20 đến 300 ký-->
+<!--                tự.</small>-->
+<!--              <small style="color: red"-->
+<!--                     *ngIf="title.hasError('maxlength')&& (title.dirty || title.touched)">Tiêu đề phải từ 40 đến 255 ký-->
+<!--                tự.</small>-->
+<!--            </div>-->
 
-          </form>
-        </div>
+<!--            <div class="col-md-4 position-relative">-->
+<!--              <label for="position" class="form-label">Loại tin tức<span style="color: red">(*)</span></label>-->
+<!--              <select id="position" class="form-select" aria-label="Default select example" formControlName="typeOfNewsDTO">-->
+<!--                <option [ngValue]="null">Lựa chọn tin tức</option>-->
+<!--                <option *ngFor="let item of typeOfNewss"-->
+<!--                        [ngValue]="item">{{item.name}}</option>-->
+<!--              </select>-->
+<!--              <small style="color: red" *ngIf="typeOfNews.hasError('required') && (typeOfNews.dirty || typeOfNews.touched)">Yêu cầu lựa chọn loại tin tức.</small>-->
+<!--            </div>-->
+
+<!--            <div class="col-md-12 position-relative">-->
+<!--              <label for="editor" class="form-label">Nội dung <span-->
+<!--                style="color: red">(*)</span></label>-->
+<!--              <ckeditor [editor]="Editor" type="text" class="form-control" id="editor" required-->
+<!--                        formControlName="content" style="width: 100%"> </ckeditor>-->
+<!--              <small style="color: red" *ngIf="content.hasError('required') && (content.dirty || content.touched)">Nội dung không được để trống.</small>-->
+<!--            </div>-->
+
+<!--            <input hidden="hidden" type="text" class="form-control" id="employee" required formControlName="employeeId" >-->
+
+
+
+<!--            <div class="col-md-12 position-relative field">-->
+<!--              <label for="files" class="form-label">Thêm ảnh</label>-->
+<!--              <input type="file" class="form-control" id="files"  (change)="showPreview($event)">-->
+<!--              <small style="color: red" *ngIf="image.hasError('required') && (image.dirty || image.touched)">Phải chọn ảnh.</small>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;            <div class="mt-5 row form-group">&ndash;&gt;-->
+<!--            &lt;!&ndash;              <div class="col-2" >&ndash;&gt;-->
+<!--            &lt;!&ndash;                <label for="img-avatar" class="mr-3">Ảnh ca nhan<span style="color: red">*</span></label>&ndash;&gt;-->
+<!--            &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;              <div class="col-10">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <input id="img-avatar" type="file" class="form-control-file" (change)="showPreview($event)">&ndash;&gt;-->
+<!--            &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;            </div>&ndash;&gt;-->
+
+<!--            <div class="btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"-->
+<!--                 aria-label="Toolbar with button groups">-->
+<!--              <div class="btn-group me-2 float-right">-->
+<!--                <button class="btn btn-success customBtn" type="submit" >Đăng tin</button>-->
+<!--              </div>-->
+
+<!--              <div class="btn-group me-2 float-right">-->
+<!--                <button class="btn btn-secondary customBtn" type="submit" (click)="onClear()">Hủy</button>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div></div>-->
+<!--  </div>-->
+<!--  &lt;!&ndash;<script>&ndash;&gt;-->
+<!--  &lt;!&ndash;  CKEDITOR.replace( 'editor', {&ndash;&gt;-->
+<!--  &lt;!&ndash;    filebrowserBrowseUrl: '/ckfinder/ckfinder.html',&ndash;&gt;-->
+<!--  &lt;!&ndash;    filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?Type=Images',&ndash;&gt;-->
+<!--  &lt;!&ndash;    filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',&ndash;&gt;-->
+<!--  &lt;!&ndash;    filebrowserImageUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',&ndash;&gt;-->
+<!--  &lt;!&ndash;    filebrowserWindowWidth : '1000',&ndash;&gt;-->
+<!--  &lt;!&ndash;    filebrowserWindowHeight : '700'&ndash;&gt;-->
+<!--  &lt;!&ndash;  });&ndash;&gt;-->
+
+<!--  &lt;!&ndash;</script>&ndash;&gt;-->
+<!--  &lt;!&ndash;  <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>&ndash;&gt;-->
+<!--  &lt;!&ndash;  <script>&ndash;&gt;-->
+<!--  &lt;!&ndash;    ClassicEditor.create(document.querySelector('#editor'))&ndash;&gt;-->
+<!--  &lt;!&ndash;      .then(editor => {&ndash;&gt;-->
+<!--  &lt;!&ndash;        console.log(editor);&ndash;&gt;-->
+<!--  &lt;!&ndash;      })&ndash;&gt;-->
+<!--  &lt;!&ndash;      .catch(error => {&ndash;&gt;-->
+<!--  &lt;!&ndash;        console.error(error);&ndash;&gt;-->
+<!--  &lt;!&ndash;      });&ndash;&gt;-->
+<!--  &lt;!&ndash;  </script>&ndash;&gt;-->
+<!--  &lt;!&ndash;  <script src="[ckeditor-build-path]/ckeditor.js"></script>&ndash;&gt;-->
+<!--</main>-->
+<main class="container-fluid" style="padding-top: 5rem">
+  <div class="row">
+    <div class="col-md-2 col-sm-12" style="background-color: #009966;">
+      <div class="position-sticky ">
+        <ul class="text-decoration-none list-group mt-4 mb-4 ">
+          <li class="list-unstyled mb-2">
+            <a class="text-decoration-none   hvr-sweep-to-right " [routerLink]="['/employee/list']"
+            >
+              <img src="https://cdn-icons-png.flaticon.com/512/1177/1177568.png"
+                   height="20px">
+              <span class="text-light">Quản lý nhân viên</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"  [routerLink]="['/individual/list']"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1178/1178215.png"
+                   height="20px">
+              <span class="text-light">Quản lý đàn</span>
+            </a>
+          </li>
+
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               [routerLink]="['/cages/list']">
+              <img src="https://cdn-icons-png.flaticon.com/512/1177/1177455.png"
+                   height="20px">
+              <span class="text-light">Quản lý chuồng nuôi</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               [routerLink]="['/treatement/list']">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060673.png"
+                   height="20px">
+              <span class="text-light">Khám chữa trị</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               [routerLink]="['/news/create']">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060702.png" height="20px">
+              <span class="text-light">Đăng bài</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060668.png" height="20px">
+
+              <span class="text-light">Giao dịch</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class="text-decoration-none hvr-sweep-to-right pleft0"
+               href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060694.png" height="20px">
+              <span class="text-light">Lịch làm việc</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class="text-decoration-none hvr-sweep-to-right pleft0"
+               href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060699.png" height="20px">
+              <span class="text-light">Hồ sơ biểu mẫu</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060674.png" height="20px">
+              <span class="text-light">Thống kê</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
-    <div></div>
-  </div>
-  <!--<script>-->
-  <!--  CKEDITOR.replace( 'editor', {-->
-  <!--    filebrowserBrowseUrl: '/ckfinder/ckfinder.html',-->
-  <!--    filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?Type=Images',-->
-  <!--    filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',-->
-  <!--    filebrowserImageUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',-->
-  <!--    filebrowserWindowWidth : '1000',-->
-  <!--    filebrowserWindowHeight : '700'-->
-  <!--  });-->
+    <section class="col-md-10">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header pb-0   bg-success ">
+                <h6  class="text-white ">Đăng tin tức</h6>
+              </div>
 
-  <!--</script>-->
-  <!--  <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>-->
-  <!--  <script>-->
-  <!--    ClassicEditor.create(document.querySelector('#editor'))-->
-  <!--      .then(editor => {-->
-  <!--        console.log(editor);-->
-  <!--      })-->
-  <!--      .catch(error => {-->
-  <!--        console.error(error);-->
-  <!--      });-->
-  <!--  </script>-->
-  <!--  <script src="[ckeditor-build-path]/ckeditor.js"></script>-->
+              <form class="row g-3 needs-validation m-3" method="post" [formGroup]="formCreateNews" (ngSubmit)="onSubmit()">
+
+                <div class="col-md-8 position-relative">
+                  <label for="title" class="form-label">Tiêu đề <span
+                    style="color: red">(*)</span></label>
+                  <input type="text" class="form-control" id="title" required formControlName="title">
+                  <small style="color: red" *ngIf="title.hasError('required') && (title.dirty || title.touched)">Tiêu đề
+                    không được để trống.</small>
+                  <small style="color: red"
+                         *ngIf="title.hasError('minlength')&& (title.dirty || title.touched)">Tiêu đề phải từ 20 đến 300 ký
+                    tự.</small>
+                  <small style="color: red"
+                         *ngIf="title.hasError('maxlength')&& (title.dirty || title.touched)">Tiêu đề phải từ 40 đến 255 ký
+                    tự.</small>
+                </div>
+
+                <div class="col-md-4 position-relative">
+                  <label for="position" class="form-label">Loại tin tức<span style="color: red">(*)</span></label>
+                  <select id="position" class="form-select" aria-label="Default select example" formControlName="typeOfNewsDTO">
+                    <option [ngValue]="null">Lựa chọn tin tức</option>
+                    <option *ngFor="let item of typeOfNewss"
+                            [ngValue]="item">{{item.name}}</option>
+                  </select>
+                  <small style="color: red" *ngIf="typeOfNews.hasError('required') && (typeOfNews.dirty || typeOfNews.touched)">Yêu cầu lựa chọn loại tin tức.</small>
+                </div>
+
+                <div class="col-md-12 position-relative">
+                  <label for="editor" class="form-label">Nội dung <span
+                    style="color: red">(*)</span></label>
+                  <ckeditor [editor]="Editor" type="text" class="form-control" id="editor" required
+                            formControlName="content" style="width: 100%"> </ckeditor>
+                  <small style="color: red" *ngIf="content.hasError('required') && (content.dirty || content.touched)">Nội dung không được để trống.</small>
+                </div>
+
+                <input hidden="hidden" type="text" class="form-control" id="employee" required formControlName="employeeId" >
+
+
+                <div class="col-md-12 position-relative field">
+                  <label for="files" class="form-label">Thêm ảnh</label>
+                  <input type="file" class="form-control" id="files"  (change)="showPreview($event)">
+                  <small style="color: red" *ngIf="image.hasError('required') && (image.dirty || image.touched)">Phải chọn ảnh.</small>
+                </div>
+
+
+                <div class="btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
+                     aria-label="Toolbar with button groups">
+                  <div class="btn-group me-2 float-right">
+                    <button class="btn btn-success customBtn" type="submit" [class.spinner]="loading" [disabled]="loading" >Đăng tin</button>
+                  </div>
+
+                  <div class="btn-group me-2 float-right">
+                    <button class="btn btn-secondary customBtn" type="submit" (click)="onClear()">Hủy</button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </section>
+  </div>
 </main>
