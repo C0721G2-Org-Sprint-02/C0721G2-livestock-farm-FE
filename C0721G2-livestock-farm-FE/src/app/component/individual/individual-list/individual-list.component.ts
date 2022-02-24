@@ -58,7 +58,6 @@ export class IndividualListComponent implements OnInit {
       this.individuals = value.content;
       this.totalPages = value.totalPages;
       this.page = value.pageable.pageNumber;
-      // this.message = '';
     }, error => {
       this.message = 'Không tìm thấy';
       this.individuals = [];

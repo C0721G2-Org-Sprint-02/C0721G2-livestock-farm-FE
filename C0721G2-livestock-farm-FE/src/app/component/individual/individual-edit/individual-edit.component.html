@@ -1,9 +1,10 @@
 <span [class.alert-danger]="message" (message)="message" [textContent]="message">{{'message'}}</span><!--thẻ modal-->
 <br>
+<!--[attr.data-bs-target]="'#'+currentId"-->
 <button type="button" class="btn btn-warning btn-responsive-margin-bottom text-white" data-bs-toggle="modal"
-        data-bs-target="#myModaledit"><i class="fas fa-edit"></i> Sửa
+       [attr.data-bs-target]="'#mymodal'+currentId"><i class="fas fa-edit"></i> Sửa
 </button>
-<div class="modal" id="myModaledit" style="text-align: left">
+<div class="modal" id="mymodal{{currentId}}" style="text-align: left">
   <div class="modal-dialog mw-100 w-75" style="width: 1280px">
     <div class="modal-content col-12">
        <div class="card mb-8">
@@ -84,12 +85,10 @@
                    aria-label="Toolbar with button groups">
                 <div class="me-2 float-right">
                   <div class="btn-group me-2">
-                    <button class="btn btn-secondary customBtn" type="button" (click)="Reset()" data-bs-dismiss="modal">
-                      Hủy
-                    </button>
+                    <button class="btn btn-secondary customBtn" type="button" data-bs-dismiss="modal">Hủy</button>
                   </div>
                   <div class="btn-group">
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModaledit2">
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" [attr.data-bs-target]="'#myModaledit2'+currentId">
                       Chỉnh sửa
                     </button>
                   </div>
@@ -104,7 +103,7 @@
 </div>
 
 
-<div class="modal fade" id="myModaledit2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+<div class="modal fade" id="myModaledit2{{currentId}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
      style="text-align: left">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -120,13 +119,11 @@
       </div>
       <div class="modal-footer">
         <div class="btn-group">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="Reset()">Đóng</button>
         </div>
         <div class="btn-group">
           <button type="button" class="btn btn-warning" (click)="onSubmit()" data-bs-dismiss="modal"
-                  data-bs-target="#modal3"
-                  data-bs-toggle="modal" >Xác nhận
-          </button>
+                  data-bs-target="#modal3" data-bs-toggle="modal" >Xác nhận</button>
         </div>
       </div>
     </div>
