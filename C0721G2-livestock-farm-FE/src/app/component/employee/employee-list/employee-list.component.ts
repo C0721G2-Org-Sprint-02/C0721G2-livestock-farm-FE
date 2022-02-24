@@ -16,6 +16,7 @@ export class EmployeeListComponent implements OnInit {
   page = 0;
   totalPage;
   deleteMessenger;
+  emptyMessenger;
   sortType = 0;
   roleType = 0;
   keyword = '';
@@ -35,7 +36,7 @@ export class EmployeeListComponent implements OnInit {
   openDialog(id) {
     this.dialogRef = this.dialog.open(EmployeeDeleteComponent, {
       height: '200px',
-      width: '300px',
+      width: '500px',
       data: id,
     });
     this.dialogRef.afterClosed().subscribe(result => {
@@ -72,11 +73,16 @@ export class EmployeeListComponent implements OnInit {
   }
 
   search() {
+    this.emptyMessenger = null;
     this.employeeService.getEmployeeList(this.page, this.sortType, this.roleType, this.keyword).subscribe(
       data => {
         console.log(data);
-        this.totalPage = data.totalPages;
-        this.employeeList = data.content;
+        if (data){
+          this.totalPage = data.totalPages;
+          this.employeeList = data.content;
+        } else {
+          this.emptyMessenger = 'Không tìm thấy từ khoá';
+        }
       }
     );
   }
