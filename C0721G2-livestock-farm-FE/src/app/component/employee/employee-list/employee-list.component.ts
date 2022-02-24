@@ -35,13 +35,12 @@ export class EmployeeListComponent implements OnInit {
 
   openDialog(id) {
     this.dialogRef = this.dialog.open(EmployeeDeleteComponent, {
-      height: '200px',
-      width: '500px',
+      width: '600px',
       data: id,
     });
     this.dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.deleteMessenger = 'nhân viên ' + id + ' đã được xoá thành công';
+        this.deleteMessenger = 'Nhân viên ' + id + ' đã được xoá thành công';
         this.page = 0;
         this.ngOnInit();
       }
