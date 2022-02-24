@@ -56,19 +56,19 @@
               <span class="mx-2" style="font-size: 80%">{{this.username | titlecase}}</span>
             </a>
             <ul class="dropdown-menu border-0 pb-0 fw-bold" aria-labelledby="navbarDropdown">
-              <div *ngIf="this.role === 'ROLE_ADMIN' then admin else customer"></div>
+              <div *ngIf="this.role === 'ROLE_ADMIN' then admin else employee"></div>
 <!--              nhớ bỏ cái này đi-->
               <li>
-                <ng-template #customer>
-                  <a class="dropdown-item" [routerLink]="['/real-estate-new/post-history', this.idCustomer ]">
-                    <i class="fas fa-bars me-2"></i>
-                    <span style="font-size: 85%">Quản lý website</span>
-                  </a>
-                </ng-template>
-                <ng-template #admin>
+                <ng-template #employee>
                   <a class="dropdown-item" [routerLink]="['/employee/list']">
                     <i class="fas fa-bars me-2"></i>
                     <span style="font-size: 85%">Quản lý nhân viên</span>
+                  </a>
+                </ng-template>
+                <ng-template #admin>
+                  <a class="dropdown-item" [routerLink]="['/news/create']">
+                    <i class="fas fa-bars me-2"></i>
+                    <span style="font-size: 85%">Đăng tin</span>
                   </a>
                 </ng-template>
               </li>

@@ -12,7 +12,8 @@
 <div class="container register">
   <div class="row">
     <div class="col-md-3 register-left">
-      <img src="https://nongnghiepweb.files.wordpress.com/2017/04/cropped-leave-icon-png-106801.png" alt="" />
+      <img  src="https://fv9-2.failiem.lv/thumb_show.php?i=jp53m5a92&view" alt="" style="width: 100%"/>
+      <!--      <img src="https://nongnghiepweb.files.wordpress.com/2017/04/cropped-leave-icon-png-106801.png" alt=""/>-->
       <h3>Chào mừng đến với trang trại của chúng tôi</h3>
     </div>
     <div class="col-md-9 register-right">
@@ -28,38 +29,42 @@
       <!--      <h1>{{cage.quantity}}</h1>-->
       <!--      <h1>123123123</h1>-->
       <div class="tab-content" id="myTabContent">
-        <div *ngIf="showAlert"  class="alert alert-success alert-dismissible fade show" role="alert"
-              style="text-align: center; width: 50% ; margin-left: 200px">
-          Tạo chuồng thành công
+        <div *ngIf="showAlert" class="alert alert-success alert-dismissible fade show" role="alert"
+             style="text-align: center; width: 50% ; margin-left: 200px">
+          Chỉnh sửa thành công!
           <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <h3 class="register-heading">Chỉnh sửa chuồng nuôi</h3>
-          <form [formGroup]="updateCage" (ngSubmit)="submit()">
+          <h3 class="register-heading" *ngIf="messageNotFound!==''" style="padding: 100px;color: red">
+            {{messageNotFound}}
+          </h3>
+          <form [formGroup]="updateCage" (ngSubmit)="submit()" *ngIf="messageNotFound==''">
             <div class="row register-form">
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Mã chuồng nuôi.</label>
-                  <input type="text" class="form-control" readonly="readonly" formControlName="id"/>
-<!--                  <div class="error alert-danger"-->
-<!--                       *ngIf="updateCage.controls.id.dirty && updateCage.controls.id.hasError('pattern') ">-->
-<!--                    Mã tạo chuồng có định dạng CA-xxxx.-->
-<!--                  </div>-->
-<!--                  <div class="alert-danger" *ngIf="showErrorCage">{{showErrorCage}}</div>-->
-<!--                  <div class="error alert-danger"-->
-<!--                       *ngIf="updateCage.controls.id.dirty && updateCage.controls.id.hasError('required') ">-->
-<!--                    Không được bỏ trống.-->
-<!--                  </div>-->
+                  <!--                  <input type="text" class="form-control" readonly="readonly" formControlName="id"/>-->
+                  <p type="text" class="form-control" readonly="readonly" formControlName="id">{{cage.id}}</p>
+                  <!--                  <div class="error alert-danger"-->
+                  <!--                       *ngIf="updateCage.controls.id.dirty && updateCage.controls.id.hasError('pattern') ">-->
+                  <!--                    Mã tạo chuồng có định dạng CA-xxxx.-->
+                  <!--                  </div>-->
+                  <!--                  <div class="alert-danger" *ngIf="showErrorCage">{{showErrorCage}}</div>-->
+                  <!--                  <div class="error alert-danger"-->
+                  <!--                       *ngIf="updateCage.controls.id.dirty && updateCage.controls.id.hasError('required') ">-->
+                  <!--                    Không được bỏ trống.-->
+                  <!--                  </div>-->
                 </div>
                 <div class="form-group">
                   <label>Loại chuồng nuôi.</label>
-                  <select class="custom-select mt-1" formControlName="typeOfCage" name="typeOfCage"
+                  <select class="custom-select mt-0" formControlName="typeOfCage" name="typeOfCage"
                           aria-label="Default select example" [compareWith]="compareFn">
                     <option *ngFor="let item of typeOfCage" [ngValue]="item">{{item.name}}</option>
                   </select>
-                  <div class="error alert-danger"
+                  <div class="error error-text"
                        *ngIf="updateCage.controls.typeOfCage.dirty && updateCage.controls.typeOfCage.hasError('required') ">
                     Không được bỏ trống.
                   </div>
@@ -67,15 +72,15 @@
                 <div class="form-group">
                   <label>Mã nhân viên.</label>
                   <input type="text" class="form-control" formControlName="employee" [ngModel]="employeeId">
-<!--                  {{cage.employee.id}}-->
-                  <div *ngIf="employeeExist" class="error alert-danger">Tên nhân viên không tồn tại</div>
-                  <div class="error alert-danger"
+                  <!--                  {{cage.employee.id}}-->
+                  <div *ngIf="employeeExist" class="error-text">Tên nhân viên không tồn tại</div>
+                  <div class="error-text"
                        *ngIf="updateCage.controls.employee.dirty && updateCage.controls.employee.hasError('required') ">
-                    Không được bỏ trống
+                    Không được bỏ trống.
                   </div>
-                  <div class="error alert-danger"
+                  <div class="error-text"
                        *ngIf="updateCage.controls.employee.dirty && updateCage.controls.employee.hasError('pattern') ">
-                    Định dạng là NV-xxxx
+                    Định dạng là NV-xxxx.
                   </div>
                 </div>
               </div>
@@ -83,32 +88,49 @@
                 <div class="form-group">
                   <label>Ngày tạo chuồng.</label>
                   <input type="date" class="form-control" formControlName="openDate"/>
-                  <div class="error alert-danger"
+                  <div class="error error-text"
                        *ngIf="updateCage.controls.openDate.dirty && updateCage.controls.openDate.hasError('required') ">
                     Không được bỏ trống
+                  </div>
+                  <div class="error error-text"
+                       *ngIf="updateCage.controls.openDate.dirty && updateCage.controls.openDate.hasError('checkDate')">
+                    Ngày khởi tạo chưa đúng.
                   </div>
                 </div>
                 <div class="form-group">
                   <label>Ngày đóng chuồng.</label>
                   <input type="date" class="form-control" formControlName="closeDate"/>
-                  <div class="error alert-danger"
+                  <div class="error error-text"
                        *ngIf="updateCage.controls.closeDate.dirty && updateCage.controls.closeDate.hasError('required') ">
                     Không được bỏ trống
+                  </div>
+                  <div class="error error-text"
+                       *ngIf="updateCage.controls.closeDate.dirty && updateCage.controls.closeDate.hasError('checkDate')">
+                    Ngày khởi tạo chưa đúng.
                   </div>
                 </div>
                 <div class="form-group">
                   <label>Số lượng cá thể.</label>
                   <input type="text" class="form-control" formControlName="quantity"/>
-                  <div class="error alert-danger"
+                  <div class="error error-text"
                        *ngIf="updateCage.controls.quantity.dirty && updateCage.controls.quantity.hasError('required')">
-                    Không được bỏ trống
+                    Không được bỏ trống.
                   </div>
-                  <div class="error alert-danger"
+                  <div class="error error-text"
+                       *ngIf="updateCage.controls.quantity.dirty && updateCage.controls.quantity.hasError('max')">
+                    Số lượng tối đa là 100.
+                  </div>
+                  <div class="error error-text"
                        *ngIf="updateCage.controls.quantity.dirty && updateCage.controls.quantity.hasError('pattern') ">
                     Nhập chưa đúng định dạng.
                   </div>
                 </div>
-                <button type="submit" class=" btn btnRegister" [disabled]="updateCage.invalid">Đồng ý</button>
+                <!--                <a class="btn btn-secondary" [routerLink]="['/cage/list']"-->
+                <!--                        style="margin: 30px 0px 0px 30px; padding-left: 10px">Quay lại-->
+                <!--                </a>-->
+                <a class="btn btnBack" [routerLink]="['/cages/list']">Quay lại
+                </a>
+                <button type="submit" class=" btn btnRegister" autofocus [disabled]="updateCage.invalid">Đồng ý</button>
               </div>
             </div>
           </form>
@@ -118,4 +140,3 @@
   </div>
 </div>
 </body>
-

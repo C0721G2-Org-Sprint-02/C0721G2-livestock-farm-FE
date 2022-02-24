@@ -1,1 +1,304 @@
-<p>employee-edit works!</p>
+<main class="container-fluid" style="padding-top: 5rem">
+  <div class="row">
+    <div class="col-md-2 col-sm-12" style="background-color: #009966;">
+      <div class="position-sticky ">
+        <ul class="text-decoration-none list-group mt-4 mb-4 ">
+          <li class="list-unstyled mb-2">
+            <a class="text-decoration-none   hvr-sweep-to-right " [routerLink]="['/employee/list']"
+            >
+              <img src="https://cdn-icons-png.flaticon.com/512/1177/1177568.png"
+                   height="20px">
+              <span class="text-light">Quản lý nhân viên</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"  [routerLink]="['/individual/list']"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1178/1178215.png"
+                   height="20px">
+              <span class="text-light">Quản lý đàn</span>
+            </a>
+          </li>
+
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               [routerLink]="['/cages/list']">
+              <img src="https://cdn-icons-png.flaticon.com/512/1177/1177455.png"
+                   height="20px">
+              <span class="text-light">Quản lý chuồng nuôi</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               [routerLink]="['/treatement/list']">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060673.png"
+                   height="20px">
+              <span class="text-light">Khám chữa trị</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               [routerLink]="['/news/create']">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060702.png" height="20px">
+              <span class="text-light">Đăng bài</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060668.png" height="20px">
+
+              <span class="text-light">Giao dịch</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class="text-decoration-none hvr-sweep-to-right pleft0"
+               href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060694.png" height="20px">
+              <span class="text-light">Lịch làm việc</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class="text-decoration-none hvr-sweep-to-right pleft0"
+               href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060699.png" height="20px">
+              <span class="text-light">Hồ sơ biểu mẫu</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060674.png" height="20px">
+              <span class="text-light">Thống kê</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <section class="col-md-10">
+      <div class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+        <div class="container py-4">
+          <div class="row">
+            <div class="col-12">
+              <div class=" col-3">
+                <button class="btn btn btn-secondary fw-bold ms-3 mt-3 mb-3 " routerLink="/employee/list">
+                  Trở về
+                  <!--            <a class="btn btn btn-secondary fw-bold ms-3 mt-3 mb-3" role="button" href="/employee/list">Trở về</a>-->
+                </button>
+              </div>
+              <div class="card mb-4">
+                <div class="card-header pb-0">
+                  <h6>Sửa thông tin nhân viên</h6>
+                  <p class="text-success"></p>
+                </div>
+                <form class="row g-3 needs-validation m-3" method="post" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+                  <div class="col-md-4 col-sm-12 position-relative">
+                    <label for="name" class="form-label">Họ và tên<span
+                      style="color: black">   (</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <input type="text" class="form-control" id="name" name="name" formControlName="name"
+                           placeholder="Nhập tên nhân viên" [ngModel]="employee.name">
+                    <small style="color: red"
+                           *ngIf="name.hasError('required') && (name.dirty || name.touched)">Họ và tên không được để
+                      trống.</small>
+                    <small style="color: red"
+                           *ngIf="name.hasError('pattern')&& (name.dirty || name.touched)">Họ và tên không đúng định
+                      dạng.</small>
+                  </div>
+                  <div class="col-md-4 col-sm-12 position-relative">
+                    <label for="date" class="form-label">Ngày sinh<span
+                      style="color: black">   (</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <input type="date" class="form-control" id="date" name="date" formControlName="dateOfBirth"
+                           [ngModel]="employee.dateOfBirth">
+                    <small style="color: red"
+                           *ngIf="dateOfBirth.hasError('required') && (dateOfBirth.dirty || dateOfBirth.touched)">Ngày sinh
+                      không được để trống.</small>
+                    <small style="color: red"
+                           *ngIf="dateOfBirth.hasError('checkAge') && (dateOfBirth.dirty || dateOfBirth.touched)">Ngày sinh từ
+                      18 tuổi đến 65 tuổi.</small>
+                  </div>
+
+                  <div class="col-md-4 col-sm-12 position-relative">
+                    <label for="price" class="form-label">Số điện thoại<span
+                      style="color: black">   (</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <input type="text" class="form-control" id="price" name="phoneNumber" formControlName="phoneNumber"
+                           placeholder="Nhập số điện thoại" [ngModel]="employee.phoneNumber">
+                    <small style="color: red"
+                           *ngIf="phoneNumber.hasError('required') && (phoneNumber.dirty || phoneNumber.touched)">Số điện
+                      thoại không được để trống.</small> <br>
+                    <small style="color: red"
+                           *ngIf="phoneNumber.hasError('pattern') && (phoneNumber.dirty || phoneNumber.touched)">Số điện thoại
+                      không đúng định
+                      dạng.</small>
+                  </div>
+
+                  <div class="col-md-4 col-sm-12 position-relative">
+                    <label for="price" class="form-label">CMND/CCCD<span
+                      style="color: black">   (</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <input type="text" class="form-control" id="idCard" name="idCard" formControlName="idCard"
+                           placeholder="Nhập số CMND/CCCD" [ngModel]="employee.idCard">
+                    <small style="color: red"
+                           *ngIf="idCard.hasError('required') && (idCard.dirty || idCard.touched)">Số CMND/CCCD không được để
+                      trống.</small> <br>
+                    <small style="color: red"
+                           *ngIf="idCard.hasError('pattern') && (idCard.dirty || idCard.touched)">Số CMND định dạng 9
+                      số và CCCD định dạng 12 số.</small>
+                  </div>
+
+                  <div class="col-md-4 position-relative">
+                    <label for="1" class="form-label">Giới tính<span
+                      style="color: black">   (</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+
+                    <div class="btn-group col-md-12 col-sm-12 position-relative" id="1" role="group"
+                         aria-label="Basic radio toggle button group">
+                      <input type="radio" class="form-check-input" id="gender" [ngModel]="employee.gender"
+                             [value]="1" autocomplete="off" formControlName="gender" name="gender"
+                             checked>
+                      <label class="px-2">Nam</label>
+                      <div class="px-5">
+                        <input type="radio" class="form-check-input" name="gender" id="gender1"
+                               autocomplete="off" formControlName="gender" [value]="0">
+                        <label class="px-2">Nữ</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4  col-sm-12 position-relative">
+                    <label for="2" class="form-label">Phân quyền<span
+                      style="color: black">   (</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <div class="btn-group col-md-12 col-sm-12 position-relative" id="2" role="group"
+                         aria-label="Basic radio toggle button group">
+                      <input type="radio" class="form-check-input" id="btnradio3"
+                             autocomplete="off" formControlName="roleDTO" name="roleDTO" [value]="1"
+                             [ngModel]="employee.roleDTO">
+                      <label class="px-2">Admin</label>
+                      <div class="px-5">
+                        <input type="radio" class="form-check-input" id="btnradio4"
+                               autocomplete="off" [value]="2" formControlName="roleDTO" name="roleDTO">
+                        <label class="px-2">Nhân viên</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 position-relative">
+                    <label for="area" class="form-label">Email<span
+                      style="color: black">   (</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <input type="text" class="form-control" id="area" name="email" formControlName="email"
+                           placeholder="Nhập email" [ngModel]="employee.email">
+                    <small style="color: red"
+                           *ngIf="email.hasError('required') && (email.dirty || email.touched)">Email không được để
+                      trống.</small><br>
+                    <small style="color: red"
+                           *ngIf="email.hasError('pattern') && (email.dirty || email.touched)">Email không đúng định
+                      dạng.</small>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 position-relative">
+                    <label for="address" class="form-label">Địa chỉ<span
+                      style="color: black">   (</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <input type="text" class="form-control" id="address" formControlName="address" name="address"
+                           placeholder="Nhập địa chỉ" [ngModel]="employee.address">
+                    <small style="color: red"
+                           *ngIf="address.hasError('required') && (address.dirty || address.touched)">
+                      Địa chỉ không được để trống.</small>
+                  </div>
+
+
+                  <div class="col-md-12 position-relative field">
+                    <label class="form-label">Ảnh cá nhân</label>
+                    <img class="form-control" src="{{employee.image}}" style="width: 20%">
+                  </div>
+                  <div class="mt-5 row form-group">
+                    <div class="col-10">
+                      <input id="img-avatar" type="file" class="form-control-file" (change)="showPreview($event)">
+                    </div>
+                  </div>
+
+                  <!--            <div class="col-md-6 position-relative field">-->
+                  <!--              <label for="files" class="form-label">Ảnh cá nhân</label>-->
+                  <!--              <input type="file" multiple="multiple" class="form-control" id="files" formControlName="image" required-->
+                  <!--                     name="files[]" (change)="detectFiles($event)" accept="image/png, image/gif, image/jpeg">-->
+                  <!--              <small *ngIf="imgMess"-->
+                  <!--                     class="fst-italic" style="color: red"></small>-->
+                  <!--              <div class="text-center row mt-4">-->
+                  <!--                <ng-container *ngFor="let item of urls">-->
+                  <!--                  <div class="col-md-2">-->
+                  <!--                    <img [src]="item" width="200px" height=200px"><img>-->
+                  <!--                  </div>-->
+                  <!--                </ng-container>-->
+                  <!--              </div>-->
+                  <!--            </div>-->
+
+                  <div class=" btn-toolbar mb-3  d-flex flex-row-reverse bd-highlight" role="toolbar"
+                       aria-label="Toolbar with button groups">
+                    <div class="btn-group me-2">
+                      <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#Modal"
+                              [disabled]="employeeForm.invalid">Lưu
+                      </button>
+                    </div>
+                    <div class="btn-group me-2">
+                      <button class="btn btn-secondary" type="button" (click)="onClick()">Xóa</button>
+                    </div>
+                  </div>
+
+                  <!--            <div class="btn-toolbar mb-3 justify-content-md-center bd-highlight" role="toolbar"-->
+                  <!--                 aria-label="Toolbar with button groups">-->
+                  <!--              <div class="btn-group me-2">-->
+                  <!--                <button class="btn btn-secondary" type="submit">Xóa</button>-->
+                  <!--              </div>-->
+                  <!--              <div class="btn-group me-2">-->
+                  <!--                <button class="btn btn-success" type="submit">Lưu</button>-->
+                  <!--              </div>-->
+                  <!--            </div>-->
+                  <div>
+                    <i><span style="color: red">Lưu ý:</span><span style="color: black">  Những thông tin (</span><span
+                      style="color: red">*</span><span style="color: black">) bắt buộc nhập.</span></i>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Chỉnh sửa thông tin nhân viên thành công
+            </div>
+            <div class="modal-footer">
+              <!--        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Đóng</button>-->
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Xác nhận</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+
+
+
+

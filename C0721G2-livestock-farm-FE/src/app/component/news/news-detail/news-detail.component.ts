@@ -4,7 +4,8 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {News} from '../../../model/news/news';
 import {Subscription} from 'rxjs';
 import {TokenStorageService} from '../../../service/security/token-storage.service';
-
+import {NewsDeleteComponent} from '../news-delete/news-delete.component';
+import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-news-detail',
   templateUrl: './news-detail.component.html',
@@ -23,6 +24,7 @@ export class NewsDetailComponent implements OnInit {
   constructor(private newsService: NewsService,
               private activatedRoute: ActivatedRoute,
               private tokenStorageService: TokenStorageService,
+              private dialog: MatDialog,
   ) {
   }
 
@@ -52,5 +54,26 @@ export class NewsDetailComponent implements OnInit {
         }
       });
     }
+  }
+  openDialog(id): void {
+    console.log(id);
+    // Trả về đối tượng customer
+    this.newsService.getNewsById(id).subscribe(customerData => {
+      console.log(customerData);
+      const dialogRef = this.dialog.open(NewsDeleteComponent, {
+        width: '500px',
+        panelClass: '.mat-dialog-container',
+        maxHeight: '100%',
+        data: {customerData},
+        // Khi bấm ra ngoài dialog khong bi mat di
+        disableClose: true
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.ngOnInit();
+      });
+    });
+    // this.router.navigate(['/news/list']);
   }
 }

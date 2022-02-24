@@ -1,17 +1,18 @@
-<main class="container-fluid">
+<main class="container-fluid" style="padding-top: 5rem">
   <div class="row">
-    <div class="col-md-2 col-sm-12 " style="background-color: #009966;">
+    <div class="col-md-2 col-sm-12" style="background-color: #009966;">
       <div class="position-sticky ">
         <ul class="text-decoration-none list-group mt-4 mb-4 ">
           <li class="list-unstyled mb-2">
-            <a class="text-decoration-none   hvr-sweep-to-right">
+            <a class="text-decoration-none   hvr-sweep-to-right " [routerLink]="['/employee/list']"
+            >
               <img src="https://cdn-icons-png.flaticon.com/512/1177/1177568.png"
                    height="20px">
               <span class="text-light">Quản lý nhân viên</span>
             </a>
           </li>
           <li class="list-unstyled mb-2">
-            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"  [routerLink]="['/individual/list']"
                href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
               <img src="https://cdn-icons-png.flaticon.com/512/1178/1178215.png"
                    height="20px">
@@ -21,7 +22,7 @@
 
           <li class="list-unstyled mb-2">
             <a class=" text-decoration-none hvr-sweep-to-right pleft0"
-               [routerLink]="['/employee/list']">
+               [routerLink]="['/cages/list']">
               <img src="https://cdn-icons-png.flaticon.com/512/1177/1177455.png"
                    height="20px">
               <span class="text-light">Quản lý chuồng nuôi</span>
@@ -29,7 +30,7 @@
           </li>
           <li class="list-unstyled mb-2">
             <a class=" text-decoration-none hvr-sweep-to-right pleft0"
-               [routerLink]="['/customer/list']">
+               [routerLink]="['/treatement/list']">
               <img src="https://cdn-icons-png.flaticon.com/512/1060/1060673.png"
                    height="20px">
               <span class="text-light">Khám chữa trị</span>
@@ -37,9 +38,9 @@
           </li>
           <li class="list-unstyled mb-2">
             <a class=" text-decoration-none hvr-sweep-to-right pleft0"
-               [routerLink]="['/real-estate-new/list-post-approval']">
+               [routerLink]="['/news/create']">
               <img src="https://cdn-icons-png.flaticon.com/512/1060/1060702.png" height="20px">
-              <span class="text-light">Quản lý bài đăng</span>
+              <span class="text-light">Đăng bài</span>
             </a>
           </li>
           <li class="list-unstyled mb-2">
@@ -84,30 +85,35 @@
                 <form class="row mt-5 mx-2 " (ngSubmit)="onSubmit()">
                   <div class="col-xxl-2 col-xl-4 col-md-6 mb-3">
                     <div class="input-group m-0">
-                      <input type="text" class="form-control " [(ngModel)]="individualId" [ngModelOptions]="{standalone: true}" placeholder="Mã cá thể">
+                      <input type="text" class="form-control " [(ngModel)]="individualId"
+                             [ngModelOptions]="{standalone: true}" placeholder="Mã cá thể">
                     </div>
                   </div>
                   <div class="col-xxl-2 col-xl-4 col-md-6 mb-3">
                     <div class="input-group m-0">
-                      <input type="text" class="form-control " [(ngModel)]="cageId" [ngModelOptions]="{standalone: true}" placeholder="Mã chuồng">
+                      <input type="text" class="form-control " [(ngModel)]="cageId"
+                             [ngModelOptions]="{standalone: true}" placeholder="Mã chuồng">
                     </div>
                   </div>
                   <div class="col-xxl-2 col-xl-4 col-md-6 mb-3">
                     <div class="input-group m-0">
-                      <input type="text" class="form-control " [(ngModel)]="dateIn" [ngModelOptions]="{standalone: true}" placeholder="Ngày nhập chuồng"
+                      <input type="text" class="form-control " [(ngModel)]="dateIn"
+                             [ngModelOptions]="{standalone: true}" placeholder="Ngày nhập chuồng"
                              onfocus="(this.type='date')"
                              onblur="(this.type='text')">
                     </div>
                   </div>
                   <div class="col-xxl-2 col-xl-4 col-md-6 mb-3">
                     <div class="input-group m-0">
-                      <input type="text" class="form-control " [(ngModel)]="dateOut"  [ngModelOptions]="{standalone: true}" placeholder="Ngày xuất chuồng"
+                      <input type="text" class="form-control " [(ngModel)]="dateOut"
+                             [ngModelOptions]="{standalone: true}" placeholder="Ngày xuất chuồng"
                              onfocus="(this.type='date')"
                              onblur="(this.type='text')">
                     </div>
                   </div>
                   <div class="col-xxl-2 col-xl-4 col-md-6 mb-3">
-                    <select class="form-select" [(ngModel)]="status" [ngModelOptions]="{standalone: true}" aria-label="Default select example">
+                    <select class="form-select" [(ngModel)]="status" [ngModelOptions]="{standalone: true}"
+                            aria-label="Default select example">
                       <option value="">Tình trạng</option>
                       <option value="1">Có bệnh</option>
                       <option value="0">Không có bệnh</option>
@@ -152,8 +158,9 @@
                         <td class="text-center align-middle text-break">{{individual.weight}}</td>
                         <td class="align-middle text-center">
                           <app-individual-edit [currentId]="individual.id"></app-individual-edit>
-<!--                          <button class="btn btn-warning btn-responsive-margin-bottom text-white"><i class="fas fa-edit"></i> Sửa</button>-->
-                          <button class="btn btn-danger text-white" (click)="openDialogDelete(individual.id)" ><i class="fas fa-trash-alt"></i> Xóa</button>
+                          <button class="btn btn-danger text-white mx-1" (click)="openDialogDelete(individual.id)"><i
+                            class="fas fa-trash-alt"></i> Xóa
+                          </button>
                         </td>
                       </tr>
                       </tbody>
@@ -163,8 +170,11 @@
                     <ul class="d-flex pagination pagination-sm justify-content-end " style="margin:20px 0">
                       <div *ngIf="this.page >0 then previous"></div>
                       <ng-template #previous>
-                        <li class="page-item"><button class="page-link bg-success" style="; color: white" (click)="previousClick()">Trước
-                          đó</button></li>
+                        <li class="page-item">
+                          <button class="page-link bg-success" style="; color: white" (click)="previousClick()">Trước
+                            đó
+                          </button>
+                        </li>
                       </ng-template>
                       <li class="page-item">
                         <input class="page-link" type="number" value="1" min="1" [max]="totalPages"
@@ -176,8 +186,11 @@
                       </li>
                       <div *ngIf="this.page  < this.totalPages-1 then next "></div>
                       <ng-template #next>
-                        <li class="page-item"><button class="page-link bg-success" style="color: white" (click)="nextClick()">Tiếp
-                          theo</button></li>
+                        <li class="page-item">
+                          <button class="page-link bg-success" style="color: white" (click)="nextClick()">Tiếp
+                            theo
+                          </button>
+                        </li>
                       </ng-template>
                     </ul>
                   </div>

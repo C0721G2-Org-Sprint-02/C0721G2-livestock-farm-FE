@@ -12,8 +12,8 @@
                 style="text-align: center">{{time | date:'dd/MM/yyyy'}}</span>
         </div>
         <div class="float-end mt-3 mb-2 me-2" *ngIf="check==true">
-          <a class="btn btn-sm btn-warning ms-4">Sửa</a>
-          <a class="btn btn-sm btn-danger ms-2">Xóa</a>
+          <a class="btn btn-sm btn-warning ms-4"  [routerLink]="['/news/edit', news.id]">Sửa</a>
+          <a class="btn btn-sm btn-danger ms-2" (click)="openDialog(news.id)">Xóa</a>
         </div>
       </div>
       <div class="mt-3">
@@ -24,7 +24,7 @@
         <div class="text-center mb-2">
           <img src="{{img}}" width="90%">
         </div>
-        <p align="justify" class="fs-5">{{news.content}}</p>
+        <p align="justify" class="fs-5" [innerHTML]="news.content">{{news.content}}</p>
       </div>
       <!--                Tác giả-->
       <div class="float-end">
