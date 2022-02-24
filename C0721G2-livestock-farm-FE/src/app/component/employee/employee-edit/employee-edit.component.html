@@ -94,11 +94,11 @@
                 <form class="row g-3 needs-validation m-3" method="post" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
                   <div class="col-md-4 col-sm-12 position-relative">
                     <label for="name" class="form-label">Họ và tên<span
-                      style="color: black">   (</span><span
+                      style="color: black">(</span><span
                       style="color: red">*</span><span
                       style="color: black">)</span></label>
                     <input type="text" class="form-control" id="name" name="name" formControlName="name"
-                           placeholder="Nhập tên nhân viên" [ngModel]="employee.name">
+                           placeholder="Nhập tên nhân viên" >
                     <small style="color: red"
                            *ngIf="name.hasError('required') && (name.dirty || name.touched)">Họ và tên không được để
                       trống.</small>
@@ -112,7 +112,7 @@
                       style="color: red">*</span><span
                       style="color: black">)</span></label>
                     <input type="date" class="form-control" id="date" name="date" formControlName="dateOfBirth"
-                           [ngModel]="employee.dateOfBirth">
+                           >
                     <small style="color: red"
                            *ngIf="dateOfBirth.hasError('required') && (dateOfBirth.dirty || dateOfBirth.touched)">Ngày sinh
                       không được để trống.</small>
@@ -127,7 +127,7 @@
                       style="color: red">*</span><span
                       style="color: black">)</span></label>
                     <input type="text" class="form-control" id="price" name="phoneNumber" formControlName="phoneNumber"
-                           placeholder="Nhập số điện thoại" [ngModel]="employee.phoneNumber">
+                           placeholder="Nhập số điện thoại" >
                     <small style="color: red"
                            *ngIf="phoneNumber.hasError('required') && (phoneNumber.dirty || phoneNumber.touched)">Số điện
                       thoại không được để trống.</small> <br>
@@ -143,7 +143,7 @@
                       style="color: red">*</span><span
                       style="color: black">)</span></label>
                     <input type="text" class="form-control" id="idCard" name="idCard" formControlName="idCard"
-                           placeholder="Nhập số CMND/CCCD" [ngModel]="employee.idCard">
+                           placeholder="Nhập số CMND/CCCD" >
                     <small style="color: red"
                            *ngIf="idCard.hasError('required') && (idCard.dirty || idCard.touched)">Số CMND/CCCD không được để
                       trống.</small> <br>
@@ -160,7 +160,7 @@
 
                     <div class="btn-group col-md-12 col-sm-12 position-relative" id="1" role="group"
                          aria-label="Basic radio toggle button group">
-                      <input type="radio" class="form-check-input" id="gender" [ngModel]="employee.gender"
+                      <input type="radio" class="form-check-input" id="gender"
                              [value]="1" autocomplete="off" formControlName="gender" name="gender"
                              checked>
                       <label class="px-2">Nam</label>
@@ -181,7 +181,7 @@
                          aria-label="Basic radio toggle button group">
                       <input type="radio" class="form-check-input" id="btnradio3"
                              autocomplete="off" formControlName="roleDTO" name="roleDTO" [value]="1"
-                             [ngModel]="employee.roleDTO">
+                             >
                       <label class="px-2">Admin</label>
                       <div class="px-5">
                         <input type="radio" class="form-check-input" id="btnradio4"
@@ -197,7 +197,7 @@
                       style="color: red">*</span><span
                       style="color: black">)</span></label>
                     <input type="text" class="form-control" id="area" name="email" formControlName="email"
-                           placeholder="Nhập email" [ngModel]="employee.email">
+                           placeholder="Nhập email" >
                     <small style="color: red"
                            *ngIf="email.hasError('required') && (email.dirty || email.touched)">Email không được để
                       trống.</small><br>
@@ -212,7 +212,7 @@
                       style="color: red">*</span><span
                       style="color: black">)</span></label>
                     <input type="text" class="form-control" id="address" formControlName="address" name="address"
-                           placeholder="Nhập địa chỉ" [ngModel]="employee.address">
+                           placeholder="Nhập địa chỉ" >
                     <small style="color: red"
                            *ngIf="address.hasError('required') && (address.dirty || address.touched)">
                       Địa chỉ không được để trống.</small>
@@ -221,7 +221,7 @@
 
                   <div class="col-md-12 position-relative field">
                     <label class="form-label">Ảnh cá nhân</label>
-                    <img class="form-control" src="{{employee.image}}" style="width: 20%">
+                    <img class="form-control" id="files" src="{{employee.image}}" style="width: 20%">
                   </div>
                   <div class="mt-5 row form-group">
                     <div class="col-10">
