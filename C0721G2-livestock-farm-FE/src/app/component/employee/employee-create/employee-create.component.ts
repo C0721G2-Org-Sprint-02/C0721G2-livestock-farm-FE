@@ -40,6 +40,7 @@ export class EmployeeCreateComponent implements OnInit {
   employee: EmployeeDTO;
   validateErrorEmail: string;
   selectedImage: any = null;
+  loading = false;
 
   constructor(private employeeService: EmployeeService,
               private router: Router,
@@ -105,13 +106,14 @@ export class EmployeeCreateComponent implements OnInit {
   onSubmit() {
     const nameImg = this.selectedImage.name;
     const fileRef = this.storage.ref(nameImg);
+    this.loading = true;
     this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
           console.log(url);
           this.employeeForm.patchValue({image: url});
 
-          // Call API to create vaccine
+          // Call API to create employee
           console.log(this.employeeForm.value)
           this.employeeService.save(this.employeeForm.value).subscribe(() => {
             this.router.navigateByUrl('/employee/list').then(r => console.log('Thêm mới thành công!'));
@@ -119,17 +121,7 @@ export class EmployeeCreateComponent implements OnInit {
         });
       })
     ).subscribe();
-    // this.subscription = this.employeeService.save(this.employeeForm.value).subscribe(data => {
-    //     alert('tao thanh cong');
-    //     console.log(this.employee);
-    //     this.router.navigate(['/employee/list']);
-    //
-    //   }
-    //   , error => {
-    //     this.validateErrorEmail = error.error.errorEmail;
-    //     console.log('Not found');
-    //     this.validateErrorEmail = 'Email bạn nhập đã được sử dụng.';
-    //   });
+    // this.loading = true;
   }
 
   onClear() {
