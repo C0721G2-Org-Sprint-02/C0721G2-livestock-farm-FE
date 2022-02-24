@@ -25,7 +25,7 @@ export class CageService {
     return this.httpClient.get(this.API + '/' + id);
   }
   getListCage(): Observable<any> {
-    return this.httpClient.get(this.API + '/list');
+    return this.httpClient.get(this.API + '/listCage');
   }
 
   search(page: number, search: string): Observable<any> {

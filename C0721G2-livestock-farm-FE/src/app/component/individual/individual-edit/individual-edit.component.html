@@ -31,8 +31,7 @@
               <label for="machuong" class="form-label">Mã chuồng nuôi <span
                 style="color: red">(*)</span></label>
               <select id="machuong" class="form-select" aria-label="Default select example" formControlName="cage"
-                      name="positionDTO">
-                <option [ngValue]="null">--Chọn--</option>
+                      name="cage" [compareWith]="compareFn">
                 <option *ngFor="let item of cage"
                         [ngValue]="item">{{item.id}}</option>
               </select>
@@ -63,8 +62,8 @@
               <select id="position-relative" class="form-control" aria-label="Default select example"
                       formControlName="status">
                 <option Value="null">Lựa chọn trạng thái</option>
-                <option [value]="0">Bệnh</option>
-                <option [value]="1">Khỏe mạnh</option>
+                <option [value]="1">Bệnh</option>
+                <option [value]="0">Khỏe mạnh</option>
 
               </select>
             </div>
