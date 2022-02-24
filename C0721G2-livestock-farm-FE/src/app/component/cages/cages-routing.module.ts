@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'create', component: CagesCreateComponent, canActivate: [AuthGuard],
     data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE',]}
   },
-  {path: 'edit', component: CagesEditComponent, canActivate: [AuthGuard],
+  {path: 'edit/:id', component: CagesEditComponent, canActivate: [AuthGuard],
     data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE',]}
   },
 ];

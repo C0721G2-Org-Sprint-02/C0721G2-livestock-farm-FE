@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Cage} from '../../../model/cage/cage';
-import {Subscription} from 'rxjs';
-import {CageService} from '../../../service/cage/cage.service';
-import {MatDialog} from '@angular/material/dialog';
+import {Cage} from "../../../model/cage/cage";
+import {Subscription} from "rxjs";
+import {CageService} from "../../../service/cage/cage.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-cages-list',
@@ -22,7 +22,9 @@ export class CagesListComponent implements OnInit {
 
 
   constructor(private cageService: CageService,
-              private dialogDelete: MatDialog,) {}
+              private dialogDelete: MatDialog,
+  ) {
+  }
 
   ngOnInit(): void {
     this.search();
@@ -105,4 +107,5 @@ export class CagesListComponent implements OnInit {
     this.flag = false;
     this.search();
   }
+
 }
