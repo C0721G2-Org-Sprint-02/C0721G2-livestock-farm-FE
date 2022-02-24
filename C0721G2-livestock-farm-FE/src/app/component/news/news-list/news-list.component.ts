@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {News} from '../../../model/news/news';
 import {NewsService} from '../../../service/news/news.service';
+import {TokenStorageService} from '../../../service/security/token-storage.service';
 
 @Component({
   selector: 'app-news-list',
@@ -21,13 +22,24 @@ export class NewsListComponent implements OnInit {
   message: string;
   flagSearch = true;
   flag = true;
+  check = true;
 
   constructor(
-    public newsService: NewsService
+    public newsService: NewsService,
+    private tokenStorageService: TokenStorageService
   ) {
   }
 
   ngOnInit(): void {
+    const user = this.tokenStorageService.getUser();
+    if (user){
+      user.roles.forEach(role => {
+        if ((role === 'ROLE_ADMIN') || (role === 'ROLE_EMPLOYEE')){
+          this.check = true;
+          console.log(this.check)
+        }
+      });
+    }
     this.showNews();
   }
 
