@@ -1,130 +1,399 @@
-<head>
-  <title>Thêm mới chuồng nuôi</title>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-  <script src="/dist/scripts.min.js"></script>
-  <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <script src="//www.danstools.com/js/forum.js"></script>
-<!--  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
-<!--  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-<!--  booostrap ser2-->
-<!--  <div>-->
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
-<!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>-->
-<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>-->
-<!--  </div>-->
-</head>
-<body>
-<!------ Include the above in your HEAD tag ---------->
-<div class="container register">
+<main class="container-fluid" style="padding-top: 5rem">
   <div class="row">
-    <div class="col-md-3 register-left">
-      <img src="https://nongnghiepweb.files.wordpress.com/2017/04/cropped-leave-icon-png-106801.png" alt=""/>
-      <h3>Chào mừng đến với trang trại của chúng tôi</h3>
-      <p></p>
-    </div>
-    <div class="col-md-9 register-right">
-      <!--                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist" style="background: gray">-->
-      <!--                            <li class="nav-item">-->
-      <!--                                <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Quay lại</a>-->
-      <!--                            </li>-->
-      <!--                            <li class="nav-item">-->
-      <!--                                <a class="nav-link" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false">Hirer</a>-->
-      <!--                                <a class="nav-link active" href="#home" style="margin-left: 220px">Quay lại</a>-->
-      <!--                            </li>-->
-      <!--                        </ul>-->
-      <div class="tab-content" id="myTabContent">
-        <div *ngIf="showAlert" class="alert alert-success alert-dismissible fade show" role="alert"
-             style="text-align: center; width: 50% ; margin-left: 200px">
-          Tạo chuồng thành công
-          <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <h3 class="register-heading">Vui lòng nhập biểu mẫu bên dưới để tạo chuồng nuôi.</h3>
-          <form [formGroup]="createCage" (ngSubmit)="submit()">
-            <div class="row register-form">
-              <div class="col-md-6 ">
-                <div class="form-group">
-                  <label>Mã chuồng nuôi.</label>
-                  <input type="text" class="form-control" formControlName="id" required/>
-                  <div class="error alert-danger"
-                       *ngIf="createCage.controls.id.dirty && createCage.controls.id.hasError('pattern') ">
-                    Mã tạo chuồng có định dạng CA-xxxx
-                  </div>
-                  <div class="alert-danger" *ngIf="showErrorCage">{{showErrorCage}}</div>
-                  <div class="error alert-danger"
-                       *ngIf="createCage.controls.id.dirty && createCage.controls.id.hasError('required') ">
-                    Không được bỏ trống
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label>Loại chuồng nuôi.</label>
-                                    <div class="error alert-danger"
-                                         *ngIf="createCage.controls.typeOfCage.dirty && createCage.controls.typeOfCage.hasError('required') ">
-                                      Không được bỏ trống
-                                    </div>
-                  <select class="custom-select mt-1" formControlName="typeOfCage" name="typeOfCage"
-                          aria-label="Default select example">
-                    <!--                    <option selected>Vui lòng chọn loại chuồng</option>-->
-                    <!--                    <option [ngValue]="null">Vui lòng chọn loại chuồng</option>-->
-                    <option [ngValue]=null>Vui lòng chọn loại chuồng</option>
-                    <option *ngFor="let item of typeOfCage" [ngValue]="item">{{item.name}}</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>Mã nhân viên.</label>
-                  <!--                  <div class="error alert-danger"-->
-                  <!--                       *ngIf="createCage.controls.id.dirty && createCage.controls.id.hasError('required') ">-->
-                  <!--                    Không được bỏ trống-->
-                  <!--                  </div>-->
-                  <input placeholder="NV-xxxx" type="text" class="form-control" formControlName="employee"/>
-                  <div *ngIf="employeeExist" class="error alert-danger">Tên nhân viên không tồn tại</div>
-                  <div class="error alert-danger"
-                       *ngIf="createCage.controls.employee.dirty && createCage.controls.employee.hasError('required') ">
-                    Không được bỏ trống
-                  </div>
-                  <div class="error alert-danger"
-                       *ngIf="createCage.controls.employee.dirty && createCage.controls.employee.hasError('pattern') ">
-                    Định dạng là NV-xxxx
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Ngày tạo chuồng.</label>
-                  <div class="error alert-danger"
-                       *ngIf="createCage.controls.openDate.dirty && createCage.controls.openDate.hasError('required') ">
-                    Không được bỏ trống
-                  </div>
-                  <input type="date" class="form-control" formControlName="openDate"/>
-                </div>
-                <div class="form-group">
-                  <label>Ngày đóng chuồng.</label>
-                  <input type="date" class="form-control" formControlName="closeDate"/>
-                </div>
-                <div class="form-group">
-                  <label>Số lượng cá thể.</label>
-                  <input type="text" class="form-control" formControlName="quantity"/>
-                  <div class="error alert-danger"
-                       *ngIf="createCage.controls.quantity.dirty && createCage.controls.quantity.hasError('required')">
-                    Không được bỏ trống
-                  </div>
-                  <div class="error alert-danger"
-                       *ngIf="createCage.controls.quantity.dirty && createCage.controls.quantity.hasError('pattern') ">
-                    Nhập chưa đúng định dạng.
-                  </div>
-                </div>
-                <button type="submit" class=" btn btnRegister" [disabled]="createCage.invalid">Đồng ý</button>
-              </div>
-            </div>
-          </form>
-        </div>
+    <div class="col-md-2 col-sm-12" style="background-color: #009966;">
+      <div class="position-sticky ">
+        <ul class="text-decoration-none list-group mt-4 mb-4 ">
+          <li class="list-unstyled mb-2">
+            <a class="text-decoration-none   hvr-sweep-to-right " [routerLink]="['/employee/list']"
+            >
+              <img src="https://cdn-icons-png.flaticon.com/512/1177/1177568.png"
+                   height="20px">
+              <span class="text-light">Quản lý nhân viên</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0" [routerLink]="['/individual/list']"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1178/1178215.png"
+                   height="20px">
+              <span class="text-light">Quản lý đàn</span>
+            </a>
+          </li>
+
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               [routerLink]="['/cages/list']">
+              <img src="https://cdn-icons-png.flaticon.com/512/1177/1177455.png"
+                   height="20px">
+              <span class="text-light">Quản lý chuồng nuôi</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               [routerLink]="['/treatement/list']">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060673.png"
+                   height="20px">
+              <span class="text-light">Khám chữa trị</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               [routerLink]="['/news/create']">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060702.png" height="20px">
+              <span class="text-light">Đăng bài</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060668.png" height="20px">
+
+              <span class="text-light">Giao dịch</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class="text-decoration-none hvr-sweep-to-right pleft0"
+               href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060694.png" height="20px">
+              <span class="text-light">Lịch làm việc</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class="text-decoration-none hvr-sweep-to-right pleft0"
+               href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060699.png" height="20px">
+              <span class="text-light">Hồ sơ biểu mẫu</span>
+            </a>
+          </li>
+          <li class="list-unstyled mb-2">
+            <a class=" text-decoration-none hvr-sweep-to-right pleft0"
+               href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/1060/1060674.png" height="20px">
+              <span class="text-light">Thống kê</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
+    <section class="col-md-10">
+      <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+        <div class="container py-4">
+          <div class="row">
+            <div class="col-12">
+              <div  *ngIf="showAlert" class="alert alert-success alert-dismissible fade show" role="alert"
+                   style="text-align: center; width: 40% ; margin-left: 350px">
+                <strong> Khởi tạo thành công!</strong>
+                <button (click)="closeAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+              </div>
+              <div class=" col-3">
+                <button class="btn btn btn-secondary fw-bold ms-3 mt-3 mb-3 " [routerLink]="['/cages/list']">Trở về
+                </button>
+              </div>
+              <div class="card mb-4">
+                <div class="card-header pb-0">
+                  <h3>Thêm mới chuồng nuôi</h3>
+                  <p class="text-success"></p>
+                </div>
+                <form class="row g-3 needs-validation m-3" [formGroup]="createCage"
+                      (ngSubmit)="submit()">
+                  <div class="col-md-4 col-sm-12 position-relative">
+                    <label for="name" class="form-label">Mã chuồng nuôi.<span
+                      style="color: black">(</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <input type="text" class="form-control" id="name" name="name" formControlName="id" placeholder="CA-xxxx">
+                    <span class="error error-text"
+                          *ngIf="createCage.controls.id.dirty && createCage.controls.id.hasError('pattern') ">
+                    Mã tạo chuồng có định dạng CA-xxxx.
+                  </span>
+                    <span class="error-text" *ngIf="showErrorCage">{{showErrorCage}}</span>
+                    <span class="error error-text"
+                          *ngIf="createCage.controls.id.dirty && createCage.controls.id.hasError('required') ">
+                    Không được bỏ trống.
+                  </span>
+                    <span class="error-text" *ngIf="showErrorCage">{{showErrorCage}}</span>
+                  </div>
+                  <div class="col-md-4 col-sm-12 position-relative">
+                    <label for="date" class="form-label">Ngày khởi tạo.<span
+                      style="color: black">   (</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <input type="date" class="form-control" id="date" name="date" formControlName="openDate">
+                    <div class="error error-text"
+                         *ngIf="createCage.controls.openDate.dirty && createCage.controls.openDate.hasError('required') ">
+                      Không được bỏ trống.
+                    </div>
+                    <div class="error error-text"
+                         *ngIf="createCage.controls.openDate.dirty && createCage.controls.openDate.hasError('checkDate')">
+                      Ngày khởi tạo chưa đúng.
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-12 position-relative">
+                    <label class="form-label">Ngày đóng chuồng<span
+                      style="color: black">   (</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <input type="date" class="form-control" formControlName="closeDate"/>
+                    <div class="error error-text"
+                         *ngIf="createCage.controls.closeDate.dirty && createCage.controls.closeDate.hasError('required') ">
+                      Không được bỏ trống.
+                    </div>
+                    <div class="error error-text"
+                         *ngIf="createCage.controls.closeDate.dirty && createCage.controls.closeDate.hasError('checkDate')">
+                      Ngày đóng chuồng chưa đúng.
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-12 position-relative">
+                    <label class="form-label">Loại chuồng nuôi<span
+                      style="color: black">   (</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <select class="form-select" aria-label="Default select example" formControlName="typeOfCage"
+                            name="typeOfCage">
+                      <!--                    <option selected>Vui lòng chọn loại chuồng</option>-->
+                      <!--                    <option [ngValue]="null">Vui lòng chọn loại chuồng</option>-->
+                      <option [ngValue]=null>Vui lòng chọn loại chuồng</option>
+                      <option *ngFor="let item of typeOfCage" [ngValue]="item">{{item.name}}</option>
+                    </select>
+                    <div class="error error-text"
+                         *ngIf="createCage.controls.typeOfCage.dirty && createCage.controls.typeOfCage.hasError('required') ">
+                      Không được bỏ trống
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-12 position-relative">
+                    <label for="1" class="form-label">Mã nhân viên <span
+                      style="color: black">(</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <div class="btn-group col-md-12 col-sm-12 position-relative" id="1" role="group"
+                         aria-label="Basic radio toggle button group">
+                      <input placeholder="NV-xxxx" type="text" class="form-control" formControlName="employee"/>
+                    </div>
+                    <div *ngIf="employeeExist" class="error error-text">Tên nhân viên không tồn tại</div>
+                    <div class="error error-text"
+                         *ngIf="createCage.controls.employee.dirty && createCage.controls.employee.hasError('required') ">
+                      Không được bỏ trống
+                    </div>
+                    <div class="error error-text"
+                         *ngIf="createCage.controls.employee.dirty && createCage.controls.employee.hasError('pattern') ">
+                      Định dạng là NV-xxxx
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-12 position-relative">
+                    <label for="2" class="form-label">Số lượng cá thể.<span
+                      style="color: black">   (</span><span
+                      style="color: red">*</span><span
+                      style="color: black">)</span></label>
+                    <div class="btn-group col-md-12 col-sm-12 position-relative" id="2" role="group"
+                         aria-label="Basic radio toggle button group">
+                      <input type="text" class="form-control" formControlName="quantity"/>
+                    </div>
+                    <div class="error error-text"
+                         *ngIf="createCage.controls.quantity.dirty && createCage.controls.quantity.hasError('required')">
+                      Không được bỏ trống.
+                    </div>
+                    <div class="error error-text"
+                         *ngIf="createCage.controls.quantity.dirty && createCage.controls.quantity.hasError('max')">
+                      Số lượng tối đa là 100.
+                    </div>
+                    <div class="error error-text"
+                         *ngIf="createCage.controls.quantity.dirty && createCage.controls.quantity.hasError('pattern') ">
+                      Nhập chưa đúng định dạng.
+                    </div>
+                  </div>
+                  <div class=" btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
+                       aria-label="Toolbar with button groups">
+                    <div class="btn-group me-2">
+                      <button class="btn btn-success" data-backdrop="static" type="submit" data-bs-toggle="modal"
+                              data-bs-target="#Modal"
+                              [disabled]="createCage.invalid">Lưu
+                      </button>
+                    </div>
+                    <div class="btn-group me-2">
+                      <button class="btn btn-secondary" type="button" (click)="onClear()">Xóa</button>
+                    </div>
+                  </div>
+                  <div>
+                    <i><span style="color: red">Lưu ý:</span><span style="color: black">  Những thông tin (</span><span
+                      style="color: red">*</span><span style="color: black">) bắt buộc nhập.</span></i>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
   </div>
-</div>
-</body>
+</main>
+
+
+
+
+
+
+<!--<head>-->
+<!--  <title>Thêm mới chuồng nuôi</title>-->
+<!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"-->
+<!--        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
+<!--  <script src="/dist/scripts.min.js"></script>-->
+<!--  <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+<!--  <script src="//www.danstools.com/js/forum.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+
+
+<!------ Include the above in your HEAD tag ---------->
+<!--<div class="container register">-->
+<!--  <div class="row">-->
+<!--    <div class="col-md-3 register-left">-->
+<!--      <img src="https://fv9-2.failiem.lv/thumb_show.php?i=jp53m5a92&view" alt="" style="width: 100%"/>-->
+<!--      &lt;!&ndash;      <img src="https://nongnghiepweb.files.wordpress.com/2017/04/cropped-leave-icon-png-106801.png" alt=""/>&ndash;&gt;-->
+
+<!--      <h3>Chào mừng đến với trang trại của chúng tôi</h3>-->
+<!--      <p></p>-->
+<!--    </div>-->
+<!--    <div class="col-md-9 register-right">-->
+
+<!--      <div class="tab-content" id="myTabContent">-->
+<!--        <div *ngIf="showAlert" class="alert alert-success alert-dismissible fade show" role="alert"-->
+<!--             style="text-align: center; width: 50% ; margin-left: 200px">-->
+<!--          Tạo chuồng thành công-->
+<!--          <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+<!--            <span aria-hidden="true">&times;</span>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">-->
+<!--          <h3 class="register-heading">Vui lòng nhập biểu mẫu bên dưới để tạo chuồng nuôi.</h3>-->
+<!--          <form [formGroup]="createCage" (ngSubmit)="submit()">-->
+<!--            <div class="row register-form">-->
+
+<!--              <div class="col-md-6">-->
+<!--                <div class="form-group">-->
+<!--                  <label>Mã chuồng nuôi.</label>-->
+<!--                  <input type="text" class="form-control" formControlName="id" required/>-->
+<!--                  <div>-->
+<!--                  <span class="error error-text"-->
+<!--                        *ngIf="createCage.controls.id.dirty && createCage.controls.id.hasError('pattern') ">-->
+<!--                    Mã tạo chuồng có định dạng CA-xxxx.-->
+<!--                  </span>-->
+<!--                    <span class="error-text" *ngIf="showErrorCage">{{showErrorCage}}</span>-->
+<!--                    <span class="error error-text"-->
+<!--                          *ngIf="createCage.controls.id.dirty && createCage.controls.id.hasError('required') ">-->
+<!--                    Không được bỏ trống.-->
+<!--                  </span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                  <label>Loại chuồng nuôi.</label>-->
+<!--                  <select class="custom-select mt-0" formControlName="typeOfCage" name="typeOfCage"-->
+<!--                          aria-label="Default select example">-->
+<!--                    &lt;!&ndash;                    <option selected>Vui lòng chọn loại chuồng</option>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <option [ngValue]="null">Vui lòng chọn loại chuồng</option>&ndash;&gt;-->
+<!--                    <option [ngValue]=null>Vui lòng chọn loại chuồng</option>-->
+<!--                    <option *ngFor="let item of typeOfCage" [ngValue]="item">{{item.name}}</option>-->
+<!--                  </select>-->
+<!--                  <div class="error error-text"-->
+<!--                       *ngIf="createCage.controls.typeOfCage.dirty && createCage.controls.typeOfCage.hasError('required') ">-->
+<!--                    Không được bỏ trống-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                  <label>Mã nhân viên.</label>-->
+<!--                  <input placeholder="NV-xxxx" type="text" class="form-control" formControlName="employee"/>-->
+<!--                  <div *ngIf="employeeExist" class="error error-text">Tên nhân viên không tồn tại</div>-->
+<!--                  <div class="error error-text"-->
+<!--                       *ngIf="createCage.controls.employee.dirty && createCage.controls.employee.hasError('required') ">-->
+<!--                    Không được bỏ trống-->
+<!--                  </div>-->
+<!--                  <div class="error error-text"-->
+<!--                       *ngIf="createCage.controls.employee.dirty && createCage.controls.employee.hasError('pattern') ">-->
+<!--                    Định dạng là NV-xxxx-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-md-6">-->
+<!--                <div class="form-group">-->
+<!--                  <label>Ngày tạo chuồng.</label>-->
+<!--                  <input type="date" class="form-control" formControlName="openDate"/>-->
+<!--                  <div class="error error-text"-->
+<!--                       *ngIf="createCage.controls.openDate.dirty && createCage.controls.openDate.hasError('required') ">-->
+<!--                    Không được bỏ trống.-->
+<!--                  </div>-->
+<!--                  <div class="error error-text"-->
+<!--                       *ngIf="createCage.controls.openDate.dirty && createCage.controls.openDate.hasError('checkDate')">-->
+<!--                    Ngày khởi tạo chưa đúng.-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                  <label>Ngày đóng chuồng.</label>-->
+<!--                  <input type="date" class="form-control" formControlName="closeDate"/>-->
+<!--                  <div class="error error-text"-->
+<!--                       *ngIf="createCage.controls.closeDate.dirty && createCage.controls.closeDate.hasError('required') ">-->
+<!--                    Không được bỏ trống.-->
+<!--                  </div>-->
+<!--                  <div class="error error-text"-->
+<!--                       *ngIf="createCage.controls.closeDate.dirty && createCage.controls.closeDate.hasError('checkDate')">-->
+<!--                    Ngày đóng chuồng chưa đúng.-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                  <label>Số lượng cá thể.</label>-->
+<!--                  <input type="text" class="form-control" formControlName="quantity"/>-->
+<!--                  <div class="error error-text"-->
+<!--                       *ngIf="createCage.controls.quantity.dirty && createCage.controls.quantity.hasError('required')">-->
+<!--                    Không được bỏ trống.-->
+<!--                  </div>-->
+<!--                  <div class="error error-text"-->
+<!--                       *ngIf="createCage.controls.quantity.dirty && createCage.controls.quantity.hasError('max')">-->
+<!--                    Số lượng tối đa là 100.-->
+<!--                  </div>-->
+<!--                  <div class="error error-text"-->
+<!--                       *ngIf="createCage.controls.quantity.dirty && createCage.controls.quantity.hasError('pattern') ">-->
+<!--                    Nhập chưa đúng định dạng.-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <button data-bs-toggle="modal" data-bs-target="#exampleModal"-->
+<!--                        type="submit" class=" btn btnRegister" [disabled]="createCage.invalid">Đồng ý-->
+<!--                </button>-->
+<!--                <a class="btn btnBack" style="margin-right: 0px" [routerLink]="['/cages/list']">Quay lại-->
+<!--                </a>-->
+<!--                &lt;!&ndash;                <button class="btn btnBack" [routerLink]="['/cage/list']"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        style="margin: 30px 0px 0px 30px; padding-left: 10px">Quay lại&ndash;&gt;-->
+<!--                &lt;!&ndash;                </button>&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</body>-->
+
+<!-- Button trigger modal -->
+<!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--  Launch demo modal-->
+<!--</button>-->
+
+<!-- Modal -->
+<!--<div *ngIf="showAlert" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"-->
+<!--     aria-hidden="true">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="exampleModalLabel">Tạo chuồng thành công</h5>-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        Tạo chuồng thành công-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
 

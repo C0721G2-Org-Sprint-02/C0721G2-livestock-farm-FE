@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {CageService} from '../../../service/cage/cage.service';
 import {Cage} from '../../../model/cage/cage';
+import {IndividualListComponent} from '../individual-list/individual-list.component';
 
 @Component({
   selector: 'app-individual-edit',
@@ -28,12 +29,11 @@ export class IndividualEditComponent implements OnInit {
   id: string;
   constructor(private individualService: IndividualService,
               private router: Router,
-              private matDialog: MatDialog, private cageService: CageService) {
+              private matDialog: MatDialog, private cageService: CageService, private individualListComponent: IndividualListComponent) {
   }
 
   @Input() currentId: any;
   message: string;
-
   ngOnInit(): void {
     this.subcription = this.cageService.getListCage().subscribe(data => {
       this.cage = data.content;
@@ -47,8 +47,8 @@ export class IndividualEditComponent implements OnInit {
   onSubmit(): void {
     if (this.individualForm.valid) {
       this.subcription = this.individualService.editIndividual(this.individualForm.value).subscribe(data => {
-        // this.router.navigate(['/individual/list']);
         this.message = 'Đã cập nhật thành công';
+        // this.individualListComponent.ngOnInit();
       }, error => {
         this.message = 'Đã cập nhật thất bại';
       })
