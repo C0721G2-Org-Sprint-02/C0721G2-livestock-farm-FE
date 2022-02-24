@@ -20,6 +20,7 @@ export class EmployeeEditComponent implements OnInit {
   employee: EmployeeDTO;
   validateErrorEmail: string;
   selectedImage: any = null;
+  loading = false;
 
   constructor(private employeeService: EmployeeService,
               private router: Router,
@@ -99,6 +100,7 @@ export class EmployeeEditComponent implements OnInit {
   onSubmit() {
     const nameImg = this.selectedImage.name;
     const fileRef = this.storage.ref(nameImg);
+    this.loading = true;
     this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
@@ -107,22 +109,11 @@ export class EmployeeEditComponent implements OnInit {
 
           // Call API
           this.employeeService.save(this.employeeForm.value).subscribe(() => {
-            this.router.navigateByUrl('/employee/list').then(r => console.log('Chỉnh sửa thông tin thành công!'));
+            this.router.navigateByUrl('/employee/list').then(r => console.log(''));
           })
         });
       })
     ).subscribe();
-    // console.log(this.employeeForm.value.image);
-    // this.subscription = this.employeeService.save(this.employeeForm.value).subscribe(data => {
-    //     alert('Chỉnh sửa thông tin thành công!');
-    //     console.log(this.employee);
-    //     this.router.navigate(['/employee/list']);
-    //   }
-    //   , error => {
-    //     this.validateErrorEmail = error.error.errorEmail;
-    //     console.log('Not found');
-    //     this.validateErrorEmail = 'Email bạn nhập đã được sử dụng';
-    //   });
   }
 
   onClick() {
