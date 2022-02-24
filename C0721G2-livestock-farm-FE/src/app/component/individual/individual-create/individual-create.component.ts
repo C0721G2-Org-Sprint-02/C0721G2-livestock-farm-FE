@@ -7,6 +7,7 @@ import {CageService} from '../../../service/cage/cage.service';
 import {Subscription} from 'rxjs';
 import {Individual} from '../../../model/individual/individual';
 import {Cage} from '../../../model/cage/cage';
+import {IndividualListComponent} from '../individual-list/individual-list.component';
 
 @Component({
   selector: 'app-individual-create',
@@ -31,7 +32,7 @@ export class IndividualCreateComponent implements OnInit {
 
   constructor(private individualService: IndividualService,
               private router: Router,
-              private matDialog: MatDialog, private cageService: CageService,) {
+              private matDialog: MatDialog, private cageService: CageService, private individualListComponent: IndividualListComponent) {
   }
 
   ngOnInit(): void {
@@ -41,17 +42,14 @@ export class IndividualCreateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.individualForm.valid) {
-      console.log(this.individualForm);
       this.subcription = this.individualService.addIndividual(this.individualForm.value).subscribe(data => {
         // this.individual = data;
-        console.log(data);
         this.message='Thêm mới thành công';
-        console.log('1');
+        this.individualListComponent.ngOnInit();
       }, error => {
-        console.log('2');
-        console.log(error);
         this.message='Thêm mới thất bại';
-      })
+      }
+      )
     }
   }
   Reset(): void{
