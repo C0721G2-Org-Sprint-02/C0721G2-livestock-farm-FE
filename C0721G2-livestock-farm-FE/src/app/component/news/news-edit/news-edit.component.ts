@@ -24,14 +24,15 @@ export class NewsEditComponent implements OnInit {
   typeOfNewss: TypeOfNews[];
   selectedImage: any = null;
   public Editor = ClassicEditor;
-
+  loading = false;
 
   constructor(private newsService: NewsService,
               private router: Router,
               private fb: FormBuilder,
               private activatedRoute: ActivatedRoute,
               private typeOfNewsService: TypeOfServerService,
-              @Inject(AngularFireStorage) private storage: AngularFireStorage) {
+              @Inject(AngularFireStorage) private storage: AngularFireStorage,
+  ) {
   }
 
   ngOnInit(): void {
@@ -40,11 +41,11 @@ export class NewsEditComponent implements OnInit {
       title: new FormControl('', [Validators.required]),
       content: new FormControl('', [Validators.required]),
       typeOfNewsDTO: new FormControl(null, [Validators.required]),
-      image: new FormControl('')
+      image: new FormControl(''),
     });
     this.subscription = this.typeOfNewsService.getAllType().subscribe(data => {
         this.typeOfNewss = data;
-        //   console.log(this.typeOfNewss)
+        console.log(this.typeOfNewss)
       },
       error => {
         console.log('có lỗi tại type of news')
@@ -54,14 +55,13 @@ export class NewsEditComponent implements OnInit {
       this.id = paramMap.get('id');
       console.log(this.id)
     });
+
     this.newsService.findById(this.id).subscribe(data => {
       this.newsDTO = data;
-      console.log(this.id);
-      console.log(this.newsDTO);
       console.log(this.formNewsEdit.value);
       this.formNewsEdit.patchValue(this.newsDTO);
+
       console.log(this.formNewsEdit.value);
-      console.log(this.id);
       console.log('Tạ ơn mọi người');
     }, error => {
       console.log('cuộc sống khó khắn');
@@ -99,7 +99,7 @@ export class NewsEditComponent implements OnInit {
 
           this.subscription = this.newsService.updateNews(this.id, this.formNewsEdit.value).subscribe(data => {
             // alert('Chỉnh sửa thông tin thành công');
-            this.router.navigate(['/news/detail',this.id]);
+            this.router.navigate(['/news/detail', this.id]);
             console.log(this.formNewsEdit);
           }, error => {
             console.log('có lỗi đại ca ơi');
@@ -107,6 +107,7 @@ export class NewsEditComponent implements OnInit {
         });
       })
     ).subscribe();
+    this.loading = true;
   }
 
   // onSubmit() {

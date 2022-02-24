@@ -22,7 +22,7 @@ export class NewsListComponent implements OnInit {
   message: string;
   flagSearch = true;
   flag = true;
-  check = true;
+  check = false;
 
   constructor(
     public newsService: NewsService,

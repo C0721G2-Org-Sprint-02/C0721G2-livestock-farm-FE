@@ -21,7 +21,7 @@ export class NewsService {
   getAllNews(page, title, typeNews): Observable<News[]> {
     console.log(typeNews + 'test');
     console.log(this.API_URL + '?page=' + page + '&title =' + title + '&typeNews=' + typeNews);
-    return this.http.get<News[]>(this.API_URL + '?page=' + page + '&title=' + title + '&typeNews=' + typeNews);
+    return this.http.get<News[]>(this.API_URL + '/list?page=' + page + '&title=' + title + '&typeNews=' + typeNews);
   }
 // ThinhTP
   deleteNewsById(id: string): Observable<any> {

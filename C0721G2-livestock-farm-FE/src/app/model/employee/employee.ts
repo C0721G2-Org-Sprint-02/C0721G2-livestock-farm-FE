@@ -2,7 +2,7 @@ import {AppUser} from '../user/app-user';
 
 
 export interface Employee {
-  id?: string;
+  id: string;
   name: string;
   email: string;
   phoneNumber: string;

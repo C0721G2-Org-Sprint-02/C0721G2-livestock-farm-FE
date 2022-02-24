@@ -46,6 +46,7 @@ export class NewsDetailComponent implements OnInit {
         });
     });
     const user = this.tokenStorageService.getUser();
+    console.log(this.check);
     if (user){
       user.roles.forEach(role => {
         if ((role === 'ROLE_ADMIN') || (role === 'ROLE_EMPLOYEE')){
