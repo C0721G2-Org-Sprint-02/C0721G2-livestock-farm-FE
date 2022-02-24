@@ -1,1 +1,75 @@
-<p>news-edit works!</p>
+<main class="container-fluid " style="padding-top: 4rem">
+  <!--  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">-->
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header pb-0">
+            <h6>Chỉnh sửa tin tức chăn nuôi</h6>
+            <p class="text-success"></p>
+          </div>
+          <form class="row g-3 needs-validation m-3" method="post" [formGroup]="formNewsEdit" (ngSubmit)="onSubmit()">
+            <div class="col-md-8 position-relative">
+              <label for="title" class="form-label">Tiêu đề <span
+                style="color: red">(*)</span></label>
+              <input type="text" class="form-control" id="title" required formControlName="title">
+              <small style="color: red" *ngIf="title.hasError('required') && (title.dirty || title.touched)">Tiêu đề
+                không được để trống.</small>
+            </div>
+            <div class="col-md-4 position-relative">
+              <label for="position" class="form-label">Loại tin tức<span style="color: red">(*)</span></label>
+              <select id="position" class="form-select" aria-label="Default select example" formControlName="typeOfNewsDTO" [compareWith]="compareFn">
+                <option [ngValue]="null">Lựa chọn tin tức</option>
+                <option *ngFor="let item of typeOfNewss"
+                        [ngValue]="item">{{item.name}}</option>
+              </select>
+              <small style="color: red" *ngIf="typeOfNews.hasError('required') && (typeOfNews.dirty || typeOfNews.touched)">Yêu cầu lựa chọn loại tin tức.</small>
+            </div>
+            <div class="col-md-12">
+              <label for="editor" class="form-label">Nội dung <span
+                style="color: red">(*)</span></label>
+              <ckeditor [editor]="Editor" type="text" id="editor" required
+                        formControlName="content"> </ckeditor>
+              <small style="color: red" *ngIf="content.hasError('required') && (content.dirty || content.touched)">Nội dung không được để trống.</small>
+            </div>
+
+            <div class="col-md-12 position-relative field">
+              <label class="form-label">Hình ảnh tiêu đề</label>
+              <img class="form-control" src="{{newsDTO.image}}" style="width: 50%">
+            </div>
+
+            <div class="col-md-12 position-relative field">
+              <label for="files" class="form-label">Thêm ảnh tiêu đề</label>
+              <input type="file" class="form-control" id="files"  (change)="showPreview($event)">
+              <small style="color: red" *ngIf="image.hasError('required') && (image.dirty || image.touched)">Phải chọn ảnh.</small>
+            </div>
+
+            <div class="btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
+                 aria-label="Toolbar with button groups">
+              <div class="btn-group me-2 float-right">
+                <button class="btn btn-success customBtn" type="submit" >Cập nhập</button>
+              </div>
+              <div class="btn-group me-2 float-right">
+                <button class="btn btn-secondary customBtn" type="submit" (click)="onClear()" >Xóa</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--  <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>-->
+  <!--  <script>-->
+  <!--    ClassicEditor.create(document.querySelector('#editor'))-->
+  <!--      .then(editor => {-->
+  <!--        console.log(editor);-->
+  <!--      })-->
+  <!--      .catch(error => {-->
+  <!--        console.error(error);-->
+  <!--      });-->
+  <!--  </script>-->
+
+
+</main>
