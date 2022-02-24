@@ -6,10 +6,7 @@
 <div class="modal" id="myModaledit" style="text-align: left">
   <div class="modal-dialog mw-100 w-75" style="width: 1280px">
     <div class="modal-content col-12">
-      <!--            thẻ header modal-->
-      <!--            <button class="btn btn-outline-primary col-3">Trở về</button>-->
-      <!--            <div class="row">-->
-      <div class="card mb-8">
+       <div class="card mb-8">
         <div class="btn btn-success modal-header">
           <h6>Chỉnh sửa thông tin</h6>
           <p class="text-success"></p>
@@ -20,7 +17,7 @@
             <div class="col-md-6 position-relative">
               <label for="code" class="form-label">Mã cá thể <span
                 style="color: red">(*)</span></label>
-              <input type="text" id="code" class="form-control" formControlName="id">
+              <input type="text" id="code" class="form-control" formControlName="id" disabled>
               <small class="fst-italic" style="color: red"
                      *ngIf="individualForm.controls.id.dirty &&individualForm.controls.id.hasError('required')">
                 Mã cá thể không được để trống</small>
@@ -32,8 +29,8 @@
             <div class="col-md-6 position-relative">
               <label for="machuong" class="form-label">Mã chuồng nuôi <span
                 style="color: red">(*)</span></label>
-              <select id="machuong" class="form-select" aria-label="Default select example"
-                      formControlName="cage" name="positionDTO">
+              <select id="machuong" class="form-select" aria-label="Default select example" formControlName="cage"
+                      name="positionDTO">
                 <option [ngValue]="null">--Chọn--</option>
                 <option *ngFor="let item of cage"
                         [ngValue]="item">{{item.id}}</option>
@@ -48,7 +45,6 @@
                      *ngIf="individualForm.controls.dateIn.dirty &&individualForm.controls.dateIn.hasError('required')">
                 Ngày vào chuồng không được để
                 trống</small>
-              <!--              <small class="fst-italic" style="color: red">không được là ngày quá khứ</small>-->
             </div>
             <div class="col-md-6 position-relative">
               <label for="dateout" class="form-label">Ngày xuất chuồng <span
@@ -57,14 +53,14 @@
               <small class="fst-italic" style="color: red"
                      *ngIf="individualForm.controls.dateOut.dirty &&individualForm.controls.dateOut.hasError('required')">
                 Ngày xuất chuồng không được để trống</small>
-              <!--              <small class="fst-italic" style="color: red">không được là ngày quá khứ</small>-->
             </div>
 
             <div class="col-md-6 position-relative ">
               <label for="position-relative" class="form-label" formControlName="status">Tình trạng <span
                 style="color: red">(*)</span></label>
               <br>
-              <select id="position-relative" class="form-control" aria-label="Default select example">
+              <select id="position-relative" class="form-control" aria-label="Default select example"
+                      formControlName="status">
                 <option Value="null">Lựa chọn trạng thái</option>
                 <option [value]="0">Bệnh</option>
                 <option [value]="1">Khỏe mạnh</option>
@@ -73,19 +69,16 @@
             </div>
             <div class="col-md-6 position-relative">
               <label for="weight" class="form-label">Cân nặng/Kg<span style="color: red">(*)</span></label>
-              <input type="number" id="weight" class="form-control" value="100" placeholder="Kg"
-                     formControlName="weight">
+              <input type="number" id="weight" class="form-control" placeholder="Kg"
+                     formControlName="weight" min="0">
               <small class="fst-italic" style="color: red"
                      *ngIf="individualForm.controls.weight.dirty &&individualForm.controls.weight.hasError('required')">
                 Cân nặng không được để trống</small>
               <small class="fst-italic" style="color: red"
-                     *ngIf="individualForm.controls.weight.dirty &&individualForm.controls.weight.hasError('required')">
-                không được là số âm, chỉ được nhập số</small>
-            </div>
+                     *ngIf="individualForm.controls.weight.dirty &&individualForm.controls.weight.hasError('min')">
+                không được là số âm, nhỏ nhất là 1</small>
 
-            <!--            <div class="col-md-12 position-relative">-->
-            <!--              <label fozr="note" class="form-label">Ghi chú</label>-->
-            <!--              <textarea type="text" class="form-control" id="note"></textarea>-->
+            </div>
             <div class="modal-footer col-12">
               <div class="btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
                    aria-label="Toolbar with button groups">
@@ -121,20 +114,18 @@
       </div>
       <div class="modal-body">
         <p size="6"> Bạn có muốn cập nhật thông tin cá thể
-          <!--          <span style="color: red">IN-0001</span>-->
         </p>
         <br>
         <font size="3"> <span style="color: red">Các thông tin cũ sẽ bị mất</span></font>
       </div>
       <div class="modal-footer">
-        <!--                <font size="3"> <span style="color: red">warning</span></font>-->
         <div class="btn-group">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
         </div>
         <div class="btn-group">
           <button type="button" class="btn btn-warning" (click)="onSubmit()" data-bs-dismiss="modal"
                   data-bs-target="#modal3"
-                  data-bs-toggle="modal">Xác nhận
+                  data-bs-toggle="modal" >Xác nhận
           </button>
         </div>
       </div>
