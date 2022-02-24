@@ -1,9 +1,37 @@
-<h2>Bạn có muốn xoá nhân viên {{data}}</h2>
-<!--<mat-dialog-content>{{data}}</mat-dialog-content>-->
-
-<div class="float-end">
-  <button class="btn btn-secondary me-2" mat-button mat-dialog-close (click)="closeDialog()">Huỷ</button>
-  <button class="btn btn-danger" mat-button [mat-dialog-close]="true" (click)="delete()">Xoá</button>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <p class="modal-title fs-4 text-center text-success">Bạn có muốn xóa nhân viên này không?</p>
+    </div>
+    <div class="modal-body fs-6 fw-bold text-danger">
+      <table class="table">
+        <tbody>
+        <tr>
+          <th>Id:</th>
+          <td>{{this.employee.id}}</td>
+        </tr>
+        <tr>
+          <th>Tên:</th>
+          <td>{{this.employee.name}}</td>
+        </tr>
+        <tr>
+          <th>Ngày sinh:</th>
+          <td>{{this.employee.dateOfBirth}}</td>
+        </tr>
+        <tr>
+          <th>CMND:</th>
+          <td>{{this.employee.idCard}}</td>
+        </tr>
+        <tr>
+          <th>Email:</th>
+          <td>{{this.employee.email}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary me-2" mat-button mat-dialog-close (click)="closeDialog()">Huỷ</button>
+      <button class="btn btn-danger" mat-button [mat-dialog-close]="true" (click)="delete()">Xoá</button>
+    </div>
+  </div>
 </div>
-
-

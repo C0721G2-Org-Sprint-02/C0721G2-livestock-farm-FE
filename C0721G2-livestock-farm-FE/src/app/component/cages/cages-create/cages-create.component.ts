@@ -108,4 +108,8 @@ export class CagesCreateComponent implements OnInit {
   closeAlert() {
     this.showAlert = false;
   }
+
+  onClear() {
+    this.createCage.reset();
+  }
 }

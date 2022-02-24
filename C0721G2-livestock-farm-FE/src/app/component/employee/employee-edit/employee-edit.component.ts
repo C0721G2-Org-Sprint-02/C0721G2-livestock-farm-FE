@@ -49,7 +49,6 @@ export class EmployeeEditComponent implements OnInit {
       image: new FormControl(),
     });
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-
       this.id = paramMap.get('id');
     });
 
@@ -107,23 +106,23 @@ export class EmployeeEditComponent implements OnInit {
           this.employeeForm.patchValue({image: url});
 
           // Call API
-          // this.employeeService.save(this.employeeForm.value).subscribe(() => {
-          //   this.router.navigateByUrl('/employee/list').then(r => console.log('Chỉnh sửa thông tin thành công!'));
-          // })
+          this.employeeService.save(this.employeeForm.value).subscribe(() => {
+            this.router.navigateByUrl('/employee/list').then(r => console.log('Chỉnh sửa thông tin thành công!'));
+          })
         });
       })
     ).subscribe();
-    console.log(this.employeeForm.value.image);
-    this.subscription = this.employeeService.save(this.employeeForm.value).subscribe(data => {
-        alert('Chỉnh sửa thông tin thành công!');
-        console.log(this.employee);
-        this.router.navigate(['/employee/list']);
-      }
-      , error => {
-        this.validateErrorEmail = error.error.errorEmail;
-        console.log('Not found');
-        this.validateErrorEmail = 'Email bạn nhập đã được sử dụng';
-      });
+    // console.log(this.employeeForm.value.image);
+    // this.subscription = this.employeeService.save(this.employeeForm.value).subscribe(data => {
+    //     alert('Chỉnh sửa thông tin thành công!');
+    //     console.log(this.employee);
+    //     this.router.navigate(['/employee/list']);
+    //   }
+    //   , error => {
+    //     this.validateErrorEmail = error.error.errorEmail;
+    //     console.log('Not found');
+    //     this.validateErrorEmail = 'Email bạn nhập đã được sử dụng';
+    //   });
   }
 
   onClick() {

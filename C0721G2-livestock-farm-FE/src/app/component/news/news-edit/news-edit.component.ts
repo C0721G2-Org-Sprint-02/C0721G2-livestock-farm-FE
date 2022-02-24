@@ -11,6 +11,7 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
+
 @Component({
   selector: 'app-news-edit',
   templateUrl: './news-edit.component.html',

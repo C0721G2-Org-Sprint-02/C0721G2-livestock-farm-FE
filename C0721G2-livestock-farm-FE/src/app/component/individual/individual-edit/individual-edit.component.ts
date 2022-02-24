@@ -36,10 +36,11 @@ export class IndividualEditComponent implements OnInit {
   message: string;
   ngOnInit(): void {
     this.subcription = this.cageService.getListCage().subscribe(data => {
-      this.cage = data.content;
+      this.cage = data;
     });
     this.subcription = this.individualService.findIndividualbyId(this.currentId).subscribe(data => {
       this.individual = data;
+      console.log(this.individual);
       this.individualForm.setValue(this.individual);
     });
   }
@@ -48,7 +49,7 @@ export class IndividualEditComponent implements OnInit {
     if (this.individualForm.valid) {
       this.subcription = this.individualService.editIndividual(this.individualForm.value).subscribe(data => {
         this.message = 'Đã cập nhật thành công';
-        // this.individualListComponent.ngOnInit();
+        this.individualListComponent.ngOnInit();
       }, error => {
         this.message = 'Đã cập nhật thất bại';
       })
@@ -56,5 +57,9 @@ export class IndividualEditComponent implements OnInit {
   }
   Reset(): void {
     this.individualForm.reset();
+  }
+
+  compareFn(c1: any, c2: any): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 }

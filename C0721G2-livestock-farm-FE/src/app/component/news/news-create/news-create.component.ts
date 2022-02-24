@@ -1,10 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NewsService} from '../../../service/news/news.service';
 import {Router} from '@angular/router';
 import {TypeOfNews} from '../../../model/news/type-of-news';
-
 import {AngularFireStorage} from '@angular/fire/storage';
 import {Observable, Subscription} from 'rxjs';
 import {finalize} from 'rxjs/operators';
@@ -12,7 +11,6 @@ import {NewsDTO} from '../../../model/news/news-dto';
 import {TypeOfServerService} from '../../../service/news/type-of-news.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {TokenStorageService} from "../../../service/security/token-storage.service";
-import {Employee} from "../../../model/employee/employee";
 
 
 @Component({
