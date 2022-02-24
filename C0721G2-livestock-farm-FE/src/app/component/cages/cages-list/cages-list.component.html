@@ -85,7 +85,7 @@
                 <div class="row pt-2 m-4">
                   <div class=" ">
                     <div class=" fw-bold float-start">
-                      <button class="btn  btn-success" [routerLink]="['/cage/create']">
+                      <button class="btn  btn-success" [routerLink]="['/cages/create']">
                         Tạo chuồng
                       </button>
                     </div>
@@ -137,7 +137,7 @@
                         <td>{{cage.typeOfCage.name}}</td>
                         <td>{{cage.quantity}}</td>
                         <td class="text-center">
-                          <button class="btn btn-success text-center text-white" [routerLink]="['/cage/edit/',cage.id]"
+                          <button class="btn btn-success text-center text-white" [routerLink]="['/cages/edit/',cage.id]"
                                   data-bs-toggle="modal"><i class="fas fa-edit"></i> Sửa
                           </button>
                         <td>
