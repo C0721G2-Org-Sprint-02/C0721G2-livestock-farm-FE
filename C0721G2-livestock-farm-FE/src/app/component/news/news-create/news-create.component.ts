@@ -1,10 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-
 import {NewsService} from '../../../service/news/news.service';
 import {Router} from '@angular/router';
 import {TypeOfNews} from '../../../model/news/type-of-news';
-
 import {AngularFireStorage} from '@angular/fire/storage';
 import {Subscription} from 'rxjs';
 import {finalize} from 'rxjs/operators';

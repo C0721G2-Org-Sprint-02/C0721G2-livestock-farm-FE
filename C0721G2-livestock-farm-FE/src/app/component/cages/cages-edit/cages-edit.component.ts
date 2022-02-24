@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TypeOfCage} from "../../../model/cage/type-of-cage";
 import {Cage} from "../../../model/cage/cage";
@@ -119,5 +119,9 @@ export class CagesEditComponent implements OnInit {
 
   closeAlert() {
     this.showAlert = false;
+  }
+
+  onClear() {
+    this.updateCage.reset();
   }
 }
