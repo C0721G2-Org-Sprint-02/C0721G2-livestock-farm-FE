@@ -1,11 +1,40 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TypeOfCage} from "../../../model/cage/type-of-cage";
 import {Cage} from "../../../model/cage/cage";
 import {CageService} from "../../../service/cage/cage.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TypeOfCageService} from "../../../service/cage/type-of-cage.service";
-import {Employee} from "../../../model/employee/employee";
+
+export function checkOpendate(control: AbstractControl) {
+  const dateOfBirth = new Date(control.value);
+  // lớn hơn 18  và bé hơn 65 dateDiff(dateOfBirth, new Date()) < 365 ||
+  console.log(dateOfBirth);
+  if (dateDiff(dateOfBirth, new Date()) > 1) {
+    console.log('abc');
+    console.log(dateDiff(dateOfBirth, new Date()));
+    return {checkDate: true};
+  }
+  return null;
+}
+
+export function checkClosedate(control: AbstractControl) {
+  const dateOfBirth = new Date(control.value);
+  // lớn hơn 18  và bé hơn 65 dateDiff(dateOfBirth, new Date()) < 365 ||
+  if (dateDiff(dateOfBirth, new Date()) > 0) {
+    return {checkDate: true};
+  }
+  return null;
+}
+
+function parseDate(str: string) {
+  const dmy = str.split('-');
+  return new Date(Number(dmy[0]), Number(dmy[1]) - 1, Number(dmy[2]));
+}
+
+function dateDiff(first, second) {
+  return Math.round((second - first) / (1000 * 60 * 60 * 24));
+}
 
 @Component({
   selector: 'app-cages-edit',
@@ -19,7 +48,7 @@ export class CagesEditComponent implements OnInit {
   typeOfCage: TypeOfCage[];
   // cages: Cage[];
   showAlert: boolean = false;
-  messageNotFound='';
+  messageNotFound = '';
 
   employeeId: string;
   showErrorCage: string;
@@ -35,9 +64,9 @@ export class CagesEditComponent implements OnInit {
   ngOnInit(): void {
     this.updateCage = this.formBuilder.group({
       id: ['', [Validators.required, Validators.pattern('^([C][A]-[0-9]{4})$')]],
-      closeDate: ['', [Validators.required]],
-      openDate: ['', [Validators.required]],
-      quantity: ['', [Validators.required, Validators.pattern('^([0-9]+)$') , Validators.max(100)]],
+      closeDate: ['', [Validators.required, checkClosedate]],
+      openDate: ['', [Validators.required, checkOpendate]],
+      quantity: ['', [Validators.required, Validators.pattern('^([0-9]+)$'), Validators.max(100)]],
       typeOfCage: ['', [Validators.required]],
       employee: ['', [Validators.required, Validators.pattern('^([N][V]-[0-9]{4})$')]],
     });
@@ -73,7 +102,7 @@ export class CagesEditComponent implements OnInit {
         this.showAlert = true;
         console.log(this.updateCage);
         this.employeeExist = '';
-        this.showErrorCage= '';
+        this.showErrorCage = '';
         // this.router.navigateByUrl('cage/list')
       }, error => {
         console.log(error);
