@@ -6,7 +6,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeCreateComponent } from './employee-create/employee-create.component';
 import { EmployeeDeleteComponent } from './employee-delete/employee-delete.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 
 
@@ -15,11 +15,12 @@ import {MatDialogModule} from '@angular/material/dialog';
   exports: [
     EmployeeListComponent
   ],
-  imports: [
-    CommonModule,
-    EmployeeRoutingModule,
-    FormsModule,
-    MatDialogModule
-  ]
+    imports: [
+        CommonModule,
+        EmployeeRoutingModule,
+        FormsModule,
+        MatDialogModule,
+        ReactiveFormsModule
+    ]
 })
 export class EmployeeModule { }
