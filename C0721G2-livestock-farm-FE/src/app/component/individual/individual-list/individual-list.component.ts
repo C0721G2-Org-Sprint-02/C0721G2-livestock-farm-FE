@@ -61,8 +61,6 @@ export class IndividualListComponent implements OnInit {
       // this.message = '';
     }, error => {
       this.message = 'Không tìm thấy';
-      this.individuals = [];
-      this.totalPages = 0;
     });
   }
 
