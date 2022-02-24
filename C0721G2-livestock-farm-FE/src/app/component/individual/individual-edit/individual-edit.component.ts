@@ -49,7 +49,7 @@ export class IndividualEditComponent implements OnInit {
     if (this.individualForm.valid) {
       this.subcription = this.individualService.editIndividual(this.individualForm.value).subscribe(data => {
         this.message = 'Đã cập nhật thành công';
-        // this.individualListComponent.ngOnInit();
+        this.individualListComponent.ngOnInit();
       }, error => {
         this.message = 'Đã cập nhật thất bại';
       })
