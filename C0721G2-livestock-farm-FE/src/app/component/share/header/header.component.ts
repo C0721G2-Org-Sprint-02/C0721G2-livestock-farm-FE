@@ -4,8 +4,8 @@ import {TokenStorageService} from '../../../service/security/token-storage.servi
 import {Router} from '@angular/router';
 import {ShareService} from '../../../service/share/share.service';
 import {LoginComponent} from '../../security/login/login.component';
-import {BuyService} from '../../../service/buy/buy.service';
 import {BuyCreateComponent} from '../../buy/buy-create/buy-create.component';
+import {BuyService} from '../../../service/buy_individual/buy.service';
 
 @Component({
   selector: 'app-header',

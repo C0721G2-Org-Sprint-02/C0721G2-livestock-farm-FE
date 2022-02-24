@@ -1,6 +1,6 @@
 .register{
   background: -webkit-linear-gradient(left, burlywood,burlywood );
-  margin-top: 3%;
+  margin-top: 4%;
   padding: 3%;
 }
 .register-left{
@@ -63,6 +63,18 @@
   width: 50%;
   cursor: pointer;
 }
+.btnBack{
+  float: left;
+  margin-top: 10%;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 2%;
+  background: #383d41;
+  color: #fff;
+  font-weight: 600;
+  width: 49%;
+  cursor: pointer;
+}
 .register .nav-tabs{
   margin-top: 3%;
   border: none;
@@ -95,4 +107,6 @@
   margin-bottom: -15%;
   color: #495057;
 }
-
+.error-text{
+  color: red;
+}
