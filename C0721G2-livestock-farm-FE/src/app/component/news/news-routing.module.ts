@@ -6,7 +6,6 @@ import {NewsCreateComponent} from "./news-create/news-create.component";
 import {NewsEditComponent} from "./news-edit/news-edit.component";
 import {NewsDeleteComponent} from "./news-delete/news-delete.component";
 
-
 const routes: Routes = [
   {
     path: 'list', component: NewsListComponent
@@ -17,6 +16,7 @@ const routes: Routes = [
   {
     path: 'create', component: NewsCreateComponent
   },
+
   {
     path: 'edit/:id', component: NewsEditComponent
   },
