@@ -41,7 +41,7 @@ export class IndividualEditComponent implements OnInit {
     this.subcription = this.individualService.findIndividualbyId(this.currentId).subscribe(data => {
       this.individual = data;
       console.log(this.individual);
-      this.individualForm.setValue(this.individual);
+      this.individualForm.patchValue(this.individual);
     });
   }
 

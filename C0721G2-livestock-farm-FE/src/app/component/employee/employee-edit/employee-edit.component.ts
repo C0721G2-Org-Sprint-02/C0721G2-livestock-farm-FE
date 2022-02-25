@@ -98,22 +98,14 @@ export class EmployeeEditComponent implements OnInit {
 
 
   onSubmit() {
-    const nameImg = this.selectedImage.name;
-    const fileRef = this.storage.ref(nameImg);
-    this.loading = true;
-    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
-      finalize(() => {
-        fileRef.getDownloadURL().subscribe((url) => {
-          console.log(url);
-          this.employeeForm.patchValue({image: url});
-
-          // Call API
-          this.employeeService.save(this.employeeForm.value).subscribe(() => {
-            this.router.navigateByUrl('/employee/list').then(r => console.log(''));
-          })
-        });
-      })
-    ).subscribe();
+    this.employeeService.editEmployee(this.employeeForm.value).subscribe(() => {
+      console.log(this.employeeForm.value);
+      this.router.navigateByUrl('/employee/list').then(r => console.log(''));
+    }, error => {
+      if (error.error.errorEmail) {
+        this.employeeForm.controls['email'].setErrors({'existsEmail': true});
+      }
+    })
   }
 
   onClick() {
@@ -122,7 +114,22 @@ export class EmployeeEditComponent implements OnInit {
 
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
-    console.log(this.selectedImage);
+    const nameImg = this.selectedImage.name;
+    const fileRef = this.storage.ref(nameImg);
+    this.loading = true;
+    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          console.log(url);
+          this.employeeForm.patchValue({image: url});
+          this.loading = false;
+          this.employee.image = url;
+
+          // Call API
+
+        });
+      })
+    ).subscribe();
   }
 }
 
