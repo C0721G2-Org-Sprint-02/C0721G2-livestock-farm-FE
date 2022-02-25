@@ -24,6 +24,10 @@ export class EmployeeService {
     return this.http.post(this.API_URL + 'create/', employee);
   }
 
+  editEmployee(employee: any): Observable<any> {
+    return this.http.patch(this.API_URL + 'edit/', employee);
+  }
+
   createEmployeeDTO(employee: EmployeeDTO): Observable<EmployeeDTO> {
     // @ts-ignore
     return this.http.post<EmployeeDTO>(this.API + 'create/', JSON.stringify(employee), this.httpOptions)

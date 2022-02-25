@@ -81,7 +81,7 @@
           <div class="col-12">
             <div class="card">
               <div class="container-fluid ">
-                <h1 class="d-flex justify-content-center pt-3 text-success m-4">Danh sách chuồng nuôi
+                <h1 class="d-flex justify-content-center fw-bold pt-3 text-success m-4">DANH SÁCH CHUỒNG NUÔI
                 </h1>
                 <div class="row pt-2 m-4">
                   <div class=" ">
@@ -126,8 +126,7 @@
                         <th>Ngày Đóng</th>
                         <th>Loại chuồng</th>
                         <th>Số Lượng Cá Thể</th>
-                        <th colspan="2">Chỉnh sửa</th>
-                        <th colspan="2">Xóa</th>
+                        <th class="text-center">Tác vụ</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -142,12 +141,10 @@
                         <td>{{cage.typeOfCage.name}}</td>
                         <td>{{cage.quantity}}</td>
                         <td class="text-center">
-                          <button class="btn btn-success text-center text-white  "
+                          <button class="btn btn-warning text-center text-white me-2  "
                                   data-bs-toggle="modal" [routerLink]="['/cages/edit/',cage.id]"
                           ><i class="fas fa-edit"></i> Sửa
                           </button>
-                        <td>
-                        <td>
                           <button class="btn btn-danger text-center"
                                   data-bs-toggle="modal"
                           ><i class="fas fa-trash-alt"></i> Xóa

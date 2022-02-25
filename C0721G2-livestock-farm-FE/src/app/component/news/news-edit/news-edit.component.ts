@@ -90,25 +90,13 @@ export class NewsEditComponent implements OnInit {
   }
 
   onSubmit() {
-    const nameImg = this.selectedImage.name;
-    const fileRef = this.storage.ref(nameImg);
-    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
-      finalize(() => {
-        fileRef.getDownloadURL().subscribe((url) => {
-          console.log(url);
-          this.formNewsEdit.patchValue({image: url});
-
-          this.subscription = this.newsService.updateNews(this.id, this.formNewsEdit.value).subscribe(data => {
-            // alert('Chỉnh sửa thông tin thành công');
-            this.router.navigate(['/news/detail', this.id]);
-            console.log(this.formNewsEdit);
-          }, error => {
-            console.log('có lỗi đại ca ơi');
-          });
-        });
-      })
-    ).subscribe();
-    this.loading = true;
+    this.subscription = this.newsService.updateNews(this.id, this.formNewsEdit.value).subscribe(data => {
+      // alert('Chỉnh sửa thông tin thành công');
+      this.router.navigate(['/news/detail', this.id]);
+      console.log(this.formNewsEdit);
+    }, error => {
+      console.log('có lỗi đại ca ơi');
+    });
   }
 
   // onSubmit() {
@@ -126,5 +114,17 @@ export class NewsEditComponent implements OnInit {
 
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
+    const nameImg = this.selectedImage.name;
+    const fileRef = this.storage.ref(nameImg);
+    this.loading = true;
+    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          this.formNewsEdit.patchValue({image: url});
+          this.newsDTO.image = url;
+          this.loading = false;
+        });
+      })
+    ).subscribe();
   }
 }

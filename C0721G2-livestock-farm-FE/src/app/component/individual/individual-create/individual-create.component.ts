@@ -36,7 +36,7 @@ export class IndividualCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subcription = this.cageService.getListCage().subscribe(data=>{this.cagelist = data.content});
+    this.subcription = this.cageService.getListCage().subscribe(data=>{this.cagelist = data});
     console.log(this.cagelist);
   }
 

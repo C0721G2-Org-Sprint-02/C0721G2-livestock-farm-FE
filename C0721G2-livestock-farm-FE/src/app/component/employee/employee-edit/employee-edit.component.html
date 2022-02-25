@@ -87,8 +87,8 @@
                 </button>
               </div>
               <div class="card mb-4">
-                <div class="card-header pb-0">
-                  <h6>Sửa thông tin nhân viên</h6>
+                <div class="card-header pb-0 bg-success">
+                  <h3 class="text-white">Sửa thông tin nhân viên</h3>
                   <p class="text-success"></p>
                 </div>
                 <form class="row g-3 needs-validation m-3" method="post" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
@@ -204,6 +204,8 @@
                     <small style="color: red"
                            *ngIf="email.hasError('pattern') && (email.dirty || email.touched)">Email không đúng định
                       dạng.</small>
+                    <small style="color: red"
+                           *ngIf="email.hasError('existsEmail') && (email.dirty || email.touched)">Email đã được sử dụng.</small>
                   </div>
 
                   <div class="col-md-6 col-sm-12 position-relative">
