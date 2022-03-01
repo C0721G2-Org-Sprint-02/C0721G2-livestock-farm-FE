@@ -82,7 +82,6 @@ export class CagesCreateComponent implements OnInit {
   submit() {
     if (this.createCage.valid) {
       // console.log('OK');
-      this.showAlert = true;
       console.log(this.createCage.value);
       this.cageService.saveCage(this.createCage.value).subscribe(
         data => {
