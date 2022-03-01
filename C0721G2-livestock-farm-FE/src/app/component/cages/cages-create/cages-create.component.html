@@ -107,7 +107,6 @@
                           *ngIf="createCage.controls.id.dirty && createCage.controls.id.hasError('pattern') ">
                     Mã tạo chuồng có định dạng CA-xxxx.
                   </span>
-                    <span class="error-text" *ngIf="showErrorCage">{{showErrorCage}}</span>
                     <span class="error error-text"
                           *ngIf="createCage.controls.id.dirty && createCage.controls.id.hasError('required') ">
                     Không được bỏ trống.
