@@ -29,6 +29,7 @@ export class BuyCreateComponent implements OnInit {
   subscription: Subscription;
   buyIndividual: BuyIndividual;
 
+  loading = '';
   constructor(private buyIndividualSerive: BuyService, private router: Router,
               public dialogRef: MatDialogRef<BuyCreateComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,) { }
@@ -38,6 +39,7 @@ export class BuyCreateComponent implements OnInit {
 
   onSubmit(buyIndividualForm: FormGroup) {
     if (this.buyIndividualForm.valid) {
+      this.loading = 'success';
       console.log(this.buyIndividualForm.value);
       this.subscription = this.buyIndividualSerive.save(this.buyIndividualForm.value).subscribe(data => {
           alert('Đã gửi thành công');

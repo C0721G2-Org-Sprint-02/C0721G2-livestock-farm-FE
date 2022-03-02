@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close();
     const dialogResetPassword = this.dialog.open(ResetPasswordComponent, {
       width: '450px',
-      height: '400px',
+      height: '650px',
       panelClass: 'custom-dialog',
       disableClose: true
     });
